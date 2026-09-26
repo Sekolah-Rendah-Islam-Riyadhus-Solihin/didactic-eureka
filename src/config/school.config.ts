@@ -1,4 +1,4 @@
-export type SchoolType = 'government' | 'private';
+export type SchoolType = "government" | "private";
 
 export interface SchoolConfig {
   identity: {
@@ -72,68 +72,92 @@ export const schoolConfig: SchoolConfig = {
   identity: {
     name: "Sekolah Rendah Islam Riyadhus Solihin",
     shortName: "SRIRS",
-    tagline: "Membina Generasi Rabbani, Berilmu, Beriman & Beramal",
+    tagline: "Membina Iman, Membela Islam",
     motto: "Berilmu, Beriman, Beramal Soleh",
     schoolType: "private", // SRIRS is an integrated Islamic primary school
-    establishedYear: 2014,
-    registrationNumber: "JAIS/PDS/01-084",
-    affiliation: "Jabatan Agama Islam Selangor (JAIS) & Kementerian Pendidikan Malaysia (KPM)",
+    establishedYear: 1986,
+    registrationNumber: "JJAA001",
+    affiliation:
+      "Kementerian Pendidikan Malaysia (KPM) & Jabatan Pendidikan Agama Islam Negeri Johor (SRAS/BP/001)",
     headteacher: {
-      name: "Ustaz Ahmad Solihin bin Rahman",
-      title: "Guru Besar & Pengetua Akademik",
-      messagePreview: "Ahlan wa sahlan ke laman rasmi SRIRS. Kami beriltizam melahirkan murid cemerlang duniawi dan ukhrawi melalui integrasi kurikulum KSSR dan Pendidikan Islam Tahfiz.",
+      name: "Hajah Zainon binti Abd Samad",
+      title: "Guru Besar (Mudirah)",
+      messagePreview:
+        "Ahlan wa sahlan ke laman rasmi SRIRS. Kami beriltizam melahirkan murid cemerlang duniawi dan ukhrawi melalui integrasi kurikulum KSSR dan Pendidikan Islam Tahfiz.",
     },
   },
   branding: {
     // Elegant Islamic Deep Green & Gold Palette
-    primary: "#065f46",        // Deep emerald green
-    primaryHover: "#047857",   // Rich forest green
-    primaryLight: "#ecfdf5",   // Mint light
-    secondary: "#d97706",      // Warm Islamic gold / amber
-    secondaryHover: "#b45309",  // Deep amber
-    accent: "#0284c7",         // Sky blue
-    surface: "#f8fafc",        // Off-white slate
-    dark: "#0f172a",           // Midnight slate
-    muted: "#64748b",          // Neutral muted text
+    primary: "#065f46", // Deep emerald green
+    primaryHover: "#047857", // Rich forest green
+    primaryLight: "#ecfdf5", // Mint light
+    secondary: "#d97706", // Warm Islamic gold / amber
+    secondaryHover: "#b45309", // Deep amber
+    accent: "#0284c7", // Sky blue
+    surface: "#f8fafc", // Off-white slate
+    dark: "#0f172a", // Midnight slate
+    muted: "#64748b", // Neutral muted text
   },
   features: {
-    showTuitionFees: true,           // Private Islamic school fees schedule
-    showZoningCatchment: false,      // Open enrollment across zones
+    showTuitionFees: true, // Private Islamic school fees schedule
+    showZoningCatchment: false, // Open enrollment across zones
     showGovernmentAssistance: false,
-    showBusRoutes: true,             // Van sekolah & transit routes
-    showCanteenMenu: true,           // Halalan toyyiban daily menu
-    showOnlineAdmissions: true,      // Online pendaftaran murid baru
-    showParentPortalButton: true,    // Portal Ibu Bapa & Waris (Laravel)
+    showBusRoutes: true, // Van sekolah & transit routes
+    showCanteenMenu: true, // Halalan toyyiban daily menu
+    showOnlineAdmissions: true, // Online pendaftaran murid baru
+    showParentPortalButton: false, // Portal Ibu Bapa & Waris (Laravel)
     portalUrl: "https://portal.srirs.edu.my",
   },
   contact: {
-    phone: "+60 3-8921 4567",
-    emergencyPhone: "+60 19-345 6789",
-    email: "pentadbiran@srirs.edu.my",
-    officeHours: "Isnin – Jumaat: 7:30 PG – 4:30 PTG",
+    phone: "+60 7-4131 496",
+    emergencyPhone: "+60 13-774 7854",
+    email: "pejabat@srirs.edu.my",
+    officeHours: [
+      {
+        days: "Isnin – Khamis",
+        hours: "7:30 PG – 4:00 PTG",
+        breakTime: {
+          label: "Rehat & Solat Zohor",
+          time: "1:00 PTG – 2:00 PTG",
+        },
+      },
+      {
+        days: "Jumaat",
+        hours: "7:30 PG – 12:30 PTG, 2:30 PTG – 4:00 PTG",
+        breakTime: {
+          label: "Solat Jumaat & Rehat",
+          time: "12:30 PTG – 2:30 PTG",
+        },
+      },
+      {
+        days: "Sabtu, Ahad & Cuti Umum",
+        isClosed: true,
+        notes: "Tutup (Kecuali program rasmi sekolah)",
+      },
+    ],
     address: {
-      street: "Lot 1420, Jalan Haji Abdul Rahman",
-      city: "Bandar Baru Bangi",
-      stateZip: "43650 Selangor",
+      street:
+        "Lot 1592, Lorong Ustaz Syed Nordin, Pt Lintang Barat, Kg Sg Kajang",
+      city: "Batu Pahat",
+      stateZip: "83000 Johor",
       country: "Malaysia",
     },
     socials: {
-      facebook: "https://facebook.com/sri.riyadhussolihin",
-      instagram: "https://instagram.com/sri.riyadhussolihin",
+      facebook: "https://facebook.com/mysrirs",
+      instagram: "https://instagram.com/mysrirs",
     },
   },
   keyStats: [
     { label: "Murid & Huffaz Cilik", value: "520+" },
     { label: "Nisbah Guru : Murid", value: "1:15" },
     { label: "Kadar Khatam Al-Quran", value: "98%" },
-    { label: "Penarafan Sekolah (JAIS)", value: "Gred A" },
+    { label: "Penarafan Sekolah (JAINJ)", value: "Gred A" },
   ],
   terms: {
-    currentTerm: "Sesi Akademik 2026/2027 — Penggal 1",
+    currentTerm: "Sesi Akademik 2026 — Penggal 2",
     termDates: [
-      { term: "Penggal 1", dates: "Mac 2026 – Mei 2026" },
-      { term: "Penggal 2", dates: "Jun 2026 – Ogos 2026" },
-      { term: "Penggal 3", dates: "Sept 2026 – Dis 2026" },
+      { term: "Penggal 1", dates: "12 Jan 2026 – 07 Jun 2026" },
+      { term: "Penggal 2", dates: "08 Jun 2026 – 31 Dis 2026" },
     ],
   },
 };

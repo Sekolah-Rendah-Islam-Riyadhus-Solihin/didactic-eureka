@@ -100,10 +100,44 @@ const isPrivate = schoolConfig.identity.schoolType === 'private';
             <span class="text-slate-400">✉️</span>
             <span>{schoolConfig.contact.email}</span>
           </p>
-          <p class="flex items-center gap-2 text-xs text-slate-400 pt-1">
-            <span>⏰</span>
-            <span>{schoolConfig.contact.officeHours}</span>
-          </p>
+          {typeof schoolConfig.contact.officeHours === "string" ? (
+            <p class="flex items-center gap-2 text-xs text-slate-400 pt-1">
+              <span>⏰</span>
+              <span>{schoolConfig.contact.officeHours}</span>
+            </p>
+          ) : (
+            <div class="pt-2 border-t border-slate-800 text-xs">
+              <div class="flex items-center gap-1.5 text-slate-300 font-medium mb-1.5">
+                <span>⏰</span>
+                <span>Waktu Pejabat:</span>
+              </div>
+              <div class="space-y-2 pl-5">
+                {schoolConfig.contact.officeHours.map((schedule) => {
+                  const breakInfo = schedule.breakTime || schedule.breakHours;
+                  return (
+                    <div class="text-xs">
+                      <div class="flex justify-between items-baseline gap-2">
+                        <span class="text-slate-300 font-medium">{schedule.days}:</span>
+                        <span class={schedule.isClosed ? "text-rose-400 font-medium" : "text-emerald-400 font-medium"}>
+                          {schedule.isClosed ? "Tutup" : (schedule.hours || `${schedule.openTime} – ${schedule.closeTime}`)}
+                        </span>
+                      </div>
+                      {breakInfo && (
+                        <div class="text-[11px] text-amber-300/80 flex items-center gap-1 mt-0.5">
+                          <span>☕</span>
+                          <span>
+                            {typeof breakInfo === "string"
+                              ? breakInfo
+                              : `${breakInfo.label ? `${breakInfo.label}: ` : "Rehat: "}${breakInfo.time}`}
+                          </span>
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
         </div>
       </div>
 
