@@ -9,15 +9,14 @@ export interface SchoolConfig {
     schoolType: SchoolType;
     establishedYear: number;
     registrationNumber?: string;
-    affiliation: string; // e.g. "Ministry of Education / State Board" or "Cambridge Primary / IB World School"
+    affiliation: string;
     headteacher: {
       name: string;
-      title: string; // "Principal" or "Headmistress"
+      title: string;
       messagePreview: string;
     };
   };
   branding: {
-    // Hex colors injected into CSS root variables
     primary: string;
     primaryHover: string;
     primaryLight: string;
@@ -29,14 +28,14 @@ export interface SchoolConfig {
     muted: string;
   };
   features: {
-    showTuitionFees: boolean;         // true for private, false for government
-    showZoningCatchment: boolean;     // true for government, false for private
-    showGovernmentAssistance: boolean;// e.g. free school meals, textbook subsidies
-    showBusRoutes: boolean;           // school transport / zoning
-    showCanteenMenu: boolean;         // weekly lunch schedule
-    showOnlineAdmissions: boolean;    // admissions inquiry form
-    showParentPortalButton: boolean;  // button linking to future Laravel portal
-    portalUrl: string;                // e.g. "https://portal.school.edu"
+    showTuitionFees: boolean;
+    showZoningCatchment: boolean;
+    showGovernmentAssistance: boolean;
+    showBusRoutes: boolean;
+    showCanteenMenu: boolean;
+    showOnlineAdmissions: boolean;
+    showParentPortalButton: boolean;
+    portalUrl: string;
   };
   contact: {
     phone: string;
@@ -66,75 +65,75 @@ export interface SchoolConfig {
 }
 
 /**
- * ACTIVE CONFIGURATION:
- * Toggle between government or private settings simply by modifying this file.
+ * ACTIVE CONFIGURATION: SRIRS V3
+ * Sekolah Rendah Islam Riyadhus Solihin
  */
 export const schoolConfig: SchoolConfig = {
   identity: {
-    name: "St. Jude's Community Primary School",
-    shortName: "St. Jude's Primary",
-    tagline: "Inspiring curious minds, fostering kind hearts.",
-    motto: "Learning Together, Growing Forever",
-    schoolType: "government", // Change to "private" to see dynamic conditional sections!
-    establishedYear: 1984,
-    registrationNumber: "EDU-PRI-84021",
-    affiliation: "Department of Education & Early Childhood Development",
+    name: "Sekolah Rendah Islam Riyadhus Solihin",
+    shortName: "SRIRS",
+    tagline: "Membina Generasi Rabbani, Berilmu, Beriman & Beramal",
+    motto: "Berilmu, Beriman, Beramal Soleh",
+    schoolType: "private", // SRIRS is an integrated Islamic primary school
+    establishedYear: 2014,
+    registrationNumber: "JAIS/PDS/01-084",
+    affiliation: "Jabatan Agama Islam Selangor (JAIS) & Kementerian Pendidikan Malaysia (KPM)",
     headteacher: {
-      name: "Mrs. Eleanor Vance",
-      title: "Headteacher & Lead Educator",
-      messagePreview: "Welcome to our vibrant primary community where every child is recognized, cherished, and empowered to reach their boundless potential.",
+      name: "Ustaz Ahmad Solihin bin Rahman",
+      title: "Guru Besar & Pengetua Akademik",
+      messagePreview: "Ahlan wa sahlan ke laman rasmi SRIRS. Kami beriltizam melahirkan murid cemerlang duniawi dan ukhrawi melalui integrasi kurikulum KSSR dan Pendidikan Islam Tahfiz.",
     },
   },
   branding: {
-    // Emerald green & warm gold palette (friendly, academic, highly accessible)
-    primary: "#065f46",        // emerald-800
-    primaryHover: "#047857",   // emerald-700
-    primaryLight: "#d1fae5",   // emerald-100
-    secondary: "#d97706",      // amber-600
-    secondaryHover: "#b45309",  // amber-700
-    accent: "#0284c7",         // sky-600
-    surface: "#f8fafc",        // slate-50
-    dark: "#0f172a",           // slate-900
-    muted: "#64748b",          // slate-500
+    // Elegant Islamic Deep Green & Gold Palette
+    primary: "#065f46",        // Deep emerald green
+    primaryHover: "#047857",   // Rich forest green
+    primaryLight: "#ecfdf5",   // Mint light
+    secondary: "#d97706",      // Warm Islamic gold / amber
+    secondaryHover: "#b45309",  // Deep amber
+    accent: "#0284c7",         // Sky blue
+    surface: "#f8fafc",        // Off-white slate
+    dark: "#0f172a",           // Midnight slate
+    muted: "#64748b",          // Neutral muted text
   },
   features: {
-    showTuitionFees: false,          // Government school: No tuition fees
-    showZoningCatchment: true,       // Government school: Catchment zone applies
-    showGovernmentAssistance: true,  // Free school breakfast & uniform grants
-    showBusRoutes: true,
-    showCanteenMenu: true,
-    showOnlineAdmissions: true,
-    showParentPortalButton: true,
-    portalUrl: "https://portal.stjudes-school.edu", // Future Laravel portal URL
+    showTuitionFees: true,           // Private Islamic school fees schedule
+    showZoningCatchment: false,      // Open enrollment across zones
+    showGovernmentAssistance: false,
+    showBusRoutes: true,             // Van sekolah & transit routes
+    showCanteenMenu: true,           // Halalan toyyiban daily menu
+    showOnlineAdmissions: true,      // Online pendaftaran murid baru
+    showParentPortalButton: true,    // Portal Ibu Bapa & Waris (Laravel)
+    portalUrl: "https://portal.srirs.edu.my",
   },
   contact: {
-    phone: "+1 (555) 234-5678",
-    emergencyPhone: "+1 (555) 234-9999",
-    email: "office@stjudes-primary.edu",
-    officeHours: "Monday – Friday: 8:00 AM – 4:00 PM",
+    phone: "+60 3-8921 4567",
+    emergencyPhone: "+60 19-345 6789",
+    email: "pentadbiran@srirs.edu.my",
+    officeHours: "Isnin – Jumaat: 7:30 PG – 4:30 PTG",
     address: {
-      street: "42 Meadowbrook Avenue",
-      city: "Greenfield",
-      stateZip: "GF 48201",
-      country: "United States",
+      street: "Lot 1420, Jalan Haji Abdul Rahman",
+      city: "Bandar Baru Bangi",
+      stateZip: "43650 Selangor",
+      country: "Malaysia",
     },
     socials: {
-      facebook: "https://facebook.com",
-      instagram: "https://instagram.com",
+      facebook: "https://facebook.com/sri.riyadhussolihin",
+      instagram: "https://instagram.com/sri.riyadhussolihin",
     },
   },
   keyStats: [
-    { label: "Happy Students", value: "480+" },
-    { label: "Student-Teacher Ratio", value: "14:1" },
-    { label: "Classrooms & Specialist Labs", value: "24" },
-    { label: "National Reading Award", value: "Top 5%" },
+    { label: "Murid & Huffaz Cilik", value: "520+" },
+    { label: "Nisbah Guru : Murid", value: "1:15" },
+    { label: "Kadar Khatam Al-Quran", value: "98%" },
+    { label: "Penarafan Sekolah (JAIS)", value: "Gred A" },
   ],
   terms: {
-    currentTerm: "Term 3 — Spring 2026",
+    currentTerm: "Sesi Akademik 2026/2027 — Penggal 1",
     termDates: [
-      { term: "Term 1 (Autumn)", dates: "Sept 2 – Nov 28" },
-      { term: "Term 2 (Winter)", dates: "Jan 6 – Mar 27" },
-      { term: "Term 3 (Spring)", dates: "Apr 14 – Jun 26" },
+      { term: "Penggal 1", dates: "Mac 2026 – Mei 2026" },
+      { term: "Penggal 2", dates: "Jun 2026 – Ogos 2026" },
+      { term: "Penggal 3", dates: "Sept 2026 – Dis 2026" },
     ],
   },
 };
