@@ -1,0 +1,9 @@
+name = "open-primary-school-web"
+compatibility_date = "2026-09-01"
+pages_build_output_dir = "dist"
+
+# Optional Cloudflare D1 Database binding for future dynamic admissions / inquiries
+# [[d1_databases]]
+# binding = "DB"
+# database_name = "school_inquiries"
+# database_id = "your-database-id-here"

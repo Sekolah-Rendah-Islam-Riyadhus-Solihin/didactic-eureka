@@ -1,0 +1,133 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { schoolConfig } from '../config/school.config';
+
+const subjects = [
+  { icon: "📖", title: "Literacy & Phonics", desc: "Structured synthetic phonics in early years expanding into guided novel study, creative writing, spelling bees, and public speaking." },
+  { icon: "📐", title: "Mathematics & Problem Solving", desc: "Hands-on manipulatives, conceptual number sense, mental arithmetic, geometry, and real-world math applications." },
+  { icon: "🔬", title: "STEM & Environmental Science", desc: "Interactive experiments in our discovery garden, living biology, introductory physics, weather tracking, and basic tablet coding." },
+  { icon: "🎨", title: "Creative & Performing Arts", desc: "Weekly ceramics, sketching, chorus singing, percussion bands, and annual theatrical performances." },
+  { icon: "⚽", title: "Physical Education & Wellbeing", desc: "Fundamental motor skills, team sportsmanship (football, rounders, gymnastics), swimming, and mindful movement." },
+  { icon: "🌍", title: "Social Studies & Geography", desc: "Learning about global communities, local cultural heritage, environmental conservation, and active citizenship." },
+];
+
+const clubs = [
+  { name: "Junior Robotics & LEGO Engineering", day: "Tuesdays 3:15 – 4:15 PM", ages: "Grades 3 – 6" },
+  { name: "Primary School Choir & Percussion", day: "Wednesdays 3:15 – 4:00 PM", ages: "All Grades" },
+  { name: "Little Green Thumbs (Gardening Club)", day: "Thursdays 3:15 – 4:15 PM", ages: "Grades 1 – 6" },
+  { name: "Chess & Strategy Boardgames", day: "Fridays 3:15 – 4:15 PM", ages: "Grades 2 – 6" },
+  { name: "Junior Soccer & Athletics Squad", day: "Mondays & Thursdays 3:30 – 4:45 PM", ages: "Grades 3 – 6" },
+];
+
+const weeklyMenu = [
+  { day: "Monday", main: "Wholewheat Pasta with Fresh Vegetable Pomodoro & Mozzarella", side: "Crispy Garlic Bread, Steamed Sweetcorn", fruit: "Fresh Apple Slices" },
+  { day: "Tuesday", main: "Mild Golden Chicken or Chickpea Curry with Steamed Rice", side: "Naan Bread, Roasted Carrots & Peas", fruit: "Sweet Melon Wedges" },
+  { day: "Wednesday", main: "Baked Salmon Fillet or Lentil Patties with Herb Roast Potatoes", side: "Green Garden Salad, Broccoli Florets", fruit: "Fresh Orange Smiles" },
+  { day: "Thursday", main: "Oven-Baked Turkey Meatballs or Veggie Balls in Rich Gravy", side: "Mashed Potato, Green Beans", fruit: "Banana & Berry Cup" },
+  { day: "Friday", main: "Crispy Baked Cod Goujons or Homemade Margherita Pizza", side: "Sweet Potato Wedges, Cucumber & Tomato Sticks", fruit: "Frozen Fruit Yogurt Pot" },
+];
+---
+
+<BaseLayout title="Academics & Student Life">
+  <!-- Page Header -->
+  <section class="bg-slate-900 text-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
+      <span class="text-xs font-bold uppercase tracking-widest text-emerald-400">Curriculum & Student Life</span>
+      <h1 class="text-3xl sm:text-5xl font-heading font-bold">Academics at {schoolConfig.identity.shortName}</h1>
+      <p class="max-w-2xl mx-auto text-sm sm:text-base text-slate-300 font-light">
+        Where active learning, joyful discovery, and academic mastery meet every single day.
+      </p>
+    </div>
+  </section>
+
+  <!-- Core Subjects Grid -->
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+      <div class="text-center max-w-2xl mx-auto space-y-2">
+        <span class="text-xs font-bold uppercase tracking-widest text-school-primary">Foundational Rigor</span>
+        <h2 class="text-3xl font-heading font-bold text-slate-900">Core Subject Areas</h2>
+        <p class="text-sm text-slate-600">Aligned with national quality benchmarks to ensure comprehensive development.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {subjects.map((sub) => (
+          <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 hover:shadow-md transition space-y-3">
+            <div class="text-3xl">{sub.icon}</div>
+            <h3 class="font-heading font-bold text-lg text-slate-900">{sub.title}</h3>
+            <p class="text-xs text-slate-600 leading-relaxed">{sub.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Extracurricular Clubs -->
+  <section class="py-16 bg-slate-50 border-t border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+      <div class="text-center max-w-2xl mx-auto space-y-2">
+        <span class="text-xs font-bold uppercase tracking-widest text-school-primary">Beyond The Classroom</span>
+        <h2 class="text-3xl font-heading font-bold text-slate-900">After-School Enrichment Clubs</h2>
+        <p class="text-sm text-slate-600">Clubs run every week to foster social collaboration, leadership, and new passions.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {clubs.map((c) => (
+          <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800">{c.ages}</span>
+              <span class="text-[11px] text-slate-400">Enrolling</span>
+            </div>
+            <h3 class="font-heading font-bold text-sm text-slate-900">{c.name}</h3>
+            <p class="text-xs text-slate-500">⏰ {c.day}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Canteen Healthy Menu Section (Anchor: #canteen) -->
+  {schoolConfig.features.showCanteenMenu && (
+    <section id="canteen" class="py-16 bg-white border-t border-slate-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+        <div class="text-center max-w-2xl mx-auto space-y-2">
+          <span class="text-xs font-bold uppercase tracking-widest text-amber-600">Healthy Nutrition</span>
+          <h2 class="text-3xl font-heading font-bold text-slate-900">🥗 Primary School Canteen Menu</h2>
+          <p class="text-sm text-slate-600">
+            Cooked fresh daily on site. 100% nut-free, allergen-coded, and adhering strictly to healthy school nutrition standards.
+          </p>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs sm:text-sm border-collapse bg-slate-50 rounded-2xl overflow-hidden border border-slate-200">
+            <thead>
+              <tr class="bg-slate-900 text-white">
+                <th class="p-4 font-heading font-bold">Day</th>
+                <th class="p-4 font-heading font-bold">Main Hot Meal</th>
+                <th class="p-4 font-heading font-bold">Sides & Veggies</th>
+                <th class="p-4 font-heading font-bold">Fruit & Dessert</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-200">
+              {weeklyMenu.map((m) => (
+                <tr class="hover:bg-slate-100 transition-colors">
+                  <td class="p-4 font-bold text-slate-900 whitespace-nowrap">{m.day}</td>
+                  <td class="p-4 text-slate-700">{m.main}</td>
+                  <td class="p-4 text-slate-600">{m.side}</td>
+                  <td class="p-4 text-emerald-700 font-medium">{m.fruit}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 text-xs text-amber-900 flex items-start gap-3">
+          <span class="text-lg">ℹ️</span>
+          <div>
+            <p class="font-bold">Dietary & Allergy Requirements:</p>
+            <p>Vegetarian, Halal, and gluten-free alternatives are prepared daily. Please register any food allergies with the school office upon enrollment.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  )}
+</BaseLayout>

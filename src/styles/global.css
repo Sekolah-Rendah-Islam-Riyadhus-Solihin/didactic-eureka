@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-school-primary: #065f46;
+  --color-school-primary-hover: #047857;
+  --color-school-primary-light: #ecfdf5;
+  --color-school-secondary: #d97706;
+  --color-school-secondary-hover: #b45309;
+  --color-school-accent: #0284c7;
+  --color-school-surface: #f8fafc;
+  --color-school-dark: #0f172a;
+  --color-school-muted: #64748b;
+  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  --font-heading: Georgia, Cambria, 'Times New Roman', Times, serif;
+}
+
+/* Accessible focus outlines for keyboard navigation */
+*:focus-visible {
+  outline: 2px solid var(--color-school-primary);
+  outline-offset: 3px;
+}
+
+/* Ensure smooth scrolling across page sections */
+html {
+  scroll-behavior: smooth;
+  color: var(--color-school-dark);
+  background-color: #ffffff;
+}
+
+/* Custom scrollbar for modern browsers */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}

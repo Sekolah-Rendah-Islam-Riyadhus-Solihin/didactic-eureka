@@ -1,0 +1,140 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { schoolConfig } from '../config/school.config';
+
+const values = [
+  { icon: "🤝", title: "Kindness & Inclusion", desc: "Every child is welcomed with open arms, taught empathy, and encouraged to be a caring friend." },
+  { icon: "🔍", title: "Curiosity & Wonder", desc: "We celebrate questions, imaginative play, hands-on experiments, and the joy of finding out." },
+  { icon: "🌱", title: "Resilience & Growth", desc: "Mistakes are celebrated as stepping stones toward learning, perseverance, and emotional strength." },
+  { icon: "⭐", title: "Integrity & Respect", desc: "Honoring our teachers, our classmates, our families, and the diverse community we live in." },
+];
+
+const staffMembers = [
+  { name: schoolConfig.identity.headteacher.name, role: schoolConfig.identity.headteacher.title, exp: "20+ Years in Primary Education" },
+  { name: "Mr. David Alistair", role: "Deputy Head & Key Stage 2 Lead", exp: "14 Years in STEM & Curriculum" },
+  { name: "Mrs. Sarah Jenkins", role: "Early Years & Kindergarten Coordinator", exp: "12 Years in Early Phonics" },
+  { name: "Ms. Amina Patel", role: "Special Educational Needs & Inclusion (SENCO)", exp: "10 Years in Child Development" },
+];
+
+const facilities = [
+  { name: "Junior Library & Storytelling Nook", desc: "Over 6,000 age-appropriate picture books, graphic novels, and junior fiction titles." },
+  { name: "All-Weather Playground & Sensory Garden", desc: "Safe shock-absorbent turf, climbing frames, balance beams, and native herbal planting." },
+  { name: "STEM & Discovery Lab", desc: "Hands-on science kits, junior tablets, robotics blocks, and interactive touchscreens." },
+  { name: "Dedicated Music & Performing Arts Hall", desc: "Percussion instruments, stage lighting, and acoustic space for assemblies and school plays." },
+];
+---
+
+<BaseLayout title="About Our School">
+  <!-- Page Header -->
+  <section class="bg-slate-900 text-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
+      <span class="text-xs font-bold uppercase tracking-widest text-amber-400">Our Ethos & Community</span>
+      <h1 class="text-3xl sm:text-5xl font-heading font-bold">About {schoolConfig.identity.name}</h1>
+      <p class="max-w-2xl mx-auto text-sm sm:text-base text-slate-300 font-light">
+        A caring, inclusive primary school committed to building character, curiosity, and academic excellence since {schoolConfig.identity.establishedYear}.
+      </p>
+    </div>
+  </section>
+
+  <!-- Mission & Headteacher Message -->
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <div class="space-y-6">
+          <span class="text-xs font-bold uppercase tracking-wider text-school-primary">Headteacher's Welcome</span>
+          <h2 class="text-2xl sm:text-3xl font-heading font-bold text-slate-900">
+            "We believe childhood is a precious chapter to be celebrated."
+          </h2>
+          <p class="text-slate-600 text-sm leading-relaxed">
+            Welcome to {schoolConfig.identity.name}. In our classrooms, you will see children engaged in vibrant conversations, reading stories with wide eyes, building scientific models, and discovering passions that stay with them forever.
+          </p>
+          <p class="text-slate-600 text-sm leading-relaxed">
+            Whether your child is taking their first steps into kindergarten or preparing for their transition into secondary school, our passionate teaching faculty ensures they feel seen, secure, and challenged.
+          </p>
+          <div class="pt-2 border-l-2 border-school-primary pl-4">
+            <p class="font-heading font-bold text-slate-900">{schoolConfig.identity.headteacher.name}</p>
+            <p class="text-xs text-slate-500">{schoolConfig.identity.headteacher.title}</p>
+          </div>
+        </div>
+
+        <div class="bg-slate-100 rounded-3xl p-8 border border-slate-200 space-y-6">
+          <h3 class="font-heading font-bold text-xl text-slate-900">Our School Mission</h3>
+          <p class="text-sm text-slate-700 leading-relaxed italic">
+            "{schoolConfig.identity.tagline}"
+          </p>
+          <div class="space-y-3 pt-2 text-xs text-slate-600">
+            <p><strong>Affiliation:</strong> {schoolConfig.identity.affiliation}</p>
+            <p><strong>Curriculum:</strong> Holistic Primary Framework (Literacy, Numeracy, Inquiry & Wellbeing)</p>
+            <p><strong>Community:</strong> Over 480 happy learners, active parent associations, and dedicated specialists.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Core Values -->
+  <section class="py-16 bg-slate-50 border-t border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+      <div class="text-center max-w-2xl mx-auto space-y-2">
+        <span class="text-xs font-bold uppercase tracking-widest text-school-primary">Foundational Pillars</span>
+        <h2 class="text-3xl font-heading font-bold text-slate-900">The Values We Live By Every Day</h2>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {values.map((v) => (
+          <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-3">
+            <div class="text-3xl">{v.icon}</div>
+            <h3 class="font-heading font-bold text-base text-slate-900">{v.title}</h3>
+            <p class="text-xs text-slate-600 leading-relaxed">{v.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Facilities Section -->
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+      <div class="text-center max-w-2xl mx-auto space-y-2">
+        <span class="text-xs font-bold uppercase tracking-widest text-school-primary">Campus Environment</span>
+        <h2 class="text-3xl font-heading font-bold text-slate-900">Facilities Designed For Young Learners</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {facilities.map((fac) => (
+          <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 hover:border-school-primary/40 transition space-y-2">
+            <h3 class="font-heading font-bold text-base text-slate-900 flex items-center gap-2">
+              <span class="text-school-primary">🏫</span> {fac.name}
+            </h3>
+            <p class="text-xs text-slate-600 leading-relaxed">{fac.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Safeguarding & Safety Commitment -->
+  <section id="safeguarding" class="py-12 bg-emerald-950 text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="space-y-2 text-center md:text-left">
+          <div class="inline-flex items-center gap-2 text-xs font-bold text-emerald-400 uppercase tracking-widest">
+            <span>🛡️</span> Child Safeguarding & Wellbeing Policy
+          </div>
+          <h3 class="text-xl sm:text-2xl font-heading font-bold">
+            Our highest commitment is the safety and happiness of every child.
+          </h3>
+          <p class="text-xs sm:text-sm text-slate-300 max-w-2xl">
+            All teaching and auxiliary staff undergo rigorous background verification, criminal record checks, and annual pediatric first-aid certification.
+          </p>
+        </div>
+        <a
+          href="/contact"
+          class="whitespace-nowrap px-5 py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-bold transition shadow"
+        >
+          View Safeguarding Team →
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

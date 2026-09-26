@@ -1,0 +1,37 @@
+---
+interface Props {
+  notice?: string;
+  type?: 'info' | 'alert' | 'event';
+  link?: string;
+  linkText?: string;
+}
+
+const {
+  notice = "Spring Term Parent-Teacher Consultations will take place on April 22-24. Booking is now open via the parent office.",
+  type = "info",
+  link = "/news",
+  linkText = "Read Details →"
+} = Astro.props;
+
+const bgColors = {
+  info: "bg-amber-500 text-amber-950",
+  alert: "bg-rose-600 text-white",
+  event: "bg-sky-600 text-white",
+};
+---
+
+<div class={`px-4 py-2.5 text-xs sm:text-sm font-medium ${bgColors[type]} transition-all shadow-inner`}>
+  <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
+    <div class="flex items-center gap-2">
+      <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-black/10 font-bold text-xs uppercase tracking-wider">
+        !
+      </span>
+      <span>{notice}</span>
+    </div>
+    {link && (
+      <a href={link} class="underline hover:no-underline font-semibold whitespace-nowrap ml-auto sm:ml-0">
+        {linkText}
+      </a>
+    )}
+  </div>
+</div>

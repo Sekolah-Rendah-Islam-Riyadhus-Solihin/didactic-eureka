@@ -1,0 +1,88 @@
+---
+import '../styles/global.css';
+import { schoolConfig } from '../config/school.config';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import EmergencyBanner from '../components/layout/EmergencyBanner.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  showEmergencyNotice?: boolean;
+  noticeText?: string;
+}
+
+const {
+  title,
+  description = schoolConfig.identity.tagline,
+  showEmergencyNotice = true,
+  noticeText,
+} = Astro.props;
+
+const pageTitle = title
+  ? `${title} | ${schoolConfig.identity.name}`
+  : `${schoolConfig.identity.name} — ${schoolConfig.identity.tagline}`;
+
+const schemaOrgData = {
+  "@context": "https://schema.org",
+  "@type": "School",
+  "name": schoolConfig.identity.name,
+  "description": schoolConfig.identity.tagline,
+  "telephone": schoolConfig.contact.phone,
+  "email": schoolConfig.contact.email,
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": schoolConfig.contact.address.street,
+    "addressLocality": schoolConfig.contact.address.city,
+    "postalCode": schoolConfig.contact.address.stateZip,
+    "addressCountry": schoolConfig.contact.address.country,
+  },
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <title>{pageTitle}</title>
+
+    <!-- Schema.org JSON-LD for School SEO -->
+    <script type="application/ld+json" set:html={JSON.stringify(schemaOrgData)} />
+
+    <!-- Dynamic Theme Injection from school.config.ts -->
+    <style define:vars={{
+      primary: schoolConfig.branding.primary,
+      primaryHover: schoolConfig.branding.primaryHover,
+      primaryLight: schoolConfig.branding.primaryLight,
+      secondary: schoolConfig.branding.secondary,
+      secondaryHover: schoolConfig.branding.secondaryHover,
+      accent: schoolConfig.branding.accent,
+      surface: schoolConfig.branding.surface,
+      dark: schoolConfig.branding.dark,
+      muted: schoolConfig.branding.muted,
+    }}>
+      :root {
+        --color-school-primary: var(--primary);
+        --color-school-primary-hover: var(--primaryHover);
+        --color-school-primary-light: var(--primaryLight);
+        --color-school-secondary: var(--secondary);
+        --color-school-secondary-hover: var(--secondaryHover);
+        --color-school-accent: var(--accent);
+        --color-school-surface: var(--surface);
+        --color-school-dark: var(--dark);
+        --color-school-muted: var(--muted);
+      }
+    </style>
+  </head>
+  <body class="min-h-screen flex flex-col font-sans bg-slate-50 antialiased selection:bg-school-primary-light selection:text-school-primary">
+    {showEmergencyNotice && <EmergencyBanner notice={noticeText} />}
+    <Header />
+    <main class="flex-grow">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

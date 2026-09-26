@@ -1,0 +1,304 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { schoolConfig } from '../config/school.config';
+
+const isPrivate = schoolConfig.identity.schoolType === 'private';
+---
+
+<BaseLayout>
+  <!-- 1. Hero Section -->
+  <section class="relative bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 text-white overflow-hidden py-16 sm:py-24">
+    <!-- Decorative background patterns -->
+    <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:16px_16px]"></div>
+    
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <!-- Left Hero Content -->
+        <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+          
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold tracking-wide uppercase bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+            <span>🏫 {isPrivate ? 'Independent Primary School' : 'Public Community Primary School'}</span>
+            <span>•</span>
+            <span>Est. {schoolConfig.identity.establishedYear}</span>
+          </div>
+
+          <h1 class="text-3xl sm:text-5xl lg:text-6xl font-heading font-extrabold tracking-tight leading-tight">
+            {schoolConfig.identity.tagline}
+          </h1>
+
+          <p class="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto lg:mx-0 font-light leading-relaxed">
+            Welcome to <strong class="text-white font-semibold">{schoolConfig.identity.name}</strong>. We provide a safe, joyful, and nurturing learning environment where every primary school student builds lifelong confidence and a love for discovery.
+          </p>
+
+          <!-- Call to action buttons -->
+          <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
+            <a
+              href="/admissions"
+              class="px-6 py-3.5 rounded-xl text-sm font-bold bg-school-primary text-white hover:bg-school-primary-hover shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5"
+            >
+              {isPrivate ? 'Enroll for Next Term →' : 'Enrollment & Catchment Guide →'}
+            </a>
+            <a
+              href="/about"
+              class="px-6 py-3.5 rounded-xl text-sm font-semibold bg-white/10 text-white hover:bg-white/20 border border-white/20 transition-all backdrop-blur-sm"
+            >
+              Learn About Our Ethos
+            </a>
+          </div>
+
+          <!-- Micro school credentials -->
+          <div class="pt-6 border-t border-slate-700/60 flex flex-wrap items-center justify-center lg:justify-start gap-6 text-xs text-slate-300">
+            <div class="flex items-center gap-2">
+              <span class="text-emerald-400 font-bold">✓</span>
+              <span>Fully Accredited: {schoolConfig.identity.affiliation}</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-emerald-400 font-bold">✓</span>
+              <span>Primary Stages: Kindergarten to Grade 6</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right Hero Visual Card -->
+        <div class="lg:col-span-5">
+          <div class="bg-white/10 backdrop-blur-md p-6 sm:p-8 rounded-3xl border border-white/20 shadow-2xl relative">
+            <div class="absolute -top-3 -right-3 bg-amber-500 text-amber-950 text-xs font-bold px-3 py-1 rounded-full shadow">
+              Now Enrolling 2026/27
+            </div>
+
+            <div class="space-y-4">
+              <h3 class="text-lg font-heading font-bold text-white flex items-center gap-2">
+                <span>🎒</span> Quick Parent Portal & Information
+              </h3>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Everything families need for a smooth school week at {schoolConfig.identity.shortName}:
+              </p>
+
+              <div class="grid grid-cols-2 gap-3 pt-2">
+                <a href="/news" class="p-3 rounded-xl bg-white/10 hover:bg-white/20 transition border border-white/10 text-left">
+                  <div class="text-lg mb-1">📅</div>
+                  <div class="text-xs font-bold text-white">Term Dates</div>
+                  <div class="text-[11px] text-slate-300">{schoolConfig.terms.currentTerm}</div>
+                </a>
+
+                <a href="/academics#canteen" class="p-3 rounded-xl bg-white/10 hover:bg-white/20 transition border border-white/10 text-left">
+                  <div class="text-lg mb-1">🥗</div>
+                  <div class="text-xs font-bold text-white">Canteen Menu</div>
+                  <div class="text-[11px] text-slate-300">Fresh daily meals</div>
+                </a>
+
+                <a href="/contact#transport" class="p-3 rounded-xl bg-white/10 hover:bg-white/20 transition border border-white/10 text-left">
+                  <div class="text-lg mb-1">🚌</div>
+                  <div class="text-xs font-bold text-white">School Bus</div>
+                  <div class="text-[11px] text-slate-300">Drop-off gates</div>
+                </a>
+
+                <a href="/admissions" class="p-3 rounded-xl bg-white/10 hover:bg-white/20 transition border border-white/10 text-left">
+                  <div class="text-lg mb-1">📋</div>
+                  <div class="text-xs font-bold text-white">Registration</div>
+                  <div class="text-[11px] text-slate-300">Forms & criteria</div>
+                </a>
+              </div>
+
+              {schoolConfig.features.showParentPortalButton && (
+                <div class="pt-2">
+                  <a
+                    href={schoolConfig.features.portalUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-900 font-bold text-xs transition shadow"
+                  >
+                    <span>🔐 Access Parent & Teacher Portal</span>
+                    <span class="text-[10px] bg-amber-600/30 px-1.5 py-0.5 rounded text-amber-950 font-semibold">Laravel</span>
+                  </a>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Key Statistics Banner -->
+  <section class="bg-school-primary text-white py-10 shadow-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+        {schoolConfig.keyStats.map((stat) => (
+          <div class="space-y-1">
+            <div class="text-3xl sm:text-4xl font-extrabold font-heading text-amber-300">
+              {stat.value}
+            </div>
+            <div class="text-xs sm:text-sm text-emerald-100 font-medium">
+              {stat.label}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Headteacher Welcome Message -->
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="bg-slate-50 rounded-3xl p-8 sm:p-12 border border-slate-200 grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+        
+        <div class="md:col-span-4 flex flex-col items-center text-center">
+          <div class="w-32 h-32 rounded-2xl bg-gradient-to-tr from-school-primary to-emerald-600 text-white flex items-center justify-center text-4xl shadow-lg mb-4">
+            👩‍🏫
+          </div>
+          <h3 class="font-heading font-bold text-lg text-slate-900">
+            {schoolConfig.identity.headteacher.name}
+          </h3>
+          <p class="text-xs text-school-primary font-semibold">
+            {schoolConfig.identity.headteacher.title}
+          </p>
+        </div>
+
+        <div class="md:col-span-8 space-y-4">
+          <span class="text-xs font-bold uppercase tracking-wider text-school-secondary">
+            A Message From Our Leadership
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-heading font-bold text-slate-900 leading-snug">
+            "Every child deserves an inspiring beginning."
+          </h2>
+          <p class="text-slate-600 leading-relaxed text-sm sm:text-base">
+            {schoolConfig.identity.headteacher.messagePreview} Here at {schoolConfig.identity.shortName}, our dedicated team of primary educators nurtures curiosity in literacy, mathematics, science, arts, and physical well-being.
+          </p>
+          <div class="pt-2">
+            <a href="/about" class="text-sm font-semibold text-school-primary hover:underline inline-flex items-center gap-1">
+              Read Headteacher's Full Address & School Ethos →
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Three Primary Learning Stages -->
+  <section class="py-16 bg-slate-50 border-t border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+      
+      <div class="text-center max-w-2xl mx-auto space-y-3">
+        <h2 class="text-xs font-bold uppercase tracking-widest text-school-primary">
+          Academic Progression
+        </h2>
+        <p class="text-3xl font-heading font-bold text-slate-900">
+          Tailored Stages for Growing Minds
+        </p>
+        <p class="text-sm text-slate-600">
+          Our curriculum balances rigorous foundational learning with play-based discovery and emotional resilience.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <!-- Stage 1 -->
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition-shadow space-y-4">
+          <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center text-2xl font-bold">
+            🌱
+          </div>
+          <h3 class="font-heading font-bold text-lg text-slate-900">
+            Early Years & Kindergarten
+          </h3>
+          <p class="text-xs text-slate-500 font-semibold uppercase tracking-wider">
+            Ages 4 – 5 • Foundation Stage
+          </p>
+          <p class="text-sm text-slate-600 leading-relaxed">
+            Fostering phonics, sensory exploration, social cooperation, and fine motor skills through warm, joyful guided play.
+          </p>
+          <ul class="text-xs text-slate-500 space-y-1.5 pt-2">
+            <li>✓ Early Literacy & Jolly Phonics</li>
+            <li>✓ Number sense & building blocks</li>
+            <li>✓ Outdoor discovery garden</li>
+          </ul>
+        </div>
+
+        <!-- Stage 2 -->
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition-shadow space-y-4">
+          <div class="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center text-2xl font-bold">
+            📚
+          </div>
+          <h3 class="font-heading font-bold text-lg text-slate-900">
+            Lower Primary (Grades 1 – 3)
+          </h3>
+          <p class="text-xs text-slate-500 font-semibold uppercase tracking-wider">
+            Ages 6 – 8 • Core Foundations
+          </p>
+          <p class="text-sm text-slate-600 leading-relaxed">
+            Developing independent reading, mathematical reasoning, introductory science, and artistic expression in caring classrooms.
+          </p>
+          <ul class="text-xs text-slate-500 space-y-1.5 pt-2">
+            <li>✓ Guided reading & creative writing</li>
+            <li>✓ Practical math problem solving</li>
+            <li>✓ Music, visual arts, and junior sports</li>
+          </ul>
+        </div>
+
+        <!-- Stage 3 -->
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition-shadow space-y-4">
+          <div class="w-12 h-12 rounded-xl bg-sky-100 text-sky-800 flex items-center justify-center text-2xl font-bold">
+            🚀
+          </div>
+          <h3 class="font-heading font-bold text-lg text-slate-900">
+            Upper Primary (Grades 4 – 6)
+          </h3>
+          <p class="text-xs text-slate-500 font-semibold uppercase tracking-wider">
+            Ages 9 – 11 • Mastery & Leadership
+          </p>
+          <p class="text-sm text-slate-600 leading-relaxed">
+            Preparing confident learners for secondary school transition through analytical thinking, STEM, and student council leadership.
+          </p>
+          <ul class="text-xs text-slate-500 space-y-1.5 pt-2">
+            <li>✓ Advanced STEM & coding lab</li>
+            <li>✓ Debate, leadership & community service</li>
+            <li>✓ Secondary school readiness transition</li>
+          </ul>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 5. Dynamic Conditional Callout: Government vs Private Notice -->
+  <section class="py-12 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {isPrivate ? (
+        <div class="bg-gradient-to-r from-amber-500/10 via-amber-500/5 to-transparent border-l-4 border-amber-500 p-6 rounded-r-2xl">
+          <div class="flex items-start gap-4">
+            <span class="text-2xl">🎓</span>
+            <div class="space-y-1">
+              <h4 class="font-heading font-bold text-slate-900 text-base">Private School Enrollment & Bursary Scholarships</h4>
+              <p class="text-sm text-slate-600">
+                Tuition fee schedules, flexible payment plans, and means-tested academic bursaries are available for the 2026 academic year.
+              </p>
+              <a href="/admissions" class="text-xs font-bold text-amber-700 hover:underline inline-block pt-1">
+                View Tuition Fees & Bursary Details →
+              </a>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div class="bg-gradient-to-r from-emerald-500/10 via-emerald-500/5 to-transparent border-l-4 border-school-primary p-6 rounded-r-2xl">
+          <div class="flex items-start gap-4">
+            <span class="text-2xl">🏛️</span>
+            <div class="space-y-1">
+              <h4 class="font-heading font-bold text-slate-900 text-base">Government Primary School Catchment & Inclusivity Notice</h4>
+              <p class="text-sm text-slate-600">
+                As an accredited public community school under {schoolConfig.identity.affiliation}, admission is open to all students residing in our official designated school zone without tuition fees.
+              </p>
+              <a href="/admissions" class="text-xs font-bold text-school-primary hover:underline inline-block pt-1">
+                Check Catchment Area & Required Documents →
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  </section>
+</BaseLayout>
