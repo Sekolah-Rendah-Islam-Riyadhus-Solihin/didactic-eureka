@@ -1,94 +1,129 @@
 export const languages = {
   ms: {
-    name: 'Bahasa Melayu',
-    code: 'ms',
-    flag: '🇲🇾',
-    shortLabel: 'BM',
+    label: "Bahasa Melayu",
+    shortLabel: "BM",
+    flag: "🇲🇾",
   },
   en: {
-    name: 'English',
-    code: 'en',
-    flag: '🇬🇧',
-    shortLabel: 'EN',
+    label: "English",
+    shortLabel: "EN",
+    flag: "🇬🇧",
   },
 } as const;
 
 export type SupportedLanguage = keyof typeof languages;
-export const defaultLang: SupportedLanguage = 'ms';
+export const defaultLang: SupportedLanguage = "ms";
 
 export const ui = {
   ms: {
     // Navigation
-    'nav.home': 'Utama',
-    'nav.about': 'Tentang Kami',
-    'nav.academics': 'Akademik',
-    'nav.admissions': 'Kemasukan',
-    'nav.news': 'Berita & Takwim',
-    'nav.contact': 'Hubungi',
-    'nav.portal': 'Portal Ibu Bapa',
-    'nav.apply': 'Daftar Sekarang',
+    "nav.home": "Laman Utama",
+    "nav.about": "Tentang Kami",
+    "nav.academics": "Kurikulum & Akademik",
+    "nav.admissions": "Pendaftaran",
+    "nav.news": "Berita & Takwim",
+    "nav.contact": "Hubungi Kami",
+    "nav.apply": "Daftar Kemasukan",
+    "nav.enrollmentInfo": "Maklumat Pendaftaran",
+    "nav.parentPortal": "Portal Ibu Bapa",
 
-    // Top Bar
-    'topbar.portal': 'Portal Ibu Bapa →',
-    'topbar.term': 'Sesi Persekolahan',
+    // Top Utility Bar
+    "topbar.emergency": "Kecemasan",
+    "topbar.currentTerm": "Sesi Persekolahan",
+    "topbar.portalTitle": "Akses portal ibu bapa & guru (Dikuasakan Laravel)",
+
+    // Branding Badges
+    "badge.private": "Sekolah Rendah Islam Swasta",
+    "badge.government": "Sekolah Rendah Kerajaan",
 
     // Footer
-    'footer.aboutTitle': 'Tentang Sekolah',
-    'footer.quickLinks': 'Pautan Pantas',
-    'footer.hours': 'Waktu Operasi Pejabat',
-    'footer.contact': 'Hubungi Kami',
-    'footer.rights': 'Hak cipta terpelihara.',
-    'footer.closed': 'Tutup',
-    'footer.break': 'Rehat',
-    'footer.emergency': 'Kecemasan 24/7',
+    "footer.quickLinks": "Pautan Pantas",
+    "footer.parentResources": "Sumber Ibu Bapa & Waris",
+    "footer.schoolOffice": "Pejabat Sekolah",
+    "footer.allRightsReserved": "Hak cipta terpelihara.",
+    "footer.canteenMenu": "🥗 Menu Makanan Sihat Kantin",
+    "footer.busRoutes": "🚌 Laluan Bas Sekolah & Zon Pejalan Kaki",
+    "footer.safeguarding": "🛡️ Polisi Keselamatan & Perlindungan Murid",
+    "footer.academicCalendar": "📅 Takwim Persekolahan & Cuti Umum",
+    "footer.parentPortalLogin": "🔐 Log Masuk Portal Ibu Bapa →",
+    "footer.emergencyPhone": "Kecemasan:",
+    "footer.officeHoursTitle": "Waktu Pejabat:",
 
-    // Emergency Notice Banner
-    'emergency.default': 'Pengumuman Penting: Sila semak hebahan terkini sekolah.',
-    'emergency.viewDetails': 'Lihat Butiran →',
+    // Common Buttons & Labels
+    "btn.learnMore": "Ketahui Lebih Lanjut",
+    "btn.explorePrograms": "Lihat Program Kami",
+    "btn.contactUs": "Hubungi Pihak Sekolah",
+    "btn.viewCalendar": "Lihat Takwim",
+    "btn.downloadForm": "Muat Turun Borang",
 
-    // General CTAs & Labels
-    'cta.apply': 'Daftar Segera',
-    'cta.learnMore': 'Ketahui Lebih Lanjut',
-    'cta.contact': 'Hubungi Pejabat',
-    'badge.schoolType': 'Sekolah Rendah Islam Integrasi',
-    'badge.tagline': 'Membentuk Generasi Huffaz & Berakhlak Mulia',
+    // Office Hours
+    "office.title": "Waktu Pejabat",
+    "office.mainLine": "Talian Utama:",
+    "office.urgentEmergency": "Kecemasan Segera:",
+    "office.closed": "Tutup",
+    "office.break": "Rehat:",
+    "office.emergencyNote":
+      "Talian kecemasan beroperasi 24/7 bagi hal kebajikan & keselamatan murid.",
+
+    // Language Switcher
+    "lang.select": "Pilih Bahasa",
+    "lang.current": "Bahasa Semasa",
   },
   en: {
     // Navigation
-    'nav.home': 'Home',
-    'nav.about': 'About Us',
-    'nav.academics': 'Academics',
-    'nav.admissions': 'Admissions',
-    'nav.news': 'News & Calendar',
-    'nav.contact': 'Contact',
-    'nav.portal': 'Parent Portal',
-    'nav.apply': 'Apply Now',
+    "nav.home": "Home",
+    "nav.about": "About Us",
+    "nav.academics": "Academics",
+    "nav.admissions": "Admissions",
+    "nav.news": "News & Calendar",
+    "nav.contact": "Contact",
+    "nav.apply": "Apply for Place",
+    "nav.enrollmentInfo": "Enrollment Info",
+    "nav.parentPortal": "Parent Portal",
 
-    // Top Bar
-    'topbar.portal': 'Parent Portal →',
-    'topbar.term': 'School Session',
+    // Top Utility Bar
+    "topbar.emergency": "Emergency",
+    "topbar.currentTerm": "School Term",
+    "topbar.portalTitle":
+      "Access parent and teacher portal (Powered by Laravel)",
+
+    // Branding Badges
+    "badge.private": "Private Islamic Primary",
+    "badge.government": "Government Primary",
 
     // Footer
-    'footer.aboutTitle': 'About School',
-    'footer.quickLinks': 'Quick Links',
-    'footer.hours': 'Office Hours',
-    'footer.contact': 'Contact Us',
-    'footer.rights': 'All rights reserved.',
-    'footer.closed': 'Closed',
-    'footer.break': 'Break',
-    'footer.emergency': '24/7 Emergency',
+    "footer.quickLinks": "Quick Links",
+    "footer.parentResources": "Parent Resources",
+    "footer.schoolOffice": "School Office",
+    "footer.allRightsReserved": "All rights reserved.",
+    "footer.canteenMenu": "🥗 Canteen Healthy Meal Menu",
+    "footer.busRoutes": "🚌 School Bus & Walk-to-School Zones",
+    "footer.safeguarding": "🛡️ Child Safeguarding & Safety Policy",
+    "footer.academicCalendar": "📅 Academic Calendar & Holidays",
+    "footer.parentPortalLogin": "🔐 Parent Portal Login →",
+    "footer.emergencyPhone": "Emergency:",
+    "footer.officeHoursTitle": "Office Hours:",
 
-    // Emergency Notice Banner
-    'emergency.default': 'Important Notice: Please check the latest school circulars.',
-    'emergency.viewDetails': 'View Details →',
+    // Common Buttons & Labels
+    "btn.learnMore": "Learn More",
+    "btn.explorePrograms": "Explore Programs",
+    "btn.contactUs": "Contact School Office",
+    "btn.viewCalendar": "View Calendar",
+    "btn.downloadForm": "Download Form",
 
-    // General CTAs & Labels
-    'cta.apply': 'Apply Now',
-    'cta.learnMore': 'Learn More',
-    'cta.contact': 'Contact Office',
-    'badge.schoolType': 'Integrated Islamic Primary School',
-    'badge.tagline': 'Nurturing Huffaz Generations with Noble Character',
+    // Office Hours
+    "office.title": "Office Hours",
+    "office.mainLine": "Main Line:",
+    "office.urgentEmergency": "Urgent Emergency:",
+    "office.closed": "Closed",
+    "office.break": "Break:",
+    "office.emergencyNote":
+      "Emergency hotline operates 24/7 for student safety & wellbeing.",
+
+    // Language Switcher
+    "lang.select": "Select Language",
+    "lang.current": "Current Language",
   },
 } as const;
 
-export type UIKey = keyof typeof ui[typeof defaultLang];
+export type UIKey = keyof (typeof ui)[typeof defaultLang];

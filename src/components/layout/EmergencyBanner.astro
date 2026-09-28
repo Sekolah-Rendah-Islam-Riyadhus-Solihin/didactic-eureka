@@ -1,31 +1,32 @@
 ---
-import type { SupportedLanguage } from '../../i18n/ui';
-import { getLangFromUrl, getLocalizedPath, useTranslations } from '../../i18n/utils';
+import { getLangFromUrl, getLocalizedPath } from "../../i18n/utils";
 
 interface Props {
   notice?: string;
   message?: string;
-  type?: 'info' | 'alert' | 'event';
+  type?: "info" | "alert" | "event";
   link?: string;
   linkText?: string;
-  lang?: SupportedLanguage;
 }
+
+const lang = getLangFromUrl(Astro.url);
+
+const defaultNotice =
+  lang === "ms"
+    ? "Hari Konsultasi Ibu Bapa & Guru Penggal 2 akan diadakan pada 22–24 April 2026. Temujanji kini dibuka di pejabat sekolah."
+    : "Term 2 Parent-Teacher Consultations will take place on April 22–24, 2026. Appointments are now open via the school office.";
+
+const defaultLinkText = lang === "ms" ? "Maklumat Lanjut →" : "Read Details →";
 
 const {
   notice,
   message,
   type = "info",
-  link,
-  linkText,
-  lang: propLang,
+  link = getLocalizedPath("/news", lang),
+  linkText = defaultLinkText,
 } = Astro.props;
 
-const lang: SupportedLanguage = propLang || getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
-
-const displayNotice = notice || message || t('emergency.default');
-const displayLink = link || getLocalizedPath('/news', lang);
-const displayLinkText = linkText || t('emergency.viewDetails');
+const displayNotice = message || notice || defaultNotice;
 
 const bgColors = {
   info: "bg-amber-500 text-amber-950",
@@ -34,18 +35,29 @@ const bgColors = {
 };
 ---
 
-<div class={`px-4 py-2.5 text-xs sm:text-sm font-medium ${bgColors[type]} transition-all shadow-inner`}>
-  <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
+<div
+  class={`px-4 py-2.5 text-xs sm:text-sm font-medium ${bgColors[type]} transition-all shadow-inner`}
+>
+  <div
+    class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2"
+  >
     <div class="flex items-center gap-2">
-      <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-black/10 font-bold text-xs uppercase tracking-wider">
+      <span
+        class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-black/10 font-bold text-xs uppercase tracking-wider"
+      >
         !
       </span>
       <span>{displayNotice}</span>
     </div>
-    {displayLink && (
-      <a href={displayLink} class="underline hover:no-underline font-semibold whitespace-nowrap ml-auto sm:ml-0">
-        {displayLinkText}
-      </a>
-    )}
+    {
+      link && (
+        <a
+          href={link}
+          class="underline hover:no-underline font-semibold whitespace-nowrap ml-auto sm:ml-0"
+        >
+          {linkText}
+        </a>
+      )
+    }
   </div>
 </div>

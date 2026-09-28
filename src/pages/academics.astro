@@ -1,32 +1,101 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import { schoolConfig } from '../config/school.config';
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { schoolConfig } from "../config/school.config";
 
-const lang = 'ms';
+const lang = "ms";
 
 const subjects = [
-  { icon: "📖", title: "Literasi Bahasa Melayu & Inggeris", desc: "Pendekatan fonik berstruktur, pemahaman teks, penulisan kreatif, pengucapan awam serta pidato dwibahasa." },
-  { icon: "🔢", title: "Matematik & Penyelesaian Masalah", desc: "Konsep nombor, congak pantas, asas geometri dan aplikasi matematik kehidupan sebenar mengikut silibus KSSR." },
-  { icon: "🔬", title: "Sains & Alam Sekitar", desc: "Amali sains bilik darjah dan taman herba, kajian sains hayat, fizikal dan pengenalan asas teknologi digital." },
-  { icon: "📖", title: "Pendidikan Islam & Hafazan Al-Quran", desc: "Hafazan berjadual, hukum Tajwid, Sirah Nabawiyyah, Fardhu Ain, bahasa Arab asas dan amali solat harian." },
-  { icon: "⚽", title: "Pendidikan Jasmani & Kesihatan", desc: "Latihan kemahiran motor, sukan berkumpulan (futsal, badminton, memanah) dan penjagaan kesihatan diri." },
-  { icon: "🌍", title: "Sejarah, Nilai Masyarakat & Kesenian", desc: "Memupuk kecintaan kepada tanah air, sejarah ketamadunan Islam, seni khat Islamiah dan tanggungjawab sivik." },
+  {
+    icon: "📖",
+    title: "Literasi Bahasa Melayu & Inggeris",
+    desc: "Pendekatan fonik berstruktur, pemahaman teks, penulisan kreatif, pengucapan awam serta pidato dwibahasa.",
+  },
+  {
+    icon: "🔢",
+    title: "Matematik & Penyelesaian Masalah",
+    desc: "Konsep nombor, congak pantas, asas geometri dan aplikasi matematik kehidupan sebenar mengikut silibus KSSR.",
+  },
+  {
+    icon: "🔬",
+    title: "Sains & Alam Sekitar",
+    desc: "Amali sains bilik darjah dan taman herba, kajian sains hayat, fizikal dan pengenalan asas teknologi digital.",
+  },
+  {
+    icon: "📖",
+    title: "Pendidikan Islam & Hafazan Al-Quran",
+    desc: "Hafazan berjadual, hukum Tajwid, Sirah Nabawiyyah, Fardhu Ain, bahasa Arab asas dan amali solat harian.",
+  },
+  {
+    icon: "⚽",
+    title: "Pendidikan Jasmani & Kesihatan",
+    desc: "Latihan kemahiran motor, sukan berkumpulan (futsal, badminton, memanah) dan penjagaan kesihatan diri.",
+  },
+  {
+    icon: "🌍",
+    title: "Sejarah, Nilai Masyarakat & Kesenian",
+    desc: "Memupuk kecintaan kepada tanah air, sejarah ketamadunan Islam, seni khat Islamiah dan tanggungjawab sivik.",
+  },
 ];
 
 const clubs = [
-  { name: "Kelab Robotik & Teknologi Junior", day: "Selasa 2:30 – 3:30 PTG", ages: "Tahun 4 – 6" },
-  { name: "Kelab Tilawah & Seni Nasyid/Khat", day: "Rabu 2:30 – 3:30 PTG", ages: "Semua Tahap" },
-  { name: "Kelab Pencinta Alam & Laman Herba", day: "Khamis 2:30 – 3:30 PTG", ages: "Tahun 1 – 6" },
-  { name: "Kelab Catur & Permainan Minda", day: "Jumaat 2:30 – 3:30 PTG", ages: "Tahun 2 – 6" },
-  { name: "Skuad Bola Sepak & Olahraga Junior", day: "Isnin & Khamis 3:00 – 4:30 PTG", ages: "Tahun 3 – 6" },
+  {
+    name: "Kelab Robotik & Teknologi Junior",
+    day: "Selasa 2:30 – 3:30 PTG",
+    ages: "Tahun 4 – 6",
+  },
+  {
+    name: "Kelab Tilawah & Seni Nasyid/Khat",
+    day: "Rabu 2:30 – 3:30 PTG",
+    ages: "Semua Tahap",
+  },
+  {
+    name: "Kelab Pencinta Alam & Laman Herba",
+    day: "Khamis 2:30 – 3:30 PTG",
+    ages: "Tahun 1 – 6",
+  },
+  {
+    name: "Kelab Catur & Permainan Minda",
+    day: "Jumaat 2:30 – 3:30 PTG",
+    ages: "Tahun 2 – 6",
+  },
+  {
+    name: "Skuad Bola Sepak & Olahraga Junior",
+    day: "Isnin & Khamis 3:00 – 4:30 PTG",
+    ages: "Tahun 3 – 6",
+  },
 ];
 
 const weeklyMenu = [
-  { day: "Isnin", main: "Nasi Lemak Ayam Rendang / Tempe Goreng", side: "Sayur Kailan Ikan Masin, Telur Rebus", fruit: "Tembikai Manis" },
-  { day: "Selasa", main: "Mee Goreng Mamak / Mee Goreng Sayur", side: "Sayur Campur, Keropok", fruit: "Pisang Emas" },
-  { day: "Rabu", main: "Nasi Putih & Ikan Bakar / Ayam Masak Lemak", side: "Sup Sayur Bayam, Papadom", fruit: "Oren Segar" },
-  { day: "Khamis", main: "Mihun Sup Daging / Ayam Bersayur", side: "Cucur Sayur Rangup", fruit: "Hirisan Jambu Batu / Epal" },
-  { day: "Jumaat", main: "Nasi Ayam Hainan / Nasi Goreng Kampung", side: "Tauhu & Tempe Goreng, Sup Kubis", fruit: "Tembikai Susu" },
+  {
+    day: "Isnin",
+    main: "Nasi Lemak Ayam Rendang / Tempe Goreng",
+    side: "Sayur Kailan Ikan Masin, Telur Rebus",
+    fruit: "Tembikai Manis",
+  },
+  {
+    day: "Selasa",
+    main: "Mee Goreng Mamak / Mee Goreng Sayur",
+    side: "Sayur Campur, Keropok",
+    fruit: "Pisang Emas",
+  },
+  {
+    day: "Rabu",
+    main: "Nasi Putih & Ikan Bakar / Ayam Masak Lemak",
+    side: "Sup Sayur Bayam, Papadom",
+    fruit: "Oren Segar",
+  },
+  {
+    day: "Khamis",
+    main: "Mihun Sup Daging / Ayam Bersayur",
+    side: "Cucur Sayur Rangup",
+    fruit: "Hirisan Jambu Batu / Epal",
+  },
+  {
+    day: "Jumaat",
+    main: "Nasi Ayam Hainan / Nasi Goreng Kampung",
+    side: "Tauhu & Tempe Goreng, Sup Kubis",
+    fruit: "Tembikai Susu",
+  },
 ];
 ---
 
@@ -34,10 +103,17 @@ const weeklyMenu = [
   <!-- Page Header -->
   <section class="bg-slate-900 text-white py-16">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
-      <span class="text-xs font-bold uppercase tracking-widest text-emerald-400">Kurikulum & Kokurikulum</span>
-      <h1 class="text-3xl sm:text-5xl font-heading font-bold">Akademik di {schoolConfig.identity.shortName}</h1>
-      <p class="max-w-2xl mx-auto text-sm sm:text-base text-slate-300 font-light">
-        Mengintegrasikan kurikulum kebangsaan dan pendidikan Islam ke arah melahirkan generasi berilmu dan bertaqwa.
+      <span class="text-xs font-bold uppercase tracking-widest text-emerald-400"
+        >Kurikulum & Kokurikulum</span
+      >
+      <h1 class="text-3xl sm:text-5xl font-heading font-bold">
+        Akademik di {schoolConfig.identity.shortName}
+      </h1>
+      <p
+        class="max-w-2xl mx-auto text-sm sm:text-base text-slate-300 font-light"
+      >
+        Mengintegrasikan kurikulum kebangsaan dan pendidikan Islam ke arah
+        melahirkan generasi berilmu dan bertaqwa.
       </p>
     </div>
   </section>
@@ -46,19 +122,31 @@ const weeklyMenu = [
   <section class="py-16 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
       <div class="text-center max-w-2xl mx-auto space-y-2">
-        <span class="text-xs font-bold uppercase tracking-widest text-school-primary">Pakej Subjek Holistik</span>
-        <h2 class="text-3xl font-heading font-bold text-slate-900">Bidang Pembelajaran Teras</h2>
-        <p class="text-sm text-slate-600">Berpandukan Kurikulum Standard Sekolah Rendah (KSSR) KPM dan Sukatan Pendidikan Islam JAIS.</p>
+        <span
+          class="text-xs font-bold uppercase tracking-widest text-school-primary"
+          >Pakej Subjek Holistik</span
+        >
+        <h2 class="text-3xl font-heading font-bold text-slate-900">
+          Bidang Pembelajaran Teras
+        </h2>
+        <p class="text-sm text-slate-600">
+          Berpandukan Kurikulum Standard Sekolah Rendah (KSSR) KPM dan Sukatan
+          Pendidikan Islam JAIS.
+        </p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {subjects.map((sub) => (
-          <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 hover:shadow-md transition space-y-3">
-            <div class="text-3xl">{sub.icon}</div>
-            <h3 class="font-heading font-bold text-lg text-slate-900">{sub.title}</h3>
-            <p class="text-xs text-slate-600 leading-relaxed">{sub.desc}</p>
-          </div>
-        ))}
+        {
+          subjects.map((sub) => (
+            <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 hover:shadow-md transition space-y-3">
+              <div class="text-3xl">{sub.icon}</div>
+              <h3 class="font-heading font-bold text-lg text-slate-900">
+                {sub.title}
+              </h3>
+              <p class="text-xs text-slate-600 leading-relaxed">{sub.desc}</p>
+            </div>
+          ))
+        }
       </div>
     </div>
   </section>
@@ -67,69 +155,102 @@ const weeklyMenu = [
   <section class="py-16 bg-slate-50 border-t border-slate-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
       <div class="text-center max-w-2xl mx-auto space-y-2">
-        <span class="text-xs font-bold uppercase tracking-widest text-school-primary">Aktiviti Luar Bilik Darjah</span>
-        <h2 class="text-3xl font-heading font-bold text-slate-900">Kelab & Persatuan Selepas Sesi Kelas</h2>
-        <p class="text-sm text-slate-600">Memupuk ukhuwah, kepimpinan serta kemahiran insaniah murid melalui pelbagai aktiviti berfaedah.</p>
+        <span
+          class="text-xs font-bold uppercase tracking-widest text-school-primary"
+          >Aktiviti Luar Bilik Darjah</span
+        >
+        <h2 class="text-3xl font-heading font-bold text-slate-900">
+          Kelab & Persatuan Selepas Sesi Kelas
+        </h2>
+        <p class="text-sm text-slate-600">
+          Memupuk ukhuwah, kepimpinan serta kemahiran insaniah murid melalui
+          pelbagai aktiviti berfaedah.
+        </p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {clubs.map((c) => (
-          <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm space-y-2">
-            <div class="flex items-center justify-between">
-              <span class="text-xs font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800">{c.ages}</span>
-              <span class="text-[11px] text-slate-400">Penyertaan Terbuka</span>
+        {
+          clubs.map((c) => (
+            <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800">
+                  {c.ages}
+                </span>
+                <span class="text-[11px] text-slate-400">
+                  Penyertaan Terbuka
+                </span>
+              </div>
+              <h3 class="font-heading font-bold text-sm text-slate-900">
+                {c.name}
+              </h3>
+              <p class="text-xs text-slate-500">⏰ {c.day}</p>
             </div>
-            <h3 class="font-heading font-bold text-sm text-slate-900">{c.name}</h3>
-            <p class="text-xs text-slate-500">⏰ {c.day}</p>
-          </div>
-        ))}
+          ))
+        }
       </div>
     </div>
   </section>
 
   <!-- Canteen Healthy Menu Section (Anchor: #canteen) -->
-  {schoolConfig.features.showCanteenMenu && (
-    <section id="canteen" class="py-16 bg-white border-t border-slate-200">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
-        <div class="text-center max-w-2xl mx-auto space-y-2">
-          <span class="text-xs font-bold uppercase tracking-widest text-amber-600">Halalan Toyyiban</span>
-          <h2 class="text-3xl font-heading font-bold text-slate-900">🥗 Menu Mingguan Kantin Sekolah</h2>
-          <p class="text-sm text-slate-600">
-            Dimasak segar setiap hari di premis sekolah. 100% Halal dan menepati piawaian pemakanan sihat murid sekolah.
-          </p>
-        </div>
+  {
+    schoolConfig.features.showCanteenMenu && (
+      <section id="canteen" class="py-16 bg-white border-t border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+          <div class="text-center max-w-2xl mx-auto space-y-2">
+            <span class="text-xs font-bold uppercase tracking-widest text-amber-600">
+              Halalan Toyyiban
+            </span>
+            <h2 class="text-3xl font-heading font-bold text-slate-900">
+              🥗 Menu Mingguan Kantin Sekolah
+            </h2>
+            <p class="text-sm text-slate-600">
+              Dimasak segar setiap hari di premis sekolah. 100% Halal dan
+              menepati piawaian pemakanan sihat murid sekolah.
+            </p>
+          </div>
 
-        <div class="overflow-x-auto">
-          <table class="w-full text-left text-xs sm:text-sm border-collapse bg-slate-50 rounded-2xl overflow-hidden border border-slate-200">
-            <thead>
-              <tr class="bg-slate-900 text-white">
-                <th class="p-4 font-heading font-bold">Hari</th>
-                <th class="p-4 font-heading font-bold">Hidangan Utama</th>
-                <th class="p-4 font-heading font-bold">Sayur & Lauk Sampingan</th>
-                <th class="p-4 font-heading font-bold">Buah-Buahan & Pencuci Mulut</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-slate-200">
-              {weeklyMenu.map((m) => (
-                <tr class="hover:bg-slate-100 transition-colors">
-                  <td class="p-4 font-bold text-slate-900 whitespace-nowrap">{m.day}</td>
-                  <td class="p-4 text-slate-700">{m.main}</td>
-                  <td class="p-4 text-slate-600">{m.side}</td>
-                  <td class="p-4 text-emerald-700 font-medium">{m.fruit}</td>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs sm:text-sm border-collapse bg-slate-50 rounded-2xl overflow-hidden border border-slate-200">
+              <thead>
+                <tr class="bg-slate-900 text-white">
+                  <th class="p-4 font-heading font-bold">Hari</th>
+                  <th class="p-4 font-heading font-bold">Hidangan Utama</th>
+                  <th class="p-4 font-heading font-bold">
+                    Sayur & Lauk Sampingan
+                  </th>
+                  <th class="p-4 font-heading font-bold">
+                    Buah-Buahan & Pencuci Mulut
+                  </th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+              </thead>
+              <tbody class="divide-y divide-slate-200">
+                {weeklyMenu.map((m) => (
+                  <tr class="hover:bg-slate-100 transition-colors">
+                    <td class="p-4 font-bold text-slate-900 whitespace-nowrap">
+                      {m.day}
+                    </td>
+                    <td class="p-4 text-slate-700">{m.main}</td>
+                    <td class="p-4 text-slate-600">{m.side}</td>
+                    <td class="p-4 text-emerald-700 font-medium">{m.fruit}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
 
-        <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 text-xs text-amber-900 flex items-start gap-3">
-          <span class="text-lg">ℹ️</span>
-          <div>
-            <p class="font-bold">Keperluan Alahan & Diet Khas:</p>
-            <p>Makanan disediakan bebas kacang dan 100% Halal. Sila maklumkan kepada pihak pejabat sekolah sekiranya anak anda mempunyai sebarang alahan makanan.</p>
+          <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 text-xs text-amber-900 flex items-start gap-3">
+            <span class="text-lg">ℹ️</span>
+            <div>
+              <p class="font-bold">Keperluan Alahan & Diet Khas:</p>
+              <p>
+                Makanan disediakan bebas kacang dan 100% Halal. Sila maklumkan
+                kepada pihak pejabat sekolah sekiranya anak anda mempunyai
+                sebarang alahan makanan.
+              </p>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
-  )}
+      </section>
+    )
+  }
 </BaseLayout>

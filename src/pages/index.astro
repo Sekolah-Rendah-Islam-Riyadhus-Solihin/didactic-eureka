@@ -1,48 +1,73 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import { schoolConfig } from '../config/school.config';
-import { getLocalizedPath } from '../i18n/utils';
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { schoolConfig } from "../config/school.config";
+import { getLocalizedPath } from "../i18n/utils";
 
-const lang = 'ms';
-const isPrivate = schoolConfig.identity.schoolType === 'private';
+const lang = "ms";
+const isPrivate = schoolConfig.identity.schoolType === "private";
 ---
 
 <BaseLayout lang={lang}>
   <!-- 1. Hero Section -->
-  <section class="relative bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 text-white overflow-hidden py-16 sm:py-24">
+  <section
+    class="relative bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 text-white overflow-hidden py-16 sm:py-24"
+  >
     <!-- Decorative background patterns -->
-    <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:16px_16px]"></div>
-    
+    <div
+      class="absolute inset-0 opacity-10 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:16px_16px]"
+    >
+    </div>
+
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-        
         <!-- Left Hero Content -->
         <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
-          
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold tracking-wide uppercase bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
-            <span>🏫 {isPrivate ? 'Sekolah Rendah Islam Integrasi' : 'Sekolah Rendah Kebangsaan'}</span>
+          <div
+            class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold tracking-wide uppercase bg-emerald-500/20 text-emerald-300 border border-emerald-500/30"
+          >
+            <span
+              >🏫 {
+                isPrivate
+                  ? "Sekolah Rendah Islam Integrasi"
+                  : "Sekolah Rendah Kebangsaan"
+              }</span
+            >
             <span>•</span>
             <span>Ditubuhkan {schoolConfig.identity.establishedYear}</span>
           </div>
 
-          <h1 class="text-3xl sm:text-5xl lg:text-6xl font-heading font-extrabold tracking-tight leading-tight">
+          <h1
+            class="text-3xl sm:text-5xl lg:text-6xl font-heading font-extrabold tracking-tight leading-tight"
+          >
             {schoolConfig.identity.tagline}
           </h1>
 
-          <p class="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto lg:mx-0 font-light leading-relaxed">
-            Selamat datang ke <strong class="text-white font-semibold">{schoolConfig.identity.name}</strong>. Kami menyediakan persekitaran pembelajaran Islam yang selamat, ceria dan kondusif untuk membina aqidah kukuh, akhlak terpuji serta kecemerlangan akademik anak-anak anda.
+          <p
+            class="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto lg:mx-0 font-light leading-relaxed"
+          >
+            Selamat datang ke <strong class="text-white font-semibold"
+              >{schoolConfig.identity.name}</strong
+            >. Kami menyediakan persekitaran pembelajaran Islam yang selamat,
+            ceria dan kondusif untuk membina aqidah kukuh, akhlak terpuji serta
+            kecemerlangan akademik anak-anak anda.
           </p>
 
           <!-- Call to action buttons -->
-          <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
+          <div
+            class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2"
+          >
             <a
-              href={getLocalizedPath('/admissions', lang)}
+              href={getLocalizedPath("/admissions", lang)}
               class="px-6 py-3.5 rounded-xl text-sm font-bold bg-school-primary text-white hover:bg-school-primary-hover shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5"
             >
-              {isPrivate ? 'Daftar Sesi Persekolahan →' : 'Panduan Pendaftaran & Zon Sekolah →'}
+              {
+                isPrivate
+                  ? "Daftar Sesi Persekolahan →"
+                  : "Panduan Pendaftaran & Zon Sekolah →"
+              }
             </a>
             <a
-              href={getLocalizedPath('/about', lang)}
+              href={getLocalizedPath("/about", lang)}
               class="px-6 py-3.5 rounded-xl text-sm font-semibold bg-white/10 text-white hover:bg-white/20 border border-white/20 transition-all backdrop-blur-sm"
             >
               Ketahui Falsafah Kami
@@ -50,7 +75,9 @@ const isPrivate = schoolConfig.identity.schoolType === 'private';
           </div>
 
           <!-- Micro school credentials -->
-          <div class="pt-6 border-t border-slate-700/60 flex flex-wrap items-center justify-center lg:justify-start gap-6 text-xs text-slate-300">
+          <div
+            class="pt-6 border-t border-slate-700/60 flex flex-wrap items-center justify-center lg:justify-start gap-6 text-xs text-slate-300"
+          >
             <div class="flex items-center gap-2">
               <span class="text-emerald-400 font-bold">✓</span>
               <span>Pentauliahan: {schoolConfig.identity.affiliation}</span>
@@ -60,67 +87,97 @@ const isPrivate = schoolConfig.identity.schoolType === 'private';
               <span>Kurikulum: KSSR & Tahfiz Al-Quran Terintegrasi</span>
             </div>
           </div>
-
         </div>
 
         <!-- Right Hero Visual Card -->
         <div class="lg:col-span-5">
-          <div class="bg-white/10 backdrop-blur-md p-6 sm:p-8 rounded-3xl border border-white/20 shadow-2xl relative">
-            <div class="absolute -top-3 -right-3 bg-amber-500 text-amber-950 text-xs font-bold px-3 py-1 rounded-full shadow">
+          <div
+            class="bg-white/10 backdrop-blur-md p-6 sm:p-8 rounded-3xl border border-white/20 shadow-2xl relative"
+          >
+            <div
+              class="absolute -top-3 -right-3 bg-amber-500 text-amber-950 text-xs font-bold px-3 py-1 rounded-full shadow"
+            >
               Pendaftaran Sesi 2026/2027 Dibuka
             </div>
 
             <div class="space-y-4">
-              <h3 class="text-lg font-heading font-bold text-white flex items-center gap-2">
+              <h3
+                class="text-lg font-heading font-bold text-white flex items-center gap-2"
+              >
                 <span>🎒</span> Maklumat Pantas & Portal Ibu Bapa
               </h3>
               <p class="text-xs text-slate-300 leading-relaxed">
-                Segala keperluan harian dan rujukan rasmi keluarga warga {schoolConfig.identity.shortName}:
+                Segala keperluan harian dan rujukan rasmi keluarga warga {
+                  schoolConfig.identity.shortName
+                }:
               </p>
 
               <div class="grid grid-cols-2 gap-3 pt-2">
-                <a href={getLocalizedPath('/news', lang)} class="p-3 rounded-xl bg-white/10 hover:bg-white/20 transition border border-white/10 text-left">
+                <a
+                  href={getLocalizedPath("/news", lang)}
+                  class="p-3 rounded-xl bg-white/10 hover:bg-white/20 transition border border-white/10 text-left"
+                >
                   <div class="text-lg mb-1">📅</div>
                   <div class="text-xs font-bold text-white">Takwim Penggal</div>
-                  <div class="text-[11px] text-slate-300">{schoolConfig.terms.currentTerm}</div>
+                  <div class="text-[11px] text-slate-300">
+                    {schoolConfig.terms.currentTerm}
+                  </div>
                 </a>
 
-                <a href={getLocalizedPath('/academics#canteen', lang)} class="p-3 rounded-xl bg-white/10 hover:bg-white/20 transition border border-white/10 text-left">
+                <a
+                  href={getLocalizedPath("/academics#canteen", lang)}
+                  class="p-3 rounded-xl bg-white/10 hover:bg-white/20 transition border border-white/10 text-left"
+                >
                   <div class="text-lg mb-1">🥗</div>
                   <div class="text-xs font-bold text-white">Menu Kantin</div>
-                  <div class="text-[11px] text-slate-300">Hidangan Halal & Sihat</div>
+                  <div class="text-[11px] text-slate-300">
+                    Hidangan Halal & Sihat
+                  </div>
                 </a>
 
-                <a href={getLocalizedPath('/contact#transport', lang)} class="p-3 rounded-xl bg-white/10 hover:bg-white/20 transition border border-white/10 text-left">
+                <a
+                  href={getLocalizedPath("/contact#transport", lang)}
+                  class="p-3 rounded-xl bg-white/10 hover:bg-white/20 transition border border-white/10 text-left"
+                >
                   <div class="text-lg mb-1">🚌</div>
                   <div class="text-xs font-bold text-white">Van Sekolah</div>
-                  <div class="text-[11px] text-slate-300">Pintu pagar & zon van</div>
+                  <div class="text-[11px] text-slate-300">
+                    Pintu pagar & zon van
+                  </div>
                 </a>
 
-                <a href={getLocalizedPath('/admissions', lang)} class="p-3 rounded-xl bg-white/10 hover:bg-white/20 transition border border-white/10 text-left">
+                <a
+                  href={getLocalizedPath("/admissions", lang)}
+                  class="p-3 rounded-xl bg-white/10 hover:bg-white/20 transition border border-white/10 text-left"
+                >
                   <div class="text-lg mb-1">📋</div>
                   <div class="text-xs font-bold text-white">Pendaftaran</div>
-                  <div class="text-[11px] text-slate-300">Syarat & borang atas talian</div>
+                  <div class="text-[11px] text-slate-300">
+                    Syarat & borang atas talian
+                  </div>
                 </a>
               </div>
 
-              {schoolConfig.features.showParentPortalButton && (
-                <div class="pt-2">
-                  <a
-                    href={schoolConfig.features.portalUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-900 font-bold text-xs transition shadow"
-                  >
-                    <span>🔐 Log Masuk Portal Ibu Bapa & Guru</span>
-                    <span class="text-[10px] bg-amber-600/30 px-1.5 py-0.5 rounded text-amber-950 font-semibold">Laravel</span>
-                  </a>
-                </div>
-              )}
+              {
+                schoolConfig.features.showParentPortalButton && (
+                  <div class="pt-2">
+                    <a
+                      href={schoolConfig.features.portalUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-900 font-bold text-xs transition shadow"
+                    >
+                      <span>🔐 Log Masuk Portal Ibu Bapa & Guru</span>
+                      <span class="text-[10px] bg-amber-600/30 px-1.5 py-0.5 rounded text-amber-950 font-semibold">
+                        Laravel
+                      </span>
+                    </a>
+                  </div>
+                )
+              }
             </div>
           </div>
         </div>
-
       </div>
     </div>
   </section>
@@ -129,16 +186,18 @@ const isPrivate = schoolConfig.identity.schoolType === 'private';
   <section class="bg-school-primary text-white py-10 shadow-md">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-        {schoolConfig.keyStats.map((stat) => (
-          <div class="space-y-1">
-            <div class="text-3xl sm:text-4xl font-extrabold font-heading text-amber-300">
-              {stat.value}
+        {
+          schoolConfig.keyStats.map((stat) => (
+            <div class="space-y-1">
+              <div class="text-3xl sm:text-4xl font-extrabold font-heading text-amber-300">
+                {stat.value}
+              </div>
+              <div class="text-xs sm:text-sm text-emerald-100 font-medium">
+                {stat.label}
+              </div>
             </div>
-            <div class="text-xs sm:text-sm text-emerald-100 font-medium">
-              {stat.label}
-            </div>
-          </div>
-        ))}
+          ))
+        }
       </div>
     </div>
   </section>
@@ -146,10 +205,13 @@ const isPrivate = schoolConfig.identity.schoolType === 'private';
   <!-- 3. Headteacher Welcome Message -->
   <section class="py-16 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="bg-slate-50 rounded-3xl p-8 sm:p-12 border border-slate-200 grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-        
+      <div
+        class="bg-slate-50 rounded-3xl p-8 sm:p-12 border border-slate-200 grid grid-cols-1 md:grid-cols-12 gap-8 items-center"
+      >
         <div class="md:col-span-4 flex flex-col items-center text-center">
-          <div class="w-32 h-32 rounded-2xl bg-gradient-to-tr from-school-primary to-emerald-600 text-white flex items-center justify-center text-4xl shadow-lg mb-4">
+          <div
+            class="w-32 h-32 rounded-2xl bg-gradient-to-tr from-school-primary to-emerald-600 text-white flex items-center justify-center text-4xl shadow-lg mb-4"
+          >
             👨‍🏫
           </div>
           <h3 class="font-heading font-bold text-lg text-slate-900">
@@ -161,22 +223,33 @@ const isPrivate = schoolConfig.identity.schoolType === 'private';
         </div>
 
         <div class="md:col-span-8 space-y-4">
-          <span class="text-xs font-bold uppercase tracking-wider text-school-secondary">
+          <span
+            class="text-xs font-bold uppercase tracking-wider text-school-secondary"
+          >
             Perutusan Pimpinan Sekolah
           </span>
-          <h2 class="text-2xl sm:text-3xl font-heading font-bold text-slate-900 leading-snug">
-            "Membimbing akal dan rohani anak-anak ke arah kejayaan dunia dan akhirat."
+          <h2
+            class="text-2xl sm:text-3xl font-heading font-bold text-slate-900 leading-snug"
+          >
+            "Membimbing akal dan rohani anak-anak ke arah kejayaan dunia dan
+            akhirat."
           </h2>
           <p class="text-slate-600 leading-relaxed text-sm sm:text-base">
-            {schoolConfig.identity.headteacher.messagePreview} Di {schoolConfig.identity.shortName}, barisan pendidik kami komited memupuk kefahaman Al-Quran, penguasaan sains dan matematik, kemahiran dwibahasa serta sahsiah Islamiah yang utuh.
+            {schoolConfig.identity.headteacher.messagePreview} Di {
+              schoolConfig.identity.shortName
+            }, barisan pendidik kami komited memupuk kefahaman Al-Quran,
+            penguasaan sains dan matematik, kemahiran dwibahasa serta sahsiah
+            Islamiah yang utuh.
           </p>
           <div class="pt-2">
-            <a href={getLocalizedPath('/about', lang)} class="text-sm font-semibold text-school-primary hover:underline inline-flex items-center gap-1">
+            <a
+              href={getLocalizedPath("/about", lang)}
+              class="text-sm font-semibold text-school-primary hover:underline inline-flex items-center gap-1"
+            >
               Baca Perutusan Penuh Guru Besar & Falsafah Sekolah →
             </a>
           </div>
         </div>
-
       </div>
     </div>
   </section>
@@ -184,34 +257,42 @@ const isPrivate = schoolConfig.identity.schoolType === 'private';
   <!-- 4. Three Primary Learning Stages -->
   <section class="py-16 bg-slate-50 border-t border-slate-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-      
       <div class="text-center max-w-2xl mx-auto space-y-3">
-        <h2 class="text-xs font-bold uppercase tracking-widest text-school-primary">
+        <h2
+          class="text-xs font-bold uppercase tracking-widest text-school-primary"
+        >
           Perkembangan Pembelajaran
         </h2>
         <p class="text-3xl font-heading font-bold text-slate-900">
           Peringkat Pembelajaran Mengikut Tahap Usia
         </p>
         <p class="text-sm text-slate-600">
-          Kurikulum kami mengimbangi pengajian asas akademik, hafazan Al-Quran, adab Islamiah serta aktiviti kokurikulum holistik.
+          Kurikulum kami mengimbangi pengajian asas akademik, hafazan Al-Quran,
+          adab Islamiah serta aktiviti kokurikulum holistik.
         </p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        
         <!-- Stage 1 -->
-        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition-shadow space-y-4">
-          <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center text-2xl font-bold">
+        <div
+          class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition-shadow space-y-4"
+        >
+          <div
+            class="w-12 h-12 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center text-2xl font-bold"
+          >
             🌱
           </div>
           <h3 class="font-heading font-bold text-lg text-slate-900">
             Prasekolah & Tadika Islam
           </h3>
-          <p class="text-xs text-slate-500 font-semibold uppercase tracking-wider">
+          <p
+            class="text-xs text-slate-500 font-semibold uppercase tracking-wider"
+          >
             Umur 4 – 5 Tahun • Peringkat Asas
           </p>
           <p class="text-sm text-slate-600 leading-relaxed">
-            Membina asas kemahiran membaca fonik, Iqra', motor halus dan adab sosial melalui pendekatan bermain sambil belajar yang ceria.
+            Membina asas kemahiran membaca fonik, Iqra', motor halus dan adab
+            sosial melalui pendekatan bermain sambil belajar yang ceria.
           </p>
           <ul class="text-xs text-slate-500 space-y-1.5 pt-2">
             <li>✓ Asas Iqra' & Fonik Dwibahasa</li>
@@ -221,18 +302,26 @@ const isPrivate = schoolConfig.identity.schoolType === 'private';
         </div>
 
         <!-- Stage 2 -->
-        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition-shadow space-y-4">
-          <div class="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center text-2xl font-bold">
+        <div
+          class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition-shadow space-y-4"
+        >
+          <div
+            class="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center text-2xl font-bold"
+          >
             📚
           </div>
           <h3 class="font-heading font-bold text-lg text-slate-900">
             Tahap 1 (Tahun 1 – 3)
           </h3>
-          <p class="text-xs text-slate-500 font-semibold uppercase tracking-wider">
+          <p
+            class="text-xs text-slate-500 font-semibold uppercase tracking-wider"
+          >
             Umur 6 – 8 Tahun • Asas Utama
           </p>
           <p class="text-sm text-slate-600 leading-relaxed">
-            Memantapkan kemahiran 3M (Membaca, Menulis, Mengira), hafazan juzuk terpilih, Fardhu Ain serta eksplorasi sains awal dalam suasana penyayang.
+            Memantapkan kemahiran 3M (Membaca, Menulis, Mengira), hafazan juzuk
+            terpilih, Fardhu Ain serta eksplorasi sains awal dalam suasana
+            penyayang.
           </p>
           <ul class="text-xs text-slate-500 space-y-1.5 pt-2">
             <li>✓ KSSR Bahasa Melayu, Inggeris & Matematik</li>
@@ -242,18 +331,26 @@ const isPrivate = schoolConfig.identity.schoolType === 'private';
         </div>
 
         <!-- Stage 3 -->
-        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition-shadow space-y-4">
-          <div class="w-12 h-12 rounded-xl bg-sky-100 text-sky-800 flex items-center justify-center text-2xl font-bold">
+        <div
+          class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition-shadow space-y-4"
+        >
+          <div
+            class="w-12 h-12 rounded-xl bg-sky-100 text-sky-800 flex items-center justify-center text-2xl font-bold"
+          >
             🚀
           </div>
           <h3 class="font-heading font-bold text-lg text-slate-900">
             Tahap 2 (Tahun 4 – 6)
           </h3>
-          <p class="text-xs text-slate-500 font-semibold uppercase tracking-wider">
+          <p
+            class="text-xs text-slate-500 font-semibold uppercase tracking-wider"
+          >
             Umur 9 – 11 Tahun • Penguasaan & Kepimpinan
           </p>
           <p class="text-sm text-slate-600 leading-relaxed">
-            Menyediakan murid dengan pemikiran kritis (KBAT), persediaan ke sekolah menengah agama, kepimpinan pengawas serta aktiviti kokurikulum aktif.
+            Menyediakan murid dengan pemikiran kritis (KBAT), persediaan ke
+            sekolah menengah agama, kepimpinan pengawas serta aktiviti
+            kokurikulum aktif.
           </p>
           <ul class="text-xs text-slate-500 space-y-1.5 pt-2">
             <li>✓ Persediaan Peperiksaan & UASA</li>
@@ -261,46 +358,59 @@ const isPrivate = schoolConfig.identity.schoolType === 'private';
             <li>✓ Kepimpinan Pengawas & Sahsiah Huffaz</li>
           </ul>
         </div>
-
       </div>
-
     </div>
   </section>
 
   <!-- 5. Conditional Callout -->
   <section class="py-12 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      {isPrivate ? (
-        <div class="bg-gradient-to-r from-amber-500/10 via-amber-500/5 to-transparent border-l-4 border-amber-500 p-6 rounded-r-2xl">
-          <div class="flex items-start gap-4">
-            <span class="text-2xl">🎓</span>
-            <div class="space-y-1">
-              <h4 class="font-heading font-bold text-slate-900 text-base">Pendaftaran Sekolah Rendah Islam & Maklumat Yuran</h4>
-              <p class="text-sm text-slate-600">
-                Jadual yuran persekolahan berpatutan, pelan ansuran fleksibel, diskaun adik-beradik serta bantuan zakat disediakan bagi keluarga yang layak.
-              </p>
-              <a href={getLocalizedPath('/admissions', lang)} class="text-xs font-bold text-amber-700 hover:underline inline-block pt-1">
-                Lihat Jadual Yuran & Maklumat Pendaftaran →
-              </a>
+      {
+        isPrivate ? (
+          <div class="bg-gradient-to-r from-amber-500/10 via-amber-500/5 to-transparent border-l-4 border-amber-500 p-6 rounded-r-2xl">
+            <div class="flex items-start gap-4">
+              <span class="text-2xl">🎓</span>
+              <div class="space-y-1">
+                <h4 class="font-heading font-bold text-slate-900 text-base">
+                  Pendaftaran Sekolah Rendah Islam & Maklumat Yuran
+                </h4>
+                <p class="text-sm text-slate-600">
+                  Jadual yuran persekolahan berpatutan, pelan ansuran fleksibel,
+                  diskaun adik-beradik serta bantuan zakat disediakan bagi
+                  keluarga yang layak.
+                </p>
+                <a
+                  href={getLocalizedPath("/admissions", lang)}
+                  class="text-xs font-bold text-amber-700 hover:underline inline-block pt-1"
+                >
+                  Lihat Jadual Yuran & Maklumat Pendaftaran →
+                </a>
+              </div>
             </div>
           </div>
-        </div>
-      ) : (
-        <div class="bg-gradient-to-r from-emerald-500/10 via-emerald-500/5 to-transparent border-l-4 border-school-primary p-6 rounded-r-2xl">
-          <div class="flex items-start gap-4">
-            <span class="text-2xl">🏛️</span>
-            <div class="space-y-1">
-              <h4 class="font-heading font-bold text-slate-900 text-base">Zon Sekolah Rendah Kebangsaan & Dasar Keterangkuman</h4>
-              <p class="text-sm text-slate-600">
-                Pendaftaran terbuka kepada semua murid di dalam zon tadahan rasmi tanpa yuran pengajian.
-              </p>
-              <a href={getLocalizedPath('/admissions', lang)} class="text-xs font-bold text-school-primary hover:underline inline-block pt-1">
-                Semak Kawasan Tadahan & Dokumen Diperlukan →
-              </a>
+        ) : (
+          <div class="bg-gradient-to-r from-emerald-500/10 via-emerald-500/5 to-transparent border-l-4 border-school-primary p-6 rounded-r-2xl">
+            <div class="flex items-start gap-4">
+              <span class="text-2xl">🏛️</span>
+              <div class="space-y-1">
+                <h4 class="font-heading font-bold text-slate-900 text-base">
+                  Zon Sekolah Rendah Kebangsaan & Dasar Keterangkuman
+                </h4>
+                <p class="text-sm text-slate-600">
+                  Pendaftaran terbuka kepada semua murid di dalam zon tadahan
+                  rasmi tanpa yuran pengajian.
+                </p>
+                <a
+                  href={getLocalizedPath("/admissions", lang)}
+                  class="text-xs font-bold text-school-primary hover:underline inline-block pt-1"
+                >
+                  Semak Kawasan Tadahan & Dokumen Diperlukan →
+                </a>
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        )
+      }
     </div>
   </section>
 </BaseLayout>

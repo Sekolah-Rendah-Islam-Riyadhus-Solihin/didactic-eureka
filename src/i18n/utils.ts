@@ -1,11 +1,17 @@
-import { ui, defaultLang, type SupportedLanguage, type UIKey, languages } from './ui';
+import {
+  ui,
+  defaultLang,
+  type SupportedLanguage,
+  type UIKey,
+  languages,
+} from "./ui";
 
 /**
- * Extracts language code from URL pathname.
- * If path starts with /en, returns 'en'. Otherwise returns defaultLang ('ms').
+ * Extracts language code from the current URL pathname.
+ * E.g. /en/about -> 'en', /about -> 'ms'
  */
 export function getLangFromUrl(url: URL): SupportedLanguage {
-  const [, lang] = url.pathname.split('/');
+  const [, lang] = url.pathname.split("/");
   if (lang && lang in languages) {
     return lang as SupportedLanguage;
   }
@@ -13,55 +19,54 @@ export function getLangFromUrl(url: URL): SupportedLanguage {
 }
 
 /**
- * Returns a translation function for a given language.
+ * Returns translation function for the given language.
  */
 export function useTranslations(lang: SupportedLanguage) {
   return function t(key: UIKey): string {
-    const langDict = ui[lang] as Record<string, string>;
-    const defaultDict = ui[defaultLang] as Record<string, string>;
-    return langDict[key] || defaultDict[key] || key;
+    const langDict = ui[lang];
+    if (key in langDict) {
+      return (langDict as Record<string, string>)[key];
+    }
+    return (ui[defaultLang] as Record<string, string>)[key] || key;
   };
 }
 
 /**
- * Strips language prefix from pathname (e.g., /en/about -> /about, /en -> /)
+ * Strips the language prefix from the current pathname.
+ * E.g. /en/about -> /about, /en/contact/ -> /contact, /about -> /about, /en -> /
  */
 export function getCleanPathname(pathname: string): string {
-  const segments = pathname.split('/').filter(Boolean);
+  const segments = pathname.split("/").filter(Boolean);
   if (segments.length > 0 && segments[0] in languages) {
-    const remaining = segments.slice(1).join('/');
-    return remaining ? `/${remaining}` : '/';
+    const remaining = segments.slice(1).join("/");
+    return remaining ? `/${remaining}` : "/";
   }
-  return pathname.startsWith('/') ? pathname : `/${pathname}`;
+  return pathname || "/";
 }
 
 /**
- * Generates localized path for given route and language.
- * Default language ('ms') has no prefix: /about
- * English ('en') has /en prefix: /en/about
+ * Generates localized path for a given route and target language.
+ * Default locale (ms) has no prefix: /about
+ * English (en) has /en prefix: /en/about
  */
-export function getLocalizedPath(path: string, lang: SupportedLanguage): string {
-  if (path.startsWith('http') || path.startsWith('mailto:') || path.startsWith('tel:') || path.startsWith('#')) {
-    return path;
-  }
-
-  const clean = getCleanPathname(path);
-
+export function getLocalizedPath(
+  cleanPath: string,
+  lang: SupportedLanguage,
+): string {
+  const normalized = cleanPath.startsWith("/") ? cleanPath : `/${cleanPath}`;
   if (lang === defaultLang) {
-    return clean;
+    return normalized;
   }
-
-  // Non-default language (e.g. en)
-  if (clean === '/') {
-    return `/${lang}`;
-  }
-  return `/${lang}${clean}`;
+  return normalized === "/" ? `/${lang}` : `/${lang}${normalized}`;
 }
 
 /**
- * Returns URL for switching to alternate language while preserving current page.
+ * Helper to get the alternate language URL for language switcher.
  */
-export function getAlternateLanguageUrl(url: URL, targetLang: SupportedLanguage): string {
-  const localizedPath = getLocalizedPath(url.pathname, targetLang);
-  return `${localizedPath}${url.search}${url.hash}`;
+export function getAlternateLanguageUrl(
+  currentUrl: URL,
+  targetLang: SupportedLanguage,
+): string {
+  const clean = getCleanPathname(currentUrl.pathname);
+  return getLocalizedPath(clean, targetLang);
 }

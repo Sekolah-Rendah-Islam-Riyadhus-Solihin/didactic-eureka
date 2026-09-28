@@ -1,28 +1,30 @@
 ---
-import { schoolConfig } from '../../config/school.config';
-import type { SupportedLanguage } from '../../i18n/ui';
-import { getLangFromUrl, getLocalizedPath, useTranslations } from '../../i18n/utils';
+import { schoolConfig } from "../../config/school.config";
+import {
+  useTranslations,
+  getLangFromUrl,
+  getLocalizedPath,
+} from "../../i18n/utils";
 
-interface Props {
-  lang?: SupportedLanguage;
-}
-
-const { lang: propLang } = Astro.props;
-const lang: SupportedLanguage = propLang || getLangFromUrl(Astro.url);
+const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
-
 const currentYear = new Date().getFullYear();
-const isPrivate = schoolConfig.identity.schoolType === 'private';
+const isPrivate = schoolConfig.identity.schoolType === "private";
 ---
 
-<footer class="bg-slate-900 text-slate-300 pt-16 pb-12 border-t border-slate-800">
+<footer
+  class="bg-slate-900 text-slate-300 pt-16 pb-12 border-t border-slate-800"
+>
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-slate-800">
-      
+    <div
+      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-slate-800"
+    >
       <!-- Column 1: School Identity & Motto -->
       <div class="space-y-4">
         <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-lg bg-school-primary text-white flex items-center justify-center font-serif text-xl font-bold shadow">
+          <div
+            class="w-10 h-10 rounded-lg bg-school-primary text-white flex items-center justify-center font-serif text-xl font-bold shadow"
+          >
             {schoolConfig.identity.shortName.charAt(0)}
           </div>
           <div>
@@ -30,7 +32,7 @@ const isPrivate = schoolConfig.identity.schoolType === 'private';
               {schoolConfig.identity.name}
             </h3>
             <p class="text-xs text-slate-400">
-              {isPrivate ? (lang === 'en' ? 'Integrated Islamic Primary School' : 'Sekolah Rendah Islam Integrasi') : (lang === 'en' ? 'Public Community Primary School' : 'Sekolah Rendah Kebangsaan')}
+              {isPrivate ? t("badge.private") : t("badge.government")}
             </p>
           </div>
         </div>
@@ -40,123 +42,243 @@ const isPrivate = schoolConfig.identity.schoolType === 'private';
         </p>
 
         <div class="pt-2 text-xs text-slate-400 space-y-1">
-          <p><span class="text-slate-300 font-semibold">{lang === 'en' ? 'Affiliation' : 'Gabungan'}:</span> {schoolConfig.identity.affiliation}</p>
-          {schoolConfig.identity.registrationNumber && (
-            <p><span class="text-slate-300 font-semibold">{lang === 'en' ? 'Reg No' : 'No. Pendaftaran'}:</span> {schoolConfig.identity.registrationNumber}</p>
-          )}
-          <p><span class="text-slate-300 font-semibold">{lang === 'en' ? 'Established' : 'Tahun Ditubuhkan'}:</span> {schoolConfig.identity.establishedYear}</p>
+          <p>
+            <span class="text-slate-300 font-semibold"
+              >{lang === "ms" ? "Gabungan:" : "Affiliation:"}</span
+            >
+            {schoolConfig.identity.affiliation}
+          </p>
+          {
+            schoolConfig.identity.registrationNumber && (
+              <p>
+                <span class="text-slate-300 font-semibold">
+                  {lang === "ms" ? "No. Daftar:" : "Reg No:"}
+                </span>{" "}
+                {schoolConfig.identity.registrationNumber}
+              </p>
+            )
+          }
+          <p>
+            <span class="text-slate-300 font-semibold"
+              >{lang === "ms" ? "Ditubuhkan:" : "Established:"}</span
+            >
+            {schoolConfig.identity.establishedYear}
+          </p>
         </div>
       </div>
 
       <!-- Column 2: Quick Links -->
       <div>
-        <h4 class="text-sm font-semibold uppercase tracking-wider text-amber-400 mb-4">
-          {t('footer.quickLinks')}
+        <h4
+          class="text-sm font-semibold uppercase tracking-wider text-amber-400 mb-4"
+        >
+          {t("footer.quickLinks")}
         </h4>
         <ul class="space-y-2.5 text-sm">
-          <li><a href={getLocalizedPath('/about', lang)} class="hover:text-white transition-colors">{t('nav.about')}</a></li>
-          <li><a href={getLocalizedPath('/academics', lang)} class="hover:text-white transition-colors">{t('nav.academics')}</a></li>
-          <li><a href={getLocalizedPath('/admissions', lang)} class="hover:text-white transition-colors">{t('nav.admissions')}</a></li>
-          <li><a href={getLocalizedPath('/news', lang)} class="hover:text-white transition-colors">{t('nav.news')}</a></li>
-          <li><a href={getLocalizedPath('/contact', lang)} class="hover:text-white transition-colors">{t('nav.contact')}</a></li>
+          <li>
+            <a
+              href={getLocalizedPath("/about", lang)}
+              class="hover:text-white transition-colors">{t("nav.about")}</a
+            >
+          </li>
+          <li>
+            <a
+              href={getLocalizedPath("/academics", lang)}
+              class="hover:text-white transition-colors">{t("nav.academics")}</a
+            >
+          </li>
+          <li>
+            <a
+              href={getLocalizedPath("/admissions", lang)}
+              class="hover:text-white transition-colors"
+              >{
+                isPrivate
+                  ? lang === "ms"
+                    ? "Yuran & Pendaftaran"
+                    : "Tuition & Enrollment"
+                  : lang === "ms"
+                    ? "Kawasan & Pendaftaran"
+                    : "Catchment & Registration"
+              }</a
+            >
+          </li>
+          <li>
+            <a
+              href={getLocalizedPath("/news", lang)}
+              class="hover:text-white transition-colors">{t("nav.news")}</a
+            >
+          </li>
+          <li>
+            <a
+              href={getLocalizedPath("/contact", lang)}
+              class="hover:text-white transition-colors">{t("nav.contact")}</a
+            >
+          </li>
         </ul>
       </div>
 
       <!-- Column 3: Parents & Policies -->
       <div>
-        <h4 class="text-sm font-semibold uppercase tracking-wider text-amber-400 mb-4">
-          {lang === 'en' ? 'Parent Resources' : 'Sumber Ibu Bapa'}
+        <h4
+          class="text-sm font-semibold uppercase tracking-wider text-amber-400 mb-4"
+        >
+          {t("footer.parentResources")}
         </h4>
         <ul class="space-y-2.5 text-sm">
-          {schoolConfig.features.showCanteenMenu && (
-            <li><a href={getLocalizedPath('/academics#canteen', lang)} class="hover:text-white transition-colors">🥗 {lang === 'en' ? 'Healthy Canteen Menu' : 'Menu Sihat Kantin'}</a></li>
-          )}
-          {schoolConfig.features.showBusRoutes && (
-            <li><a href={getLocalizedPath('/contact#transport', lang)} class="hover:text-white transition-colors">🚌 {lang === 'en' ? 'School Van & Transport Zones' : 'Zon Van & Trafik Sekolah'}</a></li>
-          )}
-          <li><a href={getLocalizedPath('/about#safeguarding', lang)} class="hover:text-white transition-colors">🛡️ {lang === 'en' ? 'Child Safeguarding & Safety' : 'Keselamatan & Perlindungan Murid'}</a></li>
-          <li><a href={getLocalizedPath('/news', lang)} class="hover:text-white transition-colors">📅 {lang === 'en' ? 'Academic Calendar & Holidays' : 'Takwim & Cuti Sekolah'}</a></li>
-          {schoolConfig.features.showParentPortalButton && (
-            <li>
-              <a href={schoolConfig.features.portalUrl} target="_blank" rel="noopener noreferrer" class="text-school-secondary hover:underline font-medium">
-                🔐 {t('topbar.portal')}
-              </a>
-            </li>
-          )}
+          {
+            schoolConfig.features.showCanteenMenu && (
+              <li>
+                <a
+                  href={`${getLocalizedPath("/academics", lang)}#canteen`}
+                  class="hover:text-white transition-colors"
+                >
+                  {t("footer.canteenMenu")}
+                </a>
+              </li>
+            )
+          }
+          {
+            schoolConfig.features.showBusRoutes && (
+              <li>
+                <a
+                  href={`${getLocalizedPath("/contact", lang)}#transport`}
+                  class="hover:text-white transition-colors"
+                >
+                  {t("footer.busRoutes")}
+                </a>
+              </li>
+            )
+          }
+          <li>
+            <a
+              href={`${getLocalizedPath("/about", lang)}#safeguarding`}
+              class="hover:text-white transition-colors"
+              >{t("footer.safeguarding")}</a
+            >
+          </li>
+          <li>
+            <a
+              href={getLocalizedPath("/news", lang)}
+              class="hover:text-white transition-colors"
+              >{t("footer.academicCalendar")}</a
+            >
+          </li>
+          {
+            schoolConfig.features.showParentPortalButton && (
+              <li>
+                <a
+                  href={schoolConfig.features.portalUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-school-secondary hover:underline font-medium"
+                >
+                  {t("footer.parentPortalLogin")}
+                </a>
+              </li>
+            )
+          }
         </ul>
       </div>
 
-      <!-- Column 4: Contact & Office Hours -->
+      <!-- Column 4: Contact & Emergency -->
       <div class="space-y-3">
-        <h4 class="text-sm font-semibold uppercase tracking-wider text-amber-400 mb-4">
-          {t('footer.contact')}
+        <h4
+          class="text-sm font-semibold uppercase tracking-wider text-amber-400 mb-4"
+        >
+          {t("footer.schoolOffice")}
         </h4>
         <div class="text-sm text-slate-300 space-y-2">
           <p class="flex items-start gap-2">
             <span class="text-slate-400">📍</span>
             <span>
-              {schoolConfig.contact.address.street}, {schoolConfig.contact.address.city}, {schoolConfig.contact.address.stateZip}
+              {schoolConfig.contact.address.street}, {
+                schoolConfig.contact.address.city
+              }, {schoolConfig.contact.address.stateZip}
             </span>
           </p>
           <p class="flex items-center gap-2">
             <span class="text-slate-400">📞</span>
             <span>{schoolConfig.contact.phone}</span>
           </p>
-          <p class="flex items-center gap-2 text-rose-400 font-semibold text-xs">
+          <p
+            class="flex items-center gap-2 text-rose-400 font-semibold text-xs"
+          >
             <span>🚨</span>
-            <span>{t('footer.emergency')}: {schoolConfig.contact.emergencyPhone}</span>
+            <span
+              >{t("footer.emergencyPhone")}
+              {schoolConfig.contact.emergencyPhone}</span
+            >
           </p>
           <p class="flex items-center gap-2">
             <span class="text-slate-400">✉️</span>
             <span>{schoolConfig.contact.email}</span>
           </p>
-          {typeof schoolConfig.contact.officeHours === "string" ? (
-            <p class="flex items-center gap-2 text-xs text-slate-400 pt-1">
-              <span>⏰</span>
-              <span>{schoolConfig.contact.officeHours}</span>
-            </p>
-          ) : (
-            <div class="pt-2 border-t border-slate-800 text-xs">
-              <div class="flex items-center gap-1.5 text-slate-300 font-medium mb-1.5">
+          {
+            typeof schoolConfig.contact.officeHours === "string" ? (
+              <p class="flex items-center gap-2 text-xs text-slate-400 pt-1">
                 <span>⏰</span>
-                <span>{t('footer.hours')}:</span>
-              </div>
-              <div class="space-y-2 pl-5">
-                {schoolConfig.contact.officeHours.map((schedule) => {
-                  const breakInfo = schedule.breakTime || schedule.breakHours;
-                  return (
-                    <div class="text-xs">
-                      <div class="flex justify-between items-baseline gap-2">
-                        <span class="text-slate-300 font-medium">{schedule.days}:</span>
-                        <span class={schedule.isClosed ? "text-rose-400 font-medium" : "text-emerald-400 font-medium"}>
-                          {schedule.isClosed ? t('footer.closed') : (schedule.hours || `${schedule.openTime} – ${schedule.closeTime}`)}
-                        </span>
-                      </div>
-                      {breakInfo && (
-                        <div class="text-[11px] text-amber-300/80 flex items-center gap-1 mt-0.5">
-                          <span>☕</span>
-                          <span>
-                            {typeof breakInfo === "string"
-                              ? (lang === 'en' ? breakInfo.replace('Rehat', 'Break') : breakInfo)
-                              : `${breakInfo.label ? `${breakInfo.label}: ` : `${t('footer.break')}: `}${breakInfo.time}`}
+                <span>{schoolConfig.contact.officeHours}</span>
+              </p>
+            ) : (
+              <div class="pt-2 border-t border-slate-800 text-xs">
+                <div class="flex items-center gap-1.5 text-slate-300 font-medium mb-1.5">
+                  <span>⏰</span>
+                  <span>{t("footer.officeHoursTitle")}</span>
+                </div>
+                <div class="space-y-2 pl-5">
+                  {schoolConfig.contact.officeHours.map((schedule) => {
+                    const breakInfo = schedule.breakTime || schedule.breakHours;
+                    return (
+                      <div class="text-xs">
+                        <div class="flex justify-between items-baseline gap-2">
+                          <span class="text-slate-300 font-medium">
+                            {schedule.days}:
+                          </span>
+                          <span
+                            class={
+                              schedule.isClosed
+                                ? "text-rose-400 font-medium"
+                                : "text-emerald-400 font-medium"
+                            }
+                          >
+                            {schedule.isClosed
+                              ? lang === "ms"
+                                ? "Tutup"
+                                : "Closed"
+                              : schedule.hours ||
+                                `${schedule.openTime} – ${schedule.closeTime}`}
                           </span>
                         </div>
-                      )}
-                    </div>
-                  );
-                })}
+                        {breakInfo && (
+                          <div class="text-[11px] text-amber-300/80 flex items-center gap-1 mt-0.5">
+                            <span>☕</span>
+                            <span>
+                              {typeof breakInfo === "string"
+                                ? lang === "ms"
+                                  ? `Rehat: ${breakInfo}`
+                                  : `Break: ${breakInfo}`
+                                : `${breakInfo.label ? `${breakInfo.label}: ` : lang === "ms" ? "Rehat: " : "Break: "}${breakInfo.time}`}
+                            </span>
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
-            </div>
-          )}
+            )
+          }
         </div>
       </div>
-
     </div>
 
-    <!-- Bottom credits -->
-    <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 gap-4">
+    <!-- Bottom credits and white-label notice -->
+    <div
+      class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 gap-4"
+    >
       <p>
-        © {currentYear} {schoolConfig.identity.name}. {t('footer.rights')}
+        © {currentYear}
+        {schoolConfig.identity.name}. {t("footer.allRightsReserved")}
       </p>
       <div class="flex items-center gap-4 text-[11px] text-slate-500">
         <span>Cloudflare Pages Ready ⚡</span>
