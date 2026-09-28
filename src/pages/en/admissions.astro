@@ -1,0 +1,238 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { schoolConfig } from '../../config/school.config';
+import { getLocalizedPath } from '../../i18n/utils';
+
+const lang = 'en';
+const isPrivate = schoolConfig.identity.schoolType === 'private';
+
+const steps = isPrivate
+  ? [
+      { step: "01", title: "Submit Online Inquiry", desc: "Fill out the preliminary student inquiry form below or attend one of our scheduled open school mornings." },
+      { step: "02", title: "Campus Tour & Informal Chat", desc: "Meet our Headteacher (Guru Besar), explore our classrooms and Tahfiz hall, and let your child experience our learning environment." },
+      { step: "03", title: "Offer of Place & Registration Fee", desc: "Following assessment of class capacity, a formal offer letter will be issued with payment and document submission details." },
+      { step: "04", title: "Welcome & New Family Orientation", desc: "Receive your welcome pack, collect the school uniform, and attend our new families orientation session." },
+    ]
+  : [
+      { step: "01", title: "Verify Your School Zone", desc: `Confirm your residential address falls within ${schoolConfig.identity.shortName}'s designated catchment zone.` },
+      { step: "02", title: "Submit Enrollment Application", desc: "Complete the official school enrollment form with proof of address, birth certificate, and immunisation card." },
+      { step: "03", title: "Enrollment Confirmation", desc: "The school office reviews your documents and registers your child under the state education authority." },
+      { step: "04", title: "Welcome & Grade Orientation", desc: "Attend our orientation morning to meet the class teacher and collect your child's starter stationery pack." },
+    ];
+
+const privateFees = [
+  { stage: "Preschool / Kindergarten", termFee: "RM 450", annualFee: "RM 1,350", notes: "Includes Iqra' & Asas Quran classes" },
+  { stage: "Year 1 – Year 3 (Lower Primary)", termFee: "RM 520", annualFee: "RM 1,560", notes: "Includes all textbooks & exercise books" },
+  { stage: "Year 4 – Year 6 (Upper Primary)", termFee: "RM 580", annualFee: "RM 1,740", notes: "Includes Tahfiz programme & UPSR preparation" },
+];
+---
+
+<BaseLayout lang={lang} title={isPrivate ? "Admissions & School Fees" : "Enrollment & Catchment Zone"}>
+  <!-- Page Header -->
+  <section class="bg-slate-900 text-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
+      <span class="text-xs font-bold uppercase tracking-widest text-amber-400">
+        {isPrivate ? 'Integrated Islamic School Admissions' : 'Community School Enrollment'}
+      </span>
+      <h1 class="text-3xl sm:text-5xl font-heading font-bold">
+        {isPrivate ? 'Admissions & School Fees' : 'How to Enroll Your Child'}
+      </h1>
+      <p class="max-w-2xl mx-auto text-sm sm:text-base text-slate-300 font-light">
+        We warmly welcome new families into the {schoolConfig.identity.shortName} community for the upcoming academic year.
+      </p>
+    </div>
+  </section>
+
+  <!-- Step-by-Step Admissions Process -->
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+      <div class="text-center max-w-2xl mx-auto space-y-2">
+        <span class="text-xs font-bold uppercase tracking-widest text-school-primary">Clear & Simple</span>
+        <h2 class="text-3xl font-heading font-bold text-slate-900">4-Step Enrollment Process</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {steps.map((s) => (
+          <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 relative space-y-3">
+            <span class="text-4xl font-extrabold font-heading text-school-primary/20">
+              {s.step}
+            </span>
+            <h3 class="font-heading font-bold text-base text-slate-900">{s.title}</h3>
+            <p class="text-xs text-slate-600 leading-relaxed">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Conditional: Fees (Private) vs Catchment (Government) -->
+  {isPrivate ? (
+    <section class="py-16 bg-slate-50 border-t border-slate-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+        <div class="text-center max-w-2xl mx-auto space-y-2">
+          <span class="text-xs font-bold uppercase tracking-widest text-amber-600">Transparent Pricing</span>
+          <h2 class="text-3xl font-heading font-bold text-slate-900">School Fees Schedule (2026/27)</h2>
+          <p class="text-sm text-slate-600">All fees include standard tuition, learning materials, and Islamic programme activities.</p>
+        </div>
+
+        <div class="overflow-x-auto max-w-4xl mx-auto">
+          <table class="w-full text-left text-xs sm:text-sm border-collapse bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm">
+            <thead>
+              <tr class="bg-slate-900 text-white">
+                <th class="p-4 font-heading font-bold">Grade Level</th>
+                <th class="p-4 font-heading font-bold">Per Penggal (3 Terms)</th>
+                <th class="p-4 font-heading font-bold">Annual Payment</th>
+                <th class="p-4 font-heading font-bold">Inclusions</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-200">
+              {privateFees.map((f) => (
+                <tr class="hover:bg-slate-50">
+                  <td class="p-4 font-bold text-slate-900">{f.stage}</td>
+                  <td class="p-4 font-semibold text-school-primary">{f.termFee}</td>
+                  <td class="p-4 font-semibold text-slate-900">{f.annualFee}</td>
+                  <td class="p-4 text-slate-600">{f.notes}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <div class="max-w-4xl mx-auto p-4 bg-amber-50 border border-amber-200 rounded-xl text-xs text-amber-900 flex items-start gap-3">
+          <span class="text-lg">⭐</span>
+          <div>
+            <p class="font-bold">Sibling Discount & Zakat Assistance:</p>
+            <p>A 10% sibling discount is applied for second and subsequent children enrolled. Zakat-funded places are available for eligible families — please enquire at the school office.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  ) : (
+    <section class="py-16 bg-slate-50 border-t border-slate-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+        <div class="text-center max-w-2xl mx-auto space-y-2">
+          <span class="text-xs font-bold uppercase tracking-widest text-emerald-700">Public Education</span>
+          <h2 class="text-3xl font-heading font-bold text-slate-900">Catchment Area & Government Support</h2>
+          <p class="text-sm text-slate-600">Tuition is fully government-funded and provided free of charge.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+            <h3 class="font-heading font-bold text-lg text-slate-900 flex items-center gap-2">
+              <span>📍</span> Catchment Area Guidelines
+            </h3>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Children permanently residing within the designated school zone are guaranteed a place. Please bring the following documents:
+            </p>
+            <ul class="text-xs text-slate-600 space-y-2">
+              <li class="flex items-center gap-2">✓ Proof of address (utility bill or tenancy agreement)</li>
+              <li class="flex items-center gap-2">✓ Child's MyKid or birth certificate</li>
+              <li class="flex items-center gap-2">✓ Child's immunisation booklet (Buku Rekod Kesihatan)</li>
+              <li class="flex items-center gap-2">✓ Transfer letter from previous school (Years 2–6)</li>
+            </ul>
+          </div>
+
+          <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+            <h3 class="font-heading font-bold text-lg text-slate-900 flex items-center gap-2">
+              <span>🍎</span> Government Assistance Schemes
+            </h3>
+            <ul class="text-xs text-slate-600 space-y-2">
+              <li class="flex items-center gap-2">✓ <strong>RMT (Rancangan Makanan Tambahan):</strong> Free breakfast daily</li>
+              <li class="flex items-center gap-2">✓ <strong>SPBT:</strong> Free textbooks and exercise books provided</li>
+              <li class="flex items-center gap-2">✓ <strong>Uniform Subsidy:</strong> Available for eligible families</li>
+              <li class="flex items-center gap-2">✓ <strong>School Bus:</strong> Subsidised transport for qualifying students</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Inquiry Form -->
+  <section class="py-16 bg-white border-t border-slate-200">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+      <div class="text-center space-y-2">
+        <span class="text-xs font-bold uppercase tracking-widest text-school-primary">Get In Touch</span>
+        <h2 class="text-3xl font-heading font-bold text-slate-900">
+          {isPrivate ? 'Student Application & School Visit Request' : 'Enrollment Inquiry & Visit Booking'}
+        </h2>
+        <p class="text-sm text-slate-600">
+          Fill out the form below and our admissions registrar will contact you to arrange a school visit.
+        </p>
+      </div>
+
+      <form id="inquiry-form" class="bg-slate-50 border border-slate-200 rounded-3xl p-6 sm:p-8 space-y-4 shadow-sm">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase mb-1" for="childName">Child's Full Name *</label>
+            <input type="text" id="childName" name="childName" required class="w-full text-xs px-3 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-school-primary focus:border-transparent" placeholder="e.g. Muhammad Aqeel bin Ahmad" />
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase mb-1" for="grade">Year / Grade Applying For *</label>
+            <select id="grade" name="grade" required class="w-full text-xs px-3 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-school-primary focus:border-transparent bg-white">
+              <option value="preschool">Preschool / Kindergarten (Ages 4–5)</option>
+              <option value="year1">Year 1 (Age 6)</option>
+              <option value="year2">Year 2 (Age 7)</option>
+              <option value="year3">Year 3 (Age 8)</option>
+              <option value="year4">Year 4 (Age 9)</option>
+              <option value="year5">Year 5 (Age 10)</option>
+              <option value="year6">Year 6 (Age 11)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase mb-1" for="parentName">Parent / Guardian Name *</label>
+            <input type="text" id="parentName" name="parentName" required class="w-full text-xs px-3 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-school-primary focus:border-transparent" placeholder="e.g. Ahmad bin Ibrahim" />
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase mb-1" for="phone">Phone Number *</label>
+            <input type="tel" id="phone" name="phone" required class="w-full text-xs px-3 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-school-primary focus:border-transparent" placeholder="+60 1X-XXX XXXX" />
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase mb-1" for="email">Parent Email Address *</label>
+          <input type="email" id="email" name="email" required class="w-full text-xs px-3 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-school-primary focus:border-transparent" placeholder="parent@example.com" />
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase mb-1" for="message">Questions or Additional Notes</label>
+          <textarea id="message" name="message" rows="3" class="w-full text-xs px-3 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-school-primary focus:border-transparent" placeholder="Mention preferred enrollment term, any special learning needs, or any questions about the school..."></textarea>
+        </div>
+
+        <div class="pt-2">
+          <button
+            type="submit"
+            class="w-full py-3.5 px-6 rounded-xl bg-school-primary text-white font-bold text-xs uppercase tracking-wider hover:bg-school-primary-hover transition-colors shadow-md flex items-center justify-center gap-2"
+          >
+            <span>Submit Admissions Inquiry</span>
+            <span>→</span>
+          </button>
+        </div>
+
+        <p id="form-feedback" class="hidden text-center text-xs font-bold text-emerald-700 pt-2">
+          ✓ Thank you! Your inquiry has been received. Our admissions office will contact you within 1 business day. Jazakumullahu Khairan.
+        </p>
+
+        <p class="text-[11px] text-slate-400 text-center pt-2">
+          Protected by Cloudflare Turnstile • Connectable to Laravel REST API (<code class="bg-slate-200 px-1 py-0.5 rounded text-slate-700">POST /api/admissions</code>)
+        </p>
+      </form>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  const form = document.getElementById('inquiry-form');
+  const feedback = document.getElementById('form-feedback');
+
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (feedback) {
+      feedback.classList.remove('hidden');
+      (form as HTMLFormElement).reset();
+    }
+  });
+</script>

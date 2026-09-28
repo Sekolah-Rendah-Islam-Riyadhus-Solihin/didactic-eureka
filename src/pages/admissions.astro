@@ -2,41 +2,42 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { schoolConfig } from '../config/school.config';
 
+const lang = 'ms';
 const isPrivate = schoolConfig.identity.schoolType === 'private';
 
 const steps = isPrivate
   ? [
-      { step: "01", title: "Submit Online Inquiry", desc: "Fill out the preliminary student inquiry form below or attend one of our open mornings." },
-      { step: "02", title: "Campus Tour & Informal Chat", desc: "Meet our headteacher, explore our classrooms, and let your child experience our play areas." },
-      { step: "03", title: "Offer of Place & Deposit", desc: "Following assessment of class capacity, a formal offer letter will be sent with payment details." },
-      { step: "04", title: "Welcome & Induction", desc: "Receive your welcome pack, order school uniform, and attend the new families orientation morning." },
+      { step: "01", title: "Isi Borang Permohonan", desc: "Lengkapkan borang permohonan murid secara atas talian atau hadir terus ke pejabat pentadbiran sekolah." },
+      { step: "02", title: "Sesi Temuduga & Suai Kenal", desc: "Sesi santai bersama Guru Besar, ujian penguasaan Iqra'/membaca asas serta lawatan ke persekitaran sekolah." },
+      { step: "03", title: "Surat Tawaran & Yuran Pendaftaran", desc: "Surat tawaran rasmi kemasukan akan dikeluarkan mengikut kekosongan tempat beserta panduan bayaran yuran pendaftaran." },
+      { step: "04", title: "Hari Orientasi Murid & Ibu Bapa", desc: "Menerima kit persekolahan, mengambil pakaian seragam dan menghadiri taklimat awal persekolahan bersama guru kelas." },
     ]
   : [
-      { step: "01", title: "Verify Your Catchment Zone", desc: `Confirm your residential address falls within ${schoolConfig.identity.shortName}'s designated school zone.` },
-      { step: "02", title: "Submit Enrollment Application", desc: "Complete the official public school enrollment form with proof of address and birth certificate." },
-      { step: "03", title: "Enrollment Confirmation", desc: "The school office reviews documents and registers your child under the state education registry." },
-      { step: "04", title: "Kindergarten / Grade Transition", desc: "Attend our step-up transition morning to meet class teachers and receive your free stationery starter pack." },
+      { step: "01", title: "Semak Zon Tadahan", desc: `Pastikan alamat kediaman berada dalam zon persekolahan ${schoolConfig.identity.shortName}.` },
+      { step: "02", title: "Hantar Borang Pendaftaran", desc: "Lengkapkan borang pendaftaran KPM bersama salinan MyKid, surat beranak dan bil utiliti." },
+      { step: "03", title: "Pengesahan Penempatan", desc: "Pihak sekolah mengesahkan pendaftaran murid dalam sistem pangkalan data pendidikan negeri." },
+      { step: "04", title: "Hari Orientasi & Transisi", desc: "Hadir ke sesi orientasi untuk suai kenal bersama guru kelas dan menerima kit alat tulis percuma." },
     ];
 
 const privateFees = [
-  { stage: "Kindergarten & Early Years", termFee: "$1,850", annualFee: "$5,550", notes: "Includes hot lunch & snack" },
-  { stage: "Lower Primary (Grades 1 – 3)", termFee: "$2,200", annualFee: "$6,600", notes: "Includes all text and exercise books" },
-  { stage: "Upper Primary (Grades 4 – 6)", termFee: "$2,450", annualFee: "$7,350", notes: "Includes STEM lab materials & swimming" },
+  { stage: "Prasekolah / Tadika Islam", termFee: "RM 450", annualFee: "RM 1,350", notes: "Termasuk kelas Iqra' & Asas Fardhu Ain" },
+  { stage: "Tahap 1 (Tahun 1 – 3)", termFee: "RM 520", annualFee: "RM 1,560", notes: "Termasuk buku teks KSSR & modul hafazan" },
+  { stage: "Tahap 2 (Tahun 4 – 6)", termFee: "RM 580", annualFee: "RM 1,740", notes: "Termasuk program Tahfiz & persediaan UASA" },
 ];
 ---
 
-<BaseLayout title={isPrivate ? "Admissions & Tuition Fees" : "Enrollment & Catchment Zone"}>
+<BaseLayout lang={lang} title={isPrivate ? "Pendaftaran & Yuran Persekolahan" : "Pendaftaran & Kawasan Tadahan"}>
   <!-- Page Header -->
   <section class="bg-slate-900 text-white py-16">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
-      <span class="text-xs font-bold uppercase tracking-widest {isPrivate ? 'text-amber-400' : 'text-emerald-400'}">
-        {isPrivate ? 'Private School Admissions' : 'Community School Enrollment'}
+      <span class="text-xs font-bold uppercase tracking-widest text-amber-400">
+        {isPrivate ? 'Pendaftaran Sekolah Rendah Islam' : 'Kemasukan Sekolah Rendah Kebangsaan'}
       </span>
       <h1 class="text-3xl sm:text-5xl font-heading font-bold">
-        {isPrivate ? 'Admissions & Tuition Fees' : 'How to Enroll Your Child'}
+        {isPrivate ? 'Kemasukan & Yuran Persekolahan' : 'Panduan Pendaftaran Murid'}
       </h1>
       <p class="max-w-2xl mx-auto text-sm sm:text-base text-slate-300 font-light">
-        We are thrilled to welcome new families into the {schoolConfig.identity.shortName} community for the upcoming academic year.
+        Kami mengalu-alukan kehadiran keluarga baharu ke komuniti {schoolConfig.identity.shortName} bagi sesi persekolahan akan datang.
       </p>
     </div>
   </section>
@@ -45,8 +46,8 @@ const privateFees = [
   <section class="py-16 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
       <div class="text-center max-w-2xl mx-auto space-y-2">
-        <span class="text-xs font-bold uppercase tracking-widest text-school-primary">Clear & Simple</span>
-        <h2 class="text-3xl font-heading font-bold text-slate-900">4-Step Enrollment Process</h2>
+        <span class="text-xs font-bold uppercase tracking-widest text-school-primary">Mudah & Teratur</span>
+        <h2 class="text-3xl font-heading font-bold text-slate-900">4 Langkah Proses Pendaftaran</h2>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -63,25 +64,24 @@ const privateFees = [
     </div>
   </section>
 
-  <!-- Conditional Section: Fees (Private) vs Catchment & Subsidies (Government) -->
+  <!-- Conditional Section: Fees (Private) vs Catchment (Government) -->
   {isPrivate ? (
-    <!-- PRIVATE SCHOOL: Tuition Schedule -->
     <section class="py-16 bg-slate-50 border-t border-slate-200">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
         <div class="text-center max-w-2xl mx-auto space-y-2">
-          <span class="text-xs font-bold uppercase tracking-widest text-amber-600">Transparent Pricing</span>
-          <h2 class="text-3xl font-heading font-bold text-slate-900">Tuition Fees Schedule (2026/27)</h2>
-          <p class="text-sm text-slate-600">All fees include standard tuition, learning resources, and sports equipment.</p>
+          <span class="text-xs font-bold uppercase tracking-widest text-amber-600">Ketelusan Yuran</span>
+          <h2 class="text-3xl font-heading font-bold text-slate-900">Jadual Yuran Persekolahan (2026/27)</h2>
+          <p class="text-sm text-slate-600">Semua yuran merangkumi pengajaran teras KSSR, aktiviti kelas agama dan modul hafazan.</p>
         </div>
 
         <div class="overflow-x-auto max-w-4xl mx-auto">
           <table class="w-full text-left text-xs sm:text-sm border-collapse bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm">
             <thead>
               <tr class="bg-slate-900 text-white">
-                <th class="p-4 font-heading font-bold">Grade Level</th>
-                <th class="p-4 font-heading font-bold">Per Term (3 Terms)</th>
-                <th class="p-4 font-heading font-bold">Annual Full Payment</th>
-                <th class="p-4 font-heading font-bold">Inclusions</th>
+                <th class="p-4 font-heading font-bold">Peringkat Murid</th>
+                <th class="p-4 font-heading font-bold">Setiap Penggal (3 Penggal)</th>
+                <th class="p-4 font-heading font-bold">Bayaran Penuh Setahun</th>
+                <th class="p-4 font-heading font-bold">Perincian</th>
               </tr>
             </thead>
             <tbody class="divide-y divide-slate-200">
@@ -100,111 +100,105 @@ const privateFees = [
         <div class="max-w-4xl mx-auto p-4 bg-amber-50 border border-amber-200 rounded-xl text-xs text-amber-900 flex items-start gap-3">
           <span class="text-lg">⭐</span>
           <div>
-            <p class="font-bold">Sibling Discount & Means-Tested Bursaries:</p>
-            <p>A 10% discount is applied automatically for second and subsequent siblings. Bursary applications open every October.</p>
+            <p class="font-bold">Diskaun Adik-Beradik & Bantuan Zakat:</p>
+            <p>Diskaun 10% diberikan secara automatik untuk anak kedua dan seterusnya yang mendaftar serentak. Bantuan tajaan zakat turut disediakan bagi keluarga yang asnaf dan berkelayakan.</p>
           </div>
         </div>
       </div>
     </section>
   ) : (
-    <!-- GOVERNMENT SCHOOL: Catchment & Free Assistance -->
     <section class="py-16 bg-slate-50 border-t border-slate-200">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         <div class="text-center max-w-2xl mx-auto space-y-2">
-          <span class="text-xs font-bold uppercase tracking-widest text-emerald-700">Public Education</span>
-          <h2 class="text-3xl font-heading font-bold text-slate-900">Catchment Area & Government Support</h2>
-          <p class="text-sm text-slate-600">Tuition is 100% free and funded by the Department of Education.</p>
+          <span class="text-xs font-bold uppercase tracking-widest text-emerald-700">Pendidikan Awam</span>
+          <h2 class="text-3xl font-heading font-bold text-slate-900">Zon Tadahan & Bantuan Kerajaan</h2>
+          <p class="text-sm text-slate-600">Yuran pengajian adalah percuma ditanggung sepenuhnya oleh Kementerian Pendidikan Malaysia.</p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-          
           <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
             <h3 class="font-heading font-bold text-lg text-slate-900 flex items-center gap-2">
-              <span>📍</span> Catchment Area Guidelines
+              <span>📍</span> Panduan Zon Tadahan
             </h3>
             <p class="text-xs text-slate-600 leading-relaxed">
-              Children living permanently within our designated community boundary are guaranteed enrollment. Please bring the following documents to the school office:
+              Murid yang menetap di dalam zon persekolahan dijamin tempat. Sila bawa dokumen berikut semasa pendaftaran:
             </p>
             <ul class="text-xs text-slate-600 space-y-2">
-              <li class="flex items-center gap-2">✓ Proof of residency (utility bill or council tax statement)</li>
-              <li class="flex items-center gap-2">✓ Child's official birth certificate or passport</li>
-              <li class="flex items-center gap-2">✓ Child's up-to-date immunization / health card</li>
-              <li class="flex items-center gap-2">✓ Previous school transfer certificate (for Grades 1–6)</li>
+              <li class="flex items-center gap-2">✓ Bukti kediaman (bil utiliti elektrik/air atau perjanjian sewa)</li>
+              <li class="flex items-center gap-2">✓ Sijil lahir / MyKid murid yang sah</li>
+              <li class="flex items-center gap-2">✓ Buku rekod imunisasi dan kesihatan murid</li>
+              <li class="flex items-center gap-2">✓ Surat pertukaran sekolah lama (bagi murid Tahun 2–6)</li>
             </ul>
           </div>
 
           <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
             <h3 class="font-heading font-bold text-lg text-slate-900 flex items-center gap-2">
-              <span>🍎</span> Free Government Schemes & Assistance
+              <span>🍎</span> Skim Bantuan Kerajaan
             </h3>
-            <p class="text-xs text-slate-600 leading-relaxed">
-              We ensure every student has equal access to all school activities without economic barriers:
-            </p>
             <ul class="text-xs text-slate-600 space-y-2">
-              <li class="flex items-center gap-2">✓ <strong>Universal Free School Breakfast:</strong> Available daily from 7:45 AM</li>
-              <li class="flex items-center gap-2">✓ <strong>Textbook & Device Subsidy:</strong> Tablets & stationery provided free</li>
-              <li class="flex items-center gap-2">✓ <strong>School Uniform Grant Scheme:</strong> Support for qualifying families</li>
-              <li class="flex items-center gap-2">✓ <strong>Free Walking Bus:</strong> Supervised adult walking groups from town center</li>
+              <li class="flex items-center gap-2">✓ <strong>Rancangan Makanan Tambahan (RMT):</strong> Sarapan percuma setiap pagi</li>
+              <li class="flex items-center gap-2">✓ <strong>Skim Pinjaman Buku Teks (SPBT):</strong> Buku teks percuma</li>
+              <li class="flex items-center gap-2">✓ <strong>Bantuan Pakaian Seragam:</strong> Diberikan kepada keluarga yang layak</li>
+              <li class="flex items-center gap-2">✓ <strong>Bas Sekolah Subsidi:</strong> Pengangkutan percuma bagi laluan terpilih</li>
             </ul>
           </div>
-
         </div>
       </div>
     </section>
   )}
 
-  <!-- Parent Inquiry / Application Form -->
+  <!-- Inquiry Form -->
   <section class="py-16 bg-white border-t border-slate-200">
     <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
       <div class="text-center space-y-2">
-        <span class="text-xs font-bold uppercase tracking-widest text-school-primary">Get In Touch</span>
+        <span class="text-xs font-bold uppercase tracking-widest text-school-primary">Hubungi Pendaftar</span>
         <h2 class="text-3xl font-heading font-bold text-slate-900">
-          {isPrivate ? 'Student Application & Tour Request' : 'Enrollment Inquiry & Tour Booking'}
+          {isPrivate ? 'Permohonan Kemasukan & Temujanji Lawatan' : 'Pertanyaan Pendaftaran & Lawatan Sekolah'}
         </h2>
         <p class="text-sm text-slate-600">
-          Fill out the form below. Our admissions registrar will reach out to schedule an informal school visit.
+          Isi borang ringkas di bawah. Pegawai pendaftar kami akan menghubungi anda untuk penetapan tarikh suai kenal.
         </p>
       </div>
 
       <form id="inquiry-form" class="bg-slate-50 border border-slate-200 rounded-3xl p-6 sm:p-8 space-y-4 shadow-sm">
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label class="block text-xs font-bold text-slate-700 uppercase mb-1" for="childName">Child's Full Name *</label>
-            <input type="text" id="childName" name="childName" required class="w-full text-xs px-3 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-school-primary focus:border-transparent" placeholder="e.g. Oliver Vance" />
+            <label class="block text-xs font-bold text-slate-700 uppercase mb-1" for="childName">Nama Penuh Murid *</label>
+            <input type="text" id="childName" name="childName" required class="w-full text-xs px-3 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-school-primary focus:border-transparent" placeholder="cth: Muhammad Aqeel bin Ahmad" />
           </div>
           <div>
-            <label class="block text-xs font-bold text-slate-700 uppercase mb-1" for="grade">Grade Applying For *</label>
+            <label class="block text-xs font-bold text-slate-700 uppercase mb-1" for="grade">Tahun / Peringkat Dimohon *</label>
             <select id="grade" name="grade" required class="w-full text-xs px-3 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-school-primary focus:border-transparent bg-white">
-              <option value="kindergarten">Kindergarten / Reception (Ages 4-5)</option>
-              <option value="grade1">Grade 1 (Ages 5-6)</option>
-              <option value="grade2">Grade 2 (Ages 6-7)</option>
-              <option value="grade3">Grade 3 (Ages 7-8)</option>
-              <option value="grade4">Grade 4 (Ages 8-9)</option>
-              <option value="grade5">Grade 5 (Ages 9-10)</option>
-              <option value="grade6">Grade 6 (Ages 10-11)</option>
+              <option value="preschool">Prasekolah / Tadika (Umur 4–5 Tahun)</option>
+              <option value="year1">Tahun 1 (Umur 6–7 Tahun)</option>
+              <option value="year2">Tahun 2</option>
+              <option value="year3">Tahun 3</option>
+              <option value="year4">Tahun 4</option>
+              <option value="year5">Tahun 5</option>
+              <option value="year6">Tahun 6</option>
             </select>
           </div>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label class="block text-xs font-bold text-slate-700 uppercase mb-1" for="parentName">Parent / Guardian Name *</label>
-            <input type="text" id="parentName" name="parentName" required class="w-full text-xs px-3 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-school-primary focus:border-transparent" placeholder="e.g. Sarah Vance" />
+            <label class="block text-xs font-bold text-slate-700 uppercase mb-1" for="parentName">Nama Ibu Bapa / Penjaga *</label>
+            <input type="text" id="parentName" name="parentName" required class="w-full text-xs px-3 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-school-primary focus:border-transparent" placeholder="cth: Ahmad bin Ibrahim" />
           </div>
           <div>
-            <label class="block text-xs font-bold text-slate-700 uppercase mb-1" for="phone">Phone Number *</label>
-            <input type="tel" id="phone" name="phone" required class="w-full text-xs px-3 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-school-primary focus:border-transparent" placeholder="+1 (555) 000-0000" />
+            <label class="block text-xs font-bold text-slate-700 uppercase mb-1" for="phone">Nombor Telefon *</label>
+            <input type="tel" id="phone" name="phone" required class="w-full text-xs px-3 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-school-primary focus:border-transparent" placeholder="+60 1X-XXX XXXX" />
           </div>
         </div>
 
         <div>
-          <label class="block text-xs font-bold text-slate-700 uppercase mb-1" for="email">Parent Email Address *</label>
-          <input type="email" id="email" name="email" required class="w-full text-xs px-3 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-school-primary focus:border-transparent" placeholder="parent@example.com" />
+          <label class="block text-xs font-bold text-slate-700 uppercase mb-1" for="email">Alamat Emel Penjaga *</label>
+          <input type="email" id="email" name="email" required class="w-full text-xs px-3 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-school-primary focus:border-transparent" placeholder="ibubapa@example.com" />
         </div>
 
         <div>
-          <label class="block text-xs font-bold text-slate-700 uppercase mb-1" for="message">Questions or Specific Notes</label>
-          <textarea id="message" name="message" rows="3" class="w-full text-xs px-3 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-school-primary focus:border-transparent" placeholder="Mention preferred start term, learning needs, or scheduling questions..."></textarea>
+          <label class="block text-xs font-bold text-slate-700 uppercase mb-1" for="message">Pertanyaan atau Catatan Tambahan</label>
+          <textarea id="message" name="message" rows="3" class="w-full text-xs px-3 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-school-primary focus:border-transparent" placeholder="Nyatakan sesi kemasukan pilihan, keperluan pembelajaran khas atau sebarang soalan..."></textarea>
         </div>
 
         <div class="pt-2">
@@ -212,18 +206,17 @@ const privateFees = [
             type="submit"
             class="w-full py-3.5 px-6 rounded-xl bg-school-primary text-white font-bold text-xs uppercase tracking-wider hover:bg-school-primary-hover transition-colors shadow-md flex items-center justify-center gap-2"
           >
-            <span>Submit Admissions Inquiry</span>
+            <span>Hantar Permohonan Kemasukan</span>
             <span>→</span>
           </button>
         </div>
 
         <p id="form-feedback" class="hidden text-center text-xs font-bold text-emerald-700 pt-2">
-          ✓ Thank you! Your inquiry has been registered. Our admissions office will reach out within 1 business day.
+          ✓ Terima kasih! Permohonan anda telah berjaya diterima. Pihak pejabat sekolah akan menghubungi anda dalam tempoh 1 hari bekerja. Jazakumullahu Khairan.
         </p>
 
-        <!-- Cloudflare Pages Functions / Laravel Note -->
         <p class="text-[11px] text-slate-400 text-center pt-2">
-          Protected by Cloudflare Turnstile • Directly connectable to Laravel REST API (<code class="bg-slate-200 px-1 py-0.5 rounded text-slate-700">POST /api/admissions</code>)
+          Dilindungi oleh Cloudflare Turnstile • Boleh dihubungkan terus ke Laravel REST API (<code class="bg-slate-200 px-1 py-0.5 rounded text-slate-700">POST /api/admissions</code>)
         </p>
       </form>
     </div>
@@ -236,10 +229,9 @@ const privateFees = [
 
   form?.addEventListener('submit', (e) => {
     e.preventDefault();
-    // Simulate successful submission or dispatch to Cloudflare Pages Functions / Laravel API
     if (feedback) {
       feedback.classList.remove('hidden');
-      form.reset();
+      (form as HTMLFormElement).reset();
     }
   });
 </script>

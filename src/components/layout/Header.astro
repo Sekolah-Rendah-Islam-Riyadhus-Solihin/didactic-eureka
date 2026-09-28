@@ -1,20 +1,33 @@
 ---
 import { schoolConfig } from '../../config/school.config';
+import LanguageSwitcher from './LanguageSwitcher.astro';
+import type { SupportedLanguage } from '../../i18n/ui';
+import { getLangFromUrl, getLocalizedPath, useTranslations } from '../../i18n/utils';
+
+interface Props {
+  lang?: SupportedLanguage;
+}
+
+const { lang: propLang } = Astro.props;
+const lang: SupportedLanguage = propLang || getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 
 const navItems = [
-  { label: 'Home', href: '/' },
-  { label: 'About Us', href: '/about' },
-  { label: 'Academics', href: '/academics' },
-  { label: 'Admissions', href: '/admissions' },
-  { label: 'News & Events', href: '/news' },
-  { label: 'Contact', href: '/contact' },
+  { label: t('nav.home'), href: getLocalizedPath('/', lang) },
+  { label: t('nav.about'), href: getLocalizedPath('/about', lang) },
+  { label: t('nav.academics'), href: getLocalizedPath('/academics', lang) },
+  { label: t('nav.admissions'), href: getLocalizedPath('/admissions', lang) },
+  { label: t('nav.news'), href: getLocalizedPath('/news', lang) },
+  { label: t('nav.contact'), href: getLocalizedPath('/contact', lang) },
 ];
 
 const currentPath = Astro.url.pathname;
 const isPrivate = schoolConfig.identity.schoolType === 'private';
+const homeHref = getLocalizedPath('/', lang);
+const admissionsHref = getLocalizedPath('/admissions', lang);
 ---
 
-<!-- Top utility bar for quick contacts & term info -->
+<!-- Top utility bar for quick contacts, term info & language switcher -->
 <div class="bg-slate-900 text-slate-300 text-xs py-1.5 px-4 border-b border-slate-800">
   <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-1.5">
     <div class="flex items-center gap-4">
@@ -41,9 +54,11 @@ const isPrivate = schoolConfig.identity.schoolType === 'private';
           title="Access parent and teacher portal (Powered by Laravel)"
         >
           <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
-          Parent Portal →
+          {t('topbar.portal')}
         </a>
       )}
+      <!-- Topbar Language Switcher -->
+      <LanguageSwitcher variant="topbar" />
     </div>
   </div>
 </div>
@@ -54,7 +69,7 @@ const isPrivate = schoolConfig.identity.schoolType === 'private';
     <div class="flex justify-between items-center h-20">
       
       <!-- School Logo & Branding -->
-      <a href="/" class="flex items-center gap-3 group">
+      <a href={homeHref} class="flex items-center gap-3 group">
         <div class="w-12 h-12 rounded-xl bg-school-primary text-white flex items-center justify-center shadow-md font-serif text-2xl font-bold transition-transform group-hover:scale-105">
           {schoolConfig.identity.shortName.charAt(0)}
         </div>
@@ -64,7 +79,7 @@ const isPrivate = schoolConfig.identity.schoolType === 'private';
           </span>
           <div class="flex items-center gap-2 text-xs text-slate-500 font-medium">
             <span class="uppercase tracking-wider text-[10px] px-1.5 py-0.2 rounded font-bold {isPrivate ? 'bg-amber-100 text-amber-800' : 'bg-emerald-100 text-emerald-800'}">
-              {isPrivate ? 'Private Primary' : 'Government Primary'}
+              {isPrivate ? (lang === 'en' ? 'Private Islamic School' : 'Sekolah Rendah Islam') : (lang === 'en' ? 'Government Primary' : 'Sekolah Kerajaan')}
             </span>
             <span>•</span>
             <span class="italic">{schoolConfig.identity.motto}</span>
@@ -75,11 +90,11 @@ const isPrivate = schoolConfig.identity.schoolType === 'private';
       <!-- Desktop Navigation Links -->
       <nav class="hidden lg:flex items-center space-x-1">
         {navItems.map((item) => {
-          const isActive = currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.href));
+          const isActive = currentPath === item.href || (item.href !== homeHref && currentPath.startsWith(item.href));
           return (
             <a
               href={item.href}
-              class={`px-3.5 py-2 rounded-lg text-sm font-medium transition-all ${
+              class={`px-3 py-2 rounded-lg text-sm font-medium transition-all ${
                 isActive
                   ? 'text-school-primary bg-school-primary-light font-semibold'
                   : 'text-slate-600 hover:text-school-primary hover:bg-slate-50'
@@ -91,18 +106,20 @@ const isPrivate = schoolConfig.identity.schoolType === 'private';
         })}
       </nav>
 
-      <!-- Right CTAs -->
+      <!-- Right CTAs & Language Switcher -->
       <div class="hidden sm:flex items-center gap-3">
+        <LanguageSwitcher variant="header" />
         <a
-          href="/admissions"
+          href={admissionsHref}
           class="px-4 py-2 rounded-lg text-sm font-semibold bg-school-primary text-white hover:bg-school-primary-hover shadow-sm transition-all hover:shadow"
         >
-          {isPrivate ? 'Apply for Place' : 'Enrollment Info'}
+          {t('cta.apply')}
         </a>
       </div>
 
       <!-- Mobile Hamburger Button -->
-      <div class="flex items-center lg:hidden">
+      <div class="flex items-center gap-2 lg:hidden">
+        <LanguageSwitcher variant="header" class="scale-90" />
         <button
           id="mobile-menu-button"
           type="button"
@@ -120,21 +137,27 @@ const isPrivate = schoolConfig.identity.schoolType === 'private';
 
   <!-- Mobile Drawer Menu -->
   <div id="mobile-menu" class="hidden lg:hidden border-t border-slate-200 bg-white px-4 pt-3 pb-6 shadow-lg">
-    <div class="space-y-1">
+    <div class="space-y-2">
+      <!-- Mobile Language Switcher -->
+      <div class="pb-2 mb-2 border-b border-slate-100">
+        <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-2">Pilihan Bahasa / Language</p>
+        <LanguageSwitcher variant="mobile" />
+      </div>
+
       {navItems.map((item) => (
         <a
           href={item.href}
-          class="block px-3 py-2.5 rounded-md text-base font-medium text-slate-700 hover:text-school-primary hover:bg-slate-50"
+          class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-school-primary hover:bg-slate-50"
         >
           {item.label}
         </a>
       ))}
       <div class="pt-4 border-t border-slate-100 flex flex-col gap-2">
         <a
-          href="/admissions"
+          href={admissionsHref}
           class="w-full text-center px-4 py-2.5 rounded-lg text-sm font-semibold bg-school-primary text-white hover:bg-school-primary-hover shadow-sm"
         >
-          {isPrivate ? 'Apply for Place' : 'Enrollment Info'}
+          {t('cta.apply')}
         </a>
         {schoolConfig.features.showParentPortalButton && (
           <a
@@ -143,7 +166,7 @@ const isPrivate = schoolConfig.identity.schoolType === 'private';
             rel="noopener noreferrer"
             class="w-full text-center px-4 py-2 rounded-lg text-sm font-medium border border-slate-300 text-slate-700 hover:bg-slate-50"
           >
-            Access Parent Portal 🔐
+            {t('topbar.portal')}
           </a>
         )}
       </div>

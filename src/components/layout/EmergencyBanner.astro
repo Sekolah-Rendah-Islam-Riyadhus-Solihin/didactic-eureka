@@ -1,17 +1,31 @@
 ---
+import type { SupportedLanguage } from '../../i18n/ui';
+import { getLangFromUrl, getLocalizedPath, useTranslations } from '../../i18n/utils';
+
 interface Props {
   notice?: string;
+  message?: string;
   type?: 'info' | 'alert' | 'event';
   link?: string;
   linkText?: string;
+  lang?: SupportedLanguage;
 }
 
 const {
-  notice = "Spring Term Parent-Teacher Consultations will take place on April 22-24. Booking is now open via the parent office.",
+  notice,
+  message,
   type = "info",
-  link = "/news",
-  linkText = "Read Details →"
+  link,
+  linkText,
+  lang: propLang,
 } = Astro.props;
+
+const lang: SupportedLanguage = propLang || getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const displayNotice = notice || message || t('emergency.default');
+const displayLink = link || getLocalizedPath('/news', lang);
+const displayLinkText = linkText || t('emergency.viewDetails');
 
 const bgColors = {
   info: "bg-amber-500 text-amber-950",
@@ -26,11 +40,11 @@ const bgColors = {
       <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-black/10 font-bold text-xs uppercase tracking-wider">
         !
       </span>
-      <span>{notice}</span>
+      <span>{displayNotice}</span>
     </div>
-    {link && (
-      <a href={link} class="underline hover:no-underline font-semibold whitespace-nowrap ml-auto sm:ml-0">
-        {linkText}
+    {displayLink && (
+      <a href={displayLink} class="underline hover:no-underline font-semibold whitespace-nowrap ml-auto sm:ml-0">
+        {displayLinkText}
       </a>
     )}
   </div>

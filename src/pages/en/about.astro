@@ -1,40 +1,40 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import { schoolConfig } from '../config/school.config';
-import { getLocalizedPath } from '../i18n/utils';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { schoolConfig } from '../../config/school.config';
+import { getLocalizedPath } from '../../i18n/utils';
 
-const lang = 'ms';
+const lang = 'en';
 
 const values = [
-  { icon: "🕌", title: "Aqidah & Taqwa", desc: "Menanamkan keimanan teguh, mencintai Allah SWT dan Rasulullah SAW serta mengamalkan sunnah dalam kehidupan harian." },
-  { icon: "🔍", title: "Cintakan Ilmu & Hikmah", desc: "Menggalakkan sifat ingin tahu, pemikiran kritis dan tradisi keilmuan Islam sepanjang hayat." },
-  { icon: "🌱", title: "Ketabahan & Sabar", desc: "Mendidik murid menghadapi cabaran dengan sabar, istiqamah dan berjiwa kental berpaksikan ajaran Islam." },
-  { icon: "⭐", title: "Integriti & Akhlak Mulia", desc: "Menghormati guru, ibu bapa, rakan sebaya serta menjadi anggota masyarakat yang berbakti." },
+  { icon: "🕌", title: "Faith & Taqwa", desc: "Every child nurtures strong iman, righteous character, and a deep love for Allah and His Messenger ﷺ." },
+  { icon: "🔍", title: "Curiosity & Knowledge", desc: "We celebrate questions, critical thinking, and the Islamic tradition of seeking knowledge throughout life." },
+  { icon: "🌱", title: "Resilience & Sabr", desc: "Challenges are embraced with patience and perseverance — qualities rooted in Islamic teachings." },
+  { icon: "⭐", title: "Integrity & Akhlak", desc: "Honoring our teachers, classmates, families, and the broader Muslim community we are part of." },
 ];
 
 const staffMembers = [
-  { name: schoolConfig.identity.headteacher.name, role: schoolConfig.identity.headteacher.title, exp: "20+ Tahun Pengalaman Pendidikan Islam" },
-  { name: "Ustaz Ahmad bin Zainudin", role: "Penolong Kanan & Ketua Program Tahfiz", exp: "15 Tahun Pengkhususan Al-Quran" },
-  { name: "Puan Siti Rahimah binti Ismail", role: "Penyelaras Prasekolah & Awal Kanak-kanak", exp: "12 Tahun Pendidikan Awal" },
-  { name: "Cikgu Faridah binti Hassan", role: "Guru Bimbingan & Kaunseling", exp: "10 Tahun Pembangunan Sahsiah" },
+  { name: schoolConfig.identity.headteacher.name, role: schoolConfig.identity.headteacher.title, exp: "20+ Years in Islamic Primary Education" },
+  { name: "Ustaz Ahmad bin Zainudin", role: "Deputy Head & Tahfiz Programme Lead", exp: "15 Years in Quranic Education" },
+  { name: "Puan Siti Rahimah binti Ismail", role: "Early Years & Kindergarten Coordinator", exp: "12 Years in Early Childhood" },
+  { name: "Cikgu Faridah binti Hassan", role: "Special Education & Inclusion (Pendidikan Khas)", exp: "10 Years in Child Development" },
 ];
 
 const facilities = [
-  { name: "Perpustakaan Islam & Sudut Membaca", desc: "Lebih 4,000 judul buku ilmiah Islamiah, kisah para nabi, bahan bacaan umum dan sudut multimedia." },
-  { name: "Dewan Tahfiz & Musolla Sekolah", desc: "Ruang solat berjemaah berhawa dingin serta dewan tasmik hafazan Al-Quran yang selesa dan tenang." },
-  { name: "Makmal Sains & Sudut STEM", desc: "Kelengkapan amali sains KSSR, kit robotik junior dan tablet pembelajaran interaktif." },
-  { name: "Gelanggang Sukan Berbumbung & Laman Herba", desc: "Gelanggang serbaguna bagi futsal dan badminton serta taman herba untuk pembelajaran alam sekitar." },
+  { name: "Islamic Library & Reading Corner", desc: "Over 4,000 age-appropriate Islamic storybooks, Quranic references, and Arabic learning resources." },
+  { name: "Tahfiz Hall & Prayer Musolla", desc: "Purpose-built Quran memorisation hall with individual recitation pods and a dedicated musolla for all prayers." },
+  { name: "STEM & Discovery Lab", desc: "Hands-on science kits, tablets, robotics kits, and interactive learning tools aligned with the national curriculum." },
+  { name: "Sports Court & School Garden", desc: "Multi-purpose covered court for badminton and futsal, plus an organic school garden for environmental education." },
 ];
 ---
 
-<BaseLayout lang={lang} title="Tentang Sekolah Kami">
+<BaseLayout lang={lang} title="About Our School">
   <!-- Page Header -->
   <section class="bg-slate-900 text-white py-16">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
-      <span class="text-xs font-bold uppercase tracking-widest text-amber-400">Falsafah & Komuniti Kami</span>
-      <h1 class="text-3xl sm:text-5xl font-heading font-bold">Tentang {schoolConfig.identity.name}</h1>
+      <span class="text-xs font-bold uppercase tracking-widest text-amber-400">Our Ethos & Community</span>
+      <h1 class="text-3xl sm:text-5xl font-heading font-bold">About {schoolConfig.identity.name}</h1>
       <p class="max-w-2xl mx-auto text-sm sm:text-base text-slate-300 font-light">
-        Sekolah rendah Islam integrasi yang komited membina sahsiah, jati diri huffaz dan kecemerlangan akademik sejak {schoolConfig.identity.establishedYear}.
+        An integrated Islamic primary school committed to building faith, character, and academic excellence since {schoolConfig.identity.establishedYear}.
       </p>
     </div>
   </section>
@@ -44,15 +44,15 @@ const facilities = [
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
         <div class="space-y-6">
-          <span class="text-xs font-bold uppercase tracking-wider text-school-primary">Kata Alu-aluan Guru Besar</span>
+          <span class="text-xs font-bold uppercase tracking-wider text-school-primary">Headteacher's Welcome</span>
           <h2 class="text-2xl sm:text-3xl font-heading font-bold text-slate-900">
-            "Membimbing akal dan rohani anak-anak ke arah kejayaan dunia dan akhirat."
+            "Nurturing the hearts and minds of our children — for this world and the hereafter."
           </h2>
           <p class="text-slate-600 text-sm leading-relaxed">
-            Selamat datang ke {schoolConfig.identity.name}. Di bilik darjah kami, anda akan menyaksikan anak-anak menghafal Al-Quran dengan gembira, berdialog ilmiah, membina projek sains dan memupuk ukhuwah berlandaskan syariat Islam.
+            Welcome to {schoolConfig.identity.name}. In our classrooms, you will see children memorising the Quran with joy, engaging in vibrant learning discussions, conducting science experiments, and building friendships grounded in Islamic values.
           </p>
           <p class="text-slate-600 text-sm leading-relaxed">
-            Sama ada anak anda baru melangkah ke alam prasekolah mahupun bersiap sedia untuk peralihan ke sekolah menengah, barisan pendidik kami sentiasa memastikan setiap anak dihargai, dibimbing dan dicabar potensinya.
+            Whether your child is beginning their kindergarten journey or approaching their UPSR preparation year, our dedicated teaching faculty ensures they feel seen, nurtured, and academically challenged.
           </p>
           <div class="pt-2 border-l-2 border-school-primary pl-4">
             <p class="font-heading font-bold text-slate-900">{schoolConfig.identity.headteacher.name}</p>
@@ -61,14 +61,14 @@ const facilities = [
         </div>
 
         <div class="bg-slate-100 rounded-3xl p-8 border border-slate-200 space-y-6">
-          <h3 class="font-heading font-bold text-xl text-slate-900">Misi & Visi Sekolah</h3>
+          <h3 class="font-heading font-bold text-xl text-slate-900">Our School Mission</h3>
           <p class="text-sm text-slate-700 leading-relaxed italic">
             "{schoolConfig.identity.tagline}"
           </p>
           <div class="space-y-3 pt-2 text-xs text-slate-600">
-            <p><strong>Pentauliahan:</strong> {schoolConfig.identity.affiliation}</p>
-            <p><strong>Kurikulum:</strong> Integrasi KSSR Kementerian Pendidikan Malaysia & Kurikulum Agama/Tahfiz</p>
-            <p><strong>Komuniti:</strong> Lebih 520 murid, PIBG yang aktif serta barisan asatizah dan guru bertauliah.</p>
+            <p><strong>Affiliation:</strong> {schoolConfig.identity.affiliation}</p>
+            <p><strong>Curriculum:</strong> Integrated KSSR & Tahfiz (Quran Memorisation) Programme</p>
+            <p><strong>Community:</strong> Over 520 students, active PIBG, and a dedicated team of Islamic educators.</p>
           </div>
         </div>
       </div>
@@ -79,8 +79,8 @@ const facilities = [
   <section class="py-16 bg-slate-50 border-t border-slate-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
       <div class="text-center max-w-2xl mx-auto space-y-2">
-        <span class="text-xs font-bold uppercase tracking-widest text-school-primary">Paksi Utama</span>
-        <h2 class="text-3xl font-heading font-bold text-slate-900">Nilai Murni Hayatan Warga Sekolah</h2>
+        <span class="text-xs font-bold uppercase tracking-widest text-school-primary">Foundational Pillars</span>
+        <h2 class="text-3xl font-heading font-bold text-slate-900">The Values We Live By Every Day</h2>
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -99,8 +99,8 @@ const facilities = [
   <section class="py-16 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
       <div class="text-center max-w-2xl mx-auto space-y-2">
-        <span class="text-xs font-bold uppercase tracking-widest text-school-primary">Persekitaran Kampus</span>
-        <h2 class="text-3xl font-heading font-bold text-slate-900">Prasarana & Kemudahan Pembelajaran</h2>
+        <span class="text-xs font-bold uppercase tracking-widest text-school-primary">Campus Environment</span>
+        <h2 class="text-3xl font-heading font-bold text-slate-900">Facilities Designed For Young Learners</h2>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -120,8 +120,8 @@ const facilities = [
   <section class="py-16 bg-slate-50 border-t border-slate-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
       <div class="text-center max-w-2xl mx-auto space-y-2">
-        <span class="text-xs font-bold uppercase tracking-widest text-school-primary">Barisan Pendidik Kami</span>
-        <h2 class="text-3xl font-heading font-bold text-slate-900">Pengurusan & Guru Utama</h2>
+        <span class="text-xs font-bold uppercase tracking-widest text-school-primary">Our Dedicated Educators</span>
+        <h2 class="text-3xl font-heading font-bold text-slate-900">Leadership & Key Staff</h2>
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {staffMembers.map((s) => (
@@ -144,20 +144,20 @@ const facilities = [
       <div class="flex flex-col md:flex-row items-center justify-between gap-6">
         <div class="space-y-2 text-center md:text-left">
           <div class="inline-flex items-center gap-2 text-xs font-bold text-emerald-400 uppercase tracking-widest">
-            <span>🛡️</span> Polisi Keselamatan & Kebajikan Murid
+            <span>🛡️</span> Child Safeguarding & Wellbeing Policy
           </div>
           <h3 class="text-xl sm:text-2xl font-heading font-bold">
-            Keutamaan tertinggi kami adalah keselamatan dan kesejahteraan setiap murid.
+            Our highest commitment is the safety and happiness of every child.
           </h3>
           <p class="text-xs sm:text-sm text-slate-300 max-w-2xl">
-            Semua guru dan kakitangan sokongan melalui saringan ketat dan menjalani latihan pertolongan cemas serta protokol keselamatan murid secara berkala.
+            All teaching and auxiliary staff undergo rigorous background verification, criminal record checks, and annual first-aid certification. Child safeguarding protocols are reviewed every academic year.
           </p>
         </div>
         <a
           href={getLocalizedPath('/contact', lang)}
           class="whitespace-nowrap px-5 py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-bold transition shadow"
         >
-          Hubungi Pasukan Kebajikan →
+          Contact Safeguarding Team →
         </a>
       </div>
     </div>

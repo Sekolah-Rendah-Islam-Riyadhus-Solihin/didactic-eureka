@@ -1,0 +1,83 @@
+---
+import { languages, type SupportedLanguage } from '../../i18n/ui';
+import { getLangFromUrl, getAlternateLanguageUrl } from '../../i18n/utils';
+
+interface Props {
+  variant?: 'topbar' | 'header' | 'mobile';
+  class?: string;
+}
+
+const { variant = 'header', class: className = '' } = Astro.props;
+const currentLang = getLangFromUrl(Astro.url);
+---
+
+{variant === 'topbar' && (
+  <div class={`inline-flex items-center gap-1 bg-slate-800/80 rounded-full p-0.5 border border-slate-700/60 ${className}`}>
+    {Object.entries(languages).map(([code, item]) => {
+      const isActive = code === currentLang;
+      const targetUrl = getAlternateLanguageUrl(Astro.url, code as SupportedLanguage);
+      return (
+        <a
+          href={targetUrl}
+          class={`px-2 py-0.5 rounded-full text-[11px] font-semibold transition-colors flex items-center gap-1 ${
+            isActive
+              ? 'bg-amber-400 text-slate-950 shadow-sm'
+              : 'text-slate-300 hover:text-white hover:bg-slate-700/50'
+          }`}
+          title={`Switch to ${item.name}`}
+          aria-current={isActive ? 'page' : undefined}
+        >
+          <span>{item.flag}</span>
+          <span>{item.shortLabel}</span>
+        </a>
+      );
+    })}
+  </div>
+)}
+
+{variant === 'header' && (
+  <div class={`inline-flex items-center gap-1 bg-slate-100 rounded-xl p-1 border border-slate-200 ${className}`}>
+    {Object.entries(languages).map(([code, item]) => {
+      const isActive = code === currentLang;
+      const targetUrl = getAlternateLanguageUrl(Astro.url, code as SupportedLanguage);
+      return (
+        <a
+          href={targetUrl}
+          class={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 ${
+            isActive
+              ? 'bg-school-primary text-white shadow-sm'
+              : 'text-slate-600 hover:text-slate-900 hover:bg-white/80'
+          }`}
+          title={`Switch to ${item.name}`}
+          aria-current={isActive ? 'page' : undefined}
+        >
+          <span>{item.flag}</span>
+          <span>{item.shortLabel}</span>
+        </a>
+      );
+    })}
+  </div>
+)}
+
+{variant === 'mobile' && (
+  <div class={`grid grid-cols-2 gap-2 p-1 bg-slate-100 rounded-xl border border-slate-200 ${className}`}>
+    {Object.entries(languages).map(([code, item]) => {
+      const isActive = code === currentLang;
+      const targetUrl = getAlternateLanguageUrl(Astro.url, code as SupportedLanguage);
+      return (
+        <a
+          href={targetUrl}
+          class={`py-2 px-3 rounded-lg text-xs font-bold text-center flex items-center justify-center gap-2 transition-all ${
+            isActive
+              ? 'bg-school-primary text-white shadow-sm'
+              : 'text-slate-700 hover:bg-white hover:text-slate-900'
+          }`}
+          aria-current={isActive ? 'page' : undefined}
+        >
+          <span class="text-base">{item.flag}</span>
+          <span>{item.name}</span>
+        </a>
+      );
+    })}
+  </div>
+)}

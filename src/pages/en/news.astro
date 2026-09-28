@@ -1,49 +1,49 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import { schoolConfig } from '../config/school.config';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { schoolConfig } from '../../config/school.config';
 
-const lang = 'ms';
+const lang = 'en';
 
 const notices = [
   {
-    title: "Hari Sukan Tahunan & Hari Keluarga Sekolah",
-    category: "Aktiviti",
+    title: "Annual Sports Day & Family Gathering",
+    category: "Events",
     date: "28 April 2026",
-    summary: "Acara sukaneka, larian berpagar, tarik tali dan jamuan santai sekeluarga di padang utama sekolah. Semua ibu bapa dan waris dijemput hadir memeriahkan program.",
+    summary: "Join us for a day of friendly track events, obstacle races, tug-of-war, and a shared community gathering on our school field. All families welcome!",
     badgeColor: "bg-emerald-100 text-emerald-800",
   },
   {
-    title: "Karnival Al-Quran & Kesenian Islam 2026",
-    category: "Akademik",
-    date: "12 Mei 2026",
-    summary: "Pertandingan hafazan cilik, seni khat, tilawah dan syarahan agama. Pameran modul hafazan murid turut dibuka kepada umum.",
+    title: "Quran & Islamic Arts Showcase 2026",
+    category: "Academic",
+    date: "12 May 2026",
+    summary: "Students from all years will present their Quran recitation, calligraphy, and Islamic art projects. Parents and guardians are warmly invited.",
     badgeColor: "bg-sky-100 text-sky-800",
   },
   {
-    title: "Hari Bicara Prestasi Murid Bersama Guru Kelas",
-    category: "Pemberitahuan",
+    title: "Term 2 Parent-Teacher Consultation Sessions",
+    category: "Notices",
     date: "22 – 24 April 2026",
-    summary: "Sesi perbincangan empat mata bersama guru kelas dan guru tasmik bagi menyemak perkembangan akademik serta pencapaian hafazan Al-Quran anak-anak.",
+    summary: "Class teachers will discuss mid-year academic progress, Tahfiz achievements, and individual development goals with parents.",
     badgeColor: "bg-amber-100 text-amber-800",
   },
   {
-    title: "Peringatan Etika Pemakaian Pakaian Seragam Sekolah",
-    category: "Disiplin",
+    title: "School Uniform & Dress Code Reminder",
+    category: "Policy",
     date: "15 April 2026",
-    summary: "Semua murid lelaki diwajibkan memakai Baju Melayu lengkap bersongkok hitam pada hari Jumaat. Murid perempuan berbaju kurung putih lengkap berlencana sekolah.",
+    summary: "A reminder to all parents: boys are required to wear the school's light blue baju Melayu on Fridays. Girls must wear the white baju kurung with the school badge at all times.",
     badgeColor: "bg-purple-100 text-purple-800",
   },
 ];
 ---
 
-<BaseLayout lang={lang} title="Berita, Hebahan & Takwim Persekolahan">
+<BaseLayout lang={lang} title="News, Events & Academic Calendar">
   <!-- Page Header -->
   <section class="bg-slate-900 text-white py-16">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
-      <span class="text-xs font-bold uppercase tracking-widest text-amber-400">Hebahan Warga Sekolah</span>
-      <h1 class="text-3xl sm:text-5xl font-heading font-bold">Berita & Takwim Akademik</h1>
+      <span class="text-xs font-bold uppercase tracking-widest text-amber-400">School Bulletins & Notices</span>
+      <h1 class="text-3xl sm:text-5xl font-heading font-bold">News & Academic Calendar</h1>
       <p class="max-w-2xl mx-auto text-sm sm:text-base text-slate-300 font-light">
-        Ikuti perkembangan aktiviti, takwim cuti dan makluman pekeliling penting daripada pihak pentadbiran {schoolConfig.identity.shortName}.
+        Stay up to date with school events, holiday schedules, and important community notices from {schoolConfig.identity.shortName}.
       </p>
     </div>
   </section>
@@ -53,7 +53,7 @@ const notices = [
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex flex-col md:flex-row items-center justify-between gap-6">
         <div>
-          <span class="text-xs font-bold uppercase tracking-widest text-amber-300">Sesi Akademik 2026</span>
+          <span class="text-xs font-bold uppercase tracking-widest text-amber-300">2026 Academic Year</span>
           <h2 class="text-2xl font-heading font-bold">{schoolConfig.terms.currentTerm}</h2>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full md:w-auto">
@@ -72,8 +72,8 @@ const notices = [
   <section class="py-16 bg-white">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
       <div class="flex items-center justify-between">
-        <h2 class="text-2xl font-heading font-bold text-slate-900">Pekeliling & Hebahan Terkini</h2>
-        <span class="text-xs text-slate-500 font-medium">Dikemaskini Setiap Minggu</span>
+        <h2 class="text-2xl font-heading font-bold text-slate-900">Latest Circulars & Announcements</h2>
+        <span class="text-xs text-slate-500 font-medium">Updated Weekly</span>
       </div>
 
       <div class="space-y-4">
@@ -98,13 +98,13 @@ const notices = [
       <!-- School Holidays Note -->
       <div class="bg-emerald-50 border border-emerald-200 rounded-2xl p-6 space-y-3">
         <h3 class="font-heading font-bold text-base text-emerald-900 flex items-center gap-2">
-          📅 Hari Kelepasan Am & Cuti Persekolahan KPM
+          📅 Malaysian Public Holidays & School Breaks
         </h3>
         <p class="text-xs text-emerald-800 leading-relaxed">
-          {schoolConfig.identity.shortName} mematuhi takwim rasmi cuti persekolahan Kementerian Pendidikan Malaysia (KPM) Kumpulan B serta cuti peristiwa / am Negeri Johor. Cuti khas turut diperuntukkan bagi sambutan perayaan Islam seperti Hari Raya Aidilfitri, Hari Raya Aidiladha dan Maulidur Rasul.
+          {schoolConfig.identity.shortName} observes all national public holidays as declared by the Malaysian Government, plus additional holidays as gazetted by the Johor State Government. Special breaks are also observed for major Islamic celebrations including Hari Raya Aidilfitri, Hari Raya Aidiladha, and Maulidur Rasul.
         </p>
         <p class="text-xs text-emerald-700 font-semibold">
-          Sila rujuk pekeliling takwim rasmi tahunan yang diedarkan oleh pejabat sekolah atau muat turun di portal waris.
+          For the full 2026 school holiday calendar, please contact the school office or check the official KPM (Kementerian Pendidikan Malaysia) calendar.
         </p>
       </div>
     </div>

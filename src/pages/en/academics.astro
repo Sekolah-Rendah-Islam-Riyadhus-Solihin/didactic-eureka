@@ -1,0 +1,136 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { schoolConfig } from '../../config/school.config';
+import { getLocalizedPath } from '../../i18n/utils';
+
+const lang = 'en';
+
+const subjects = [
+  { icon: "📖", title: "Bahasa Melayu & English Literacy", desc: "Structured phonics, guided reading, creative writing, oral communication, and public speaking in both national and English language." },
+  { icon: "🔢", title: "Mathematics & Problem Solving", desc: "Conceptual number sense, mental arithmetic, geometry, data handling, and real-world problem applications aligned with the KSSR syllabus." },
+  { icon: "🔬", title: "Science & Environmental Studies", desc: "Hands-on experiments, living science, earth sciences, weather tracking, and introductory technology discovery aligned to the national curriculum." },
+  { icon: "📖", title: "Islamic Education & Quran", desc: "Daily Quran recitation (Tajweed), Islamic moral studies (Pendidikan Islam), Sirah, Fiqh, and integrated Hafazan (memorisation) classes." },
+  { icon: "⚽", title: "Physical Education & Health", desc: "Fundamental motor skills, team sports (badminton, futsal, athletics), and physical fitness sessions every week." },
+  { icon: "🌍", title: "Social Studies, History & Geography", desc: "Learning about Malaysian heritage, world civilisations, local community values, environmental responsibility, and active citizenship." },
+];
+
+const clubs = [
+  { name: "Junior Robotics & Technology Club", day: "Tuesday 2:30 – 3:30 PM", ages: "Years 4 – 6" },
+  { name: "Quran Recitation & Choral Speaking", day: "Wednesday 2:30 – 3:30 PM", ages: "All Years" },
+  { name: "School Garden & Environment Club", day: "Thursday 2:30 – 3:30 PM", ages: "Years 1 – 6" },
+  { name: "Chess & Strategy Games", day: "Friday 2:30 – 3:30 PM", ages: "Years 2 – 6" },
+  { name: "Junior Football & Athletics", day: "Monday & Thursday 3:00 – 4:30 PM", ages: "Years 3 – 6" },
+];
+
+const weeklyMenu = [
+  { day: "Monday", main: "Nasi Lemak with Ayam Rendang or Tempeh", side: "Sayur Kailan, Telur Goreng", fruit: "Slice of Papaya or Watermelon" },
+  { day: "Tuesday", main: "Mee Goreng Mamak or Vegetarian Mee Goreng", side: "Sayur Campur, Keropok", fruit: "Fresh Banana" },
+  { day: "Wednesday", main: "Nasi Putih with Ikan Bakar or Masak Lemak Sayur", side: "Sup Sayur, Papadom", fruit: "Orange Wedges" },
+  { day: "Thursday", main: "Mihun Sup Daging or Sup Ayam with Vegetables", side: "Cucur Sayur, Roti Canai", fruit: "Guava or Apple Slices" },
+  { day: "Friday", main: "Nasi Ayam Hainan or Vegetarian Nasi Goreng", side: "Tauhu & Tempe Goreng, Sayur Kobis", fruit: "Mango Pieces or Melon" },
+];
+---
+
+<BaseLayout lang={lang} title="Academics & Student Life">
+  <!-- Page Header -->
+  <section class="bg-slate-900 text-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
+      <span class="text-xs font-bold uppercase tracking-widest text-emerald-400">Curriculum & Student Life</span>
+      <h1 class="text-3xl sm:text-5xl font-heading font-bold">Academics at {schoolConfig.identity.shortName}</h1>
+      <p class="max-w-2xl mx-auto text-sm sm:text-base text-slate-300 font-light">
+        Where Islamic values, joyful discovery, and academic mastery come together every single day.
+      </p>
+    </div>
+  </section>
+
+  <!-- Core Subjects Grid -->
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+      <div class="text-center max-w-2xl mx-auto space-y-2">
+        <span class="text-xs font-bold uppercase tracking-widest text-school-primary">Integrated Curriculum</span>
+        <h2 class="text-3xl font-heading font-bold text-slate-900">Core Subject Areas</h2>
+        <p class="text-sm text-slate-600">Aligned with the KSSR national curriculum and enriched with integrated Islamic and Tahfiz studies.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {subjects.map((sub) => (
+          <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 hover:shadow-md transition space-y-3">
+            <div class="text-3xl">{sub.icon}</div>
+            <h3 class="font-heading font-bold text-lg text-slate-900">{sub.title}</h3>
+            <p class="text-xs text-slate-600 leading-relaxed">{sub.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Extracurricular Clubs -->
+  <section class="py-16 bg-slate-50 border-t border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+      <div class="text-center max-w-2xl mx-auto space-y-2">
+        <span class="text-xs font-bold uppercase tracking-widest text-school-primary">Beyond The Classroom</span>
+        <h2 class="text-3xl font-heading font-bold text-slate-900">After-School Enrichment Clubs</h2>
+        <p class="text-sm text-slate-600">Clubs run every week to foster collaboration, leadership, and lifelong passions.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {clubs.map((c) => (
+          <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800">{c.ages}</span>
+              <span class="text-[11px] text-slate-400">Open Enrollment</span>
+            </div>
+            <h3 class="font-heading font-bold text-sm text-slate-900">{c.name}</h3>
+            <p class="text-xs text-slate-500">⏰ {c.day}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Canteen Healthy Menu Section -->
+  {schoolConfig.features.showCanteenMenu && (
+    <section id="canteen" class="py-16 bg-white border-t border-slate-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+        <div class="text-center max-w-2xl mx-auto space-y-2">
+          <span class="text-xs font-bold uppercase tracking-widest text-amber-600">Halalan Toyyiban</span>
+          <h2 class="text-3xl font-heading font-bold text-slate-900">🥗 School Canteen Weekly Menu</h2>
+          <p class="text-sm text-slate-600">
+            Freshly prepared daily on-site. 100% Halal certified and adhering to healthy school nutrition standards set by the Ministry of Education.
+          </p>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs sm:text-sm border-collapse bg-slate-50 rounded-2xl overflow-hidden border border-slate-200">
+            <thead>
+              <tr class="bg-slate-900 text-white">
+                <th class="p-4 font-heading font-bold">Day</th>
+                <th class="p-4 font-heading font-bold">Main Dish</th>
+                <th class="p-4 font-heading font-bold">Sides & Vegetables</th>
+                <th class="p-4 font-heading font-bold">Fruit & Dessert</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-200">
+              {weeklyMenu.map((m) => (
+                <tr class="hover:bg-slate-100 transition-colors">
+                  <td class="p-4 font-bold text-slate-900 whitespace-nowrap">{m.day}</td>
+                  <td class="p-4 text-slate-700">{m.main}</td>
+                  <td class="p-4 text-slate-600">{m.side}</td>
+                  <td class="p-4 text-emerald-700 font-medium">{m.fruit}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 text-xs text-amber-900 flex items-start gap-3">
+          <span class="text-lg">ℹ️</span>
+          <div>
+            <p class="font-bold">Dietary & Allergy Requirements:</p>
+            <p>All food served is 100% Halal and prepared in a nut-aware kitchen. Vegetarian alternatives are available upon request. Please inform the school office of any food allergies at enrollment.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  )}
+</BaseLayout>
