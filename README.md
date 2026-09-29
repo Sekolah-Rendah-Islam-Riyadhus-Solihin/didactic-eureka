@@ -48,17 +48,23 @@ Open `src/config/school.config.ts`:
 schoolType: "government", // or "private"
 ```
 
-### B. Customize School Identity & Colors
+### B. Customize School Identity, Logo & Colors
 ```typescript
 identity: {
   name: "Oakridge Primary School",
   shortName: "Oakridge Primary",
   tagline: "Inspiring curious minds, fostering kind hearts.",
   motto: "Learning Together, Growing Forever",
+  logo: "/images/logo.png", // Or leave empty for minimalist fallback
+  logoMode: "auto",         // 'auto' | 'image' | 'crest' | 'monogram' | 'none'
   establishedYear: 1984,
-  affiliation: "Department of Education & Early Childhood Development",
   // ...
 },
+```
+> 📖 See the full [Logo System Guide](./LOGO_SYSTEM_GUIDE.md) for how to use custom images, minimalist crest/monogram fallbacks, or hide logos completely.
+
+### C. Branding & Theme Colors
+```typescript
 branding: {
   primary: "#065f46",       // School primary brand color (injected into CSS vars)
   primaryHover: "#047857",
@@ -68,7 +74,7 @@ branding: {
 }
 ```
 
-### C. Enable / Disable Specific Sections
+### D. Enable / Disable Specific Sections
 ```typescript
 features: {
   showTuitionFees: false,          // Set to true for private schools
