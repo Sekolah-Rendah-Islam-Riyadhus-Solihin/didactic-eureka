@@ -24,16 +24,20 @@ An open-source, white-label, accessible website template designed specifically f
 ## 🚀 Quick Start Guide
 
 ### 1. Run Development Server
+
 ```bash
 npm install
 npm run dev
 ```
+
 Open [http://localhost:4321](http://localhost:4321) in your browser.
 
 ### 2. Build for Production
+
 ```bash
 npm run build
 ```
+
 This generates the optimized static build in the `dist/` directory.
 
 ---
@@ -43,12 +47,14 @@ This generates the optimized static build in the `dist/` directory.
 Open `src/config/school.config.ts`:
 
 ### A. Switch School Type
+
 ```typescript
 // Toggle between 'government' and 'private'
 schoolType: "government", // or "private"
 ```
 
 ### B. Customize School Identity, Logo & Colors
+
 ```typescript
 identity: {
   name: "Oakridge Primary School",
@@ -61,9 +67,11 @@ identity: {
   // ...
 },
 ```
+
 > 📖 See the full [Logo System Guide](./LOGO_SYSTEM_GUIDE.md) for how to use custom images, minimalist crest/monogram fallbacks, or hide logos completely.
 
 ### C. Branding & Theme Colors
+
 ```typescript
 branding: {
   primary: "#065f46",       // School primary brand color (injected into CSS vars)
@@ -75,6 +83,7 @@ branding: {
 ```
 
 ### D. Enable / Disable Specific Sections
+
 ```typescript
 features: {
   showTuitionFees: false,          // Set to true for private schools
@@ -92,6 +101,7 @@ features: {
 ## ☁️ Deploying to Cloudflare Pages
 
 ### Option 1: Via Cloudflare Dashboard (Recommended)
+
 1. Push this repository to GitHub or GitLab.
 2. In the [Cloudflare Dashboard](https://dash.cloudflare.com/), go to **Workers & Pages** > **Create application** > **Pages** > **Connect to Git**.
 3. Select your repository and configure:
@@ -101,6 +111,7 @@ features: {
 4. Click **Save and Deploy**. Your school website is live on a global edge network!
 
 ### Option 2: Via Wrangler CLI
+
 ```bash
 npm run build
 npx wrangler pages deploy dist --project-name=open-primary-school
@@ -119,10 +130,10 @@ When your school is ready for dynamic services (student records, parent portals,
 2. **Headless REST API (`/api/inquiries`)**:
    - The admissions form on `/admissions` can send JSON directly to your Laravel API:
      ```javascript
-     await fetch('https://api.school.edu/api/admissions', {
-       method: 'POST',
-       headers: { 'Content-Type': 'application/json' },
-       body: JSON.stringify(formData)
+     await fetch("https://api.school.edu/api/admissions", {
+       method: "POST",
+       headers: { "Content-Type": "application/json" },
+       body: JSON.stringify(formData),
      });
      ```
 3. **Automated Deploy Webhook**:
