@@ -18,7 +18,9 @@ const currentLang = getLangFromUrl(Astro.url);
       role="navigation"
       aria-label="Language selection"
     >
-      <span class="pl-1.5 pr-0.5 text-slate-400 text-[11px]" aria-hidden="true">🌐</span>
+      <span class="pl-1.5 pr-0.5 text-slate-400 text-[11px]" aria-hidden="true">
+        🌐
+      </span>
       {(Object.keys(languages) as SupportedLanguage[]).map((lang) => {
         const isCurrent = currentLang === lang;
         const targetUrl = getAlternateLanguageUrl(Astro.url, lang);
