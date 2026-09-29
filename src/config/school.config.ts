@@ -129,7 +129,7 @@ export const schoolConfig: SchoolConfig = {
     name: "Sekolah Rendah Islam Riyadhus Solihin",
     shortName: "SRIRS",
     tagline: "Membina Iman, Membela Islam",
-    motto: "Berilmu, Beriman, Beramal Soleh",
+    motto: "Membina Iman, Membela Islam",
     schoolType: "private", // SRIRS is an integrated Islamic primary school
     establishedYear: 1986,
     registrationNumber: "JJAA001",
@@ -183,11 +183,7 @@ export const schoolConfig: SchoolConfig = {
       },
       {
         days: "Jumaat",
-        hours: "7:30 PG – 12:30 PTG, 2:30 PTG – 4:00 PTG",
-        breakTime: {
-          label: "Solat Jumaat & Rehat",
-          time: "12:30 PTG – 2:30 PTG",
-        },
+        hours: "7:30 PG – 11:30 PG",
       },
       {
         days: "Sabtu, Ahad & Cuti Umum",
@@ -204,7 +200,7 @@ export const schoolConfig: SchoolConfig = {
     },
     socials: {
       facebook: "https://facebook.com/mysrirs",
-      instagram: "https://instagram.com/mysrirs",
+      tiktok: "https://tiktok.com/@mysrirs",
     },
   },
   keyStats: [
