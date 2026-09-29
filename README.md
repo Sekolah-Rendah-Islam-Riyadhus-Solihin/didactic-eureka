@@ -146,7 +146,8 @@ When your school is ready for dynamic services (student records, parent portals,
 This open primary school web platform was architected and developed by:
 
 **Sahaini bin Ahmad Safian**  
-**Eco Idea Niaga** *(Suruhanjaya Syarikat Malaysia Registration No: `JR0031446-U`)*  
+**Eco Idea Niaga** _(Suruhanjaya Syarikat Malaysia Registration No: `JR0031446-U`)_
+
 - 🐙 **GitHub Profile**: [@unclesaha](https://github.com/unclesaha)
 - 💼 **Custom Deployments & Integrations**: Available for institutional customizations, bespoke school management system integrations (Laravel/Astro), and portal implementations.
 
@@ -163,4 +164,3 @@ If this open-source template helps your school, community, or client, you are we
 
 Copyright (c) 2026 **Sahaini bin Ahmad Safian / Eco Idea Niaga (JR0031446-U)**.  
 Released under the [MIT License](./LICENSE). When deploying, adapting, or creating derivative works from this repository, original authorship and developer attribution notices must be preserved for future reference and portfolio verification.
-

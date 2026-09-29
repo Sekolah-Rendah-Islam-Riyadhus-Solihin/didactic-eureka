@@ -273,10 +273,39 @@ const isPrivate = schoolConfig.identity.schoolType === "private";
     <div
       class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 gap-4"
     >
-      <p>
-        © {currentYear}
-        {schoolConfig.identity.name}. {t("footer.allRightsReserved")}
-      </p>
+      <div
+        class="flex flex-col sm:flex-row items-center sm:items-start gap-1.5 sm:gap-2.5 text-center sm:text-left"
+      >
+        <p>
+          © {currentYear}
+          {schoolConfig.identity.name}. {t("footer.allRightsReserved")}
+        </p>
+        {
+          schoolConfig.developer && schoolConfig.developer.showFooterCredit && (
+            <>
+              <span class="text-slate-600 hidden sm:inline">•</span>
+              <p class="text-[11px] text-slate-500">
+                {lang === "ms"
+                  ? "Direka & Dibangunkan oleh"
+                  : "Engineered & Designed by"}{" "}
+                <button
+                  type="button"
+                  id="open-dev-modal"
+                  class="font-semibold text-slate-400 hover:text-amber-400 transition-colors underline decoration-slate-600 hover:decoration-amber-400 cursor-pointer"
+                  title={
+                    lang === "ms"
+                      ? "Klik untuk maklumat pembangun & belanja kopi"
+                      : "Click for developer details & buy me a coffee"
+                  }
+                >
+                  EIN
+                </button>
+              </p>
+            </>
+          )
+        }
+      </div>
+
       <div class="flex items-center gap-4 text-[11px] text-slate-500">
         <span>Cloudflare Pages Ready ⚡</span>
         <span>•</span>
@@ -285,35 +314,69 @@ const isPrivate = schoolConfig.identity.schoolType === "private";
         <span>WCAG 2.1 AA Accessible ♿</span>
       </div>
     </div>
+  </div>
 
-    <!-- Developer & Enterprise Attribution with Tipping Support -->
-    {
-      schoolConfig.developer && schoolConfig.developer.showFooterCredit && (
-        <div class="mt-6 pt-6 border-t border-slate-800/80 flex flex-col md:flex-row items-center justify-between text-xs text-slate-400 gap-4">
-          <div class="flex flex-wrap items-center justify-center md:justify-start gap-2 text-center md:text-left">
-            <span class="text-slate-500">
-              {lang === "ms"
-                ? "Direka & Dibangunkan oleh"
-                : "Engineered & Designed by"}
-            </span>
-            <span class="font-semibold text-slate-200">
-              {schoolConfig.developer.company}
-            </span>
-            <span class="text-[11px] font-mono px-1.5 py-0.5 rounded bg-slate-800 border border-slate-700 text-amber-400">
-              {schoolConfig.developer.registrationNumber}
-            </span>
-            <span class="text-slate-500">•</span>
+  <!-- Developer Modal (EIN) -->
+  {
+    schoolConfig.developer && (
+      <div
+        id="dev-modal"
+        class="fixed inset-0 z-50 hidden bg-slate-950/75 backdrop-blur-xs items-center justify-center p-4 transition-opacity"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="dev-modal-title"
+      >
+        <div class="relative w-full max-w-md rounded-3xl bg-slate-900 border border-slate-700/80 p-6 sm:p-7 shadow-2xl text-slate-200 space-y-5 animate-in fade-in zoom-in-95 duration-150">
+          <!-- Close Button -->
+          <button
+            type="button"
+            id="close-dev-modal"
+            class="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700 flex items-center justify-center transition-colors cursor-pointer"
+            aria-label="Tutup"
+          >
+            ✕
+          </button>
+
+          <!-- Header & Identity -->
+          <div class="flex items-start gap-4 pr-6">
+            <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-emerald-600 to-amber-500 text-slate-950 font-bold flex items-center justify-center text-xl shrink-0 shadow-md">
+              💡
+            </div>
+            <div>
+              <div class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-[10px] font-mono font-semibold bg-amber-400/10 text-amber-300 border border-amber-400/20 mb-1">
+                SSM: {schoolConfig.developer.registrationNumber}
+              </div>
+              <h3
+                id="dev-modal-title"
+                class="text-lg font-heading font-bold text-white leading-tight"
+              >
+                {schoolConfig.developer.company}
+              </h3>
+              <p class="text-xs text-emerald-400 font-medium">
+                {schoolConfig.developer.author}
+              </p>
+            </div>
+          </div>
+
+          <!-- Description & Portfolio -->
+          <p class="text-xs text-slate-300 leading-relaxed">
+            {lang === "ms"
+              ? "Arkitek perisian dan pembangun templat web sekolah rendah sumber terbuka ini. Mengkhusus dalam ekosistem Astro, Tailwind CSS, Cloudflare Pages, serta integrasi sistem pengurusan sekolah Laravel."
+              : "Software architect and engineer of this open-source primary school web platform. Specialising in Astro, Tailwind CSS, Cloudflare Pages, and Laravel school management integrations."}
+          </p>
+
+          <!-- Social / Portfolio link -->
+          <div class="pt-1">
             <a
               href={
                 schoolConfig.developer.github || "https://github.com/unclesaha"
               }
               target="_blank"
               rel="noopener noreferrer"
-              class="font-medium text-emerald-400 hover:text-emerald-300 underline underline-offset-2 transition-colors inline-flex items-center gap-1"
+              class="inline-flex items-center gap-2 text-xs font-semibold text-slate-300 hover:text-amber-300 transition-colors"
             >
-              <span>{schoolConfig.developer.author}</span>
               <svg
-                class="w-3.5 h-3.5 opacity-70"
+                class="w-4 h-4 text-slate-400"
                 fill="currentColor"
                 viewBox="0 0 24 24"
               >
@@ -323,43 +386,90 @@ const isPrivate = schoolConfig.identity.schoolType === "private";
                   d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
                 />
               </svg>
+              <span>GitHub: @unclesaha ↗</span>
             </a>
           </div>
 
-          <!-- Tipping / Support Links -->
+          <!-- Buy Me a Coffee Box -->
           {schoolConfig.developer.tipping && (
-            <div class="flex items-center gap-2">
-              <span class="text-[11px] text-slate-400">
+            <div class="rounded-2xl bg-slate-800/90 border border-slate-700 p-4 space-y-3">
+              <div class="flex items-center gap-2">
+                <span class="text-base">☕</span>
+                <h4 class="text-xs font-bold uppercase tracking-wider text-amber-400">
+                  {lang === "ms"
+                    ? "Belanja Secawan Kopi / Tip"
+                    : "Buy Me a Cup of Coffee"}
+                </h4>
+              </div>
+              <p class="text-[11px] text-slate-300 leading-relaxed">
                 {lang === "ms"
-                  ? "☕ Belanja Kopi / Tip:"
-                  : "☕ Buy me a coffee:"}
-              </span>
-              {schoolConfig.developer.tipping.bayarcashUrl && (
-                <a
-                  href={schoolConfig.developer.tipping.bayarcashUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-amber-400 text-slate-950 hover:bg-amber-300 transition-all shadow-xs hover:shadow"
-                  title="BayarCash FPX / DuitNow (Malaysia)"
-                >
-                  <span>🇲🇾 BayarCash</span>
-                </a>
-              )}
-              {schoolConfig.developer.tipping.paypalUrl && (
-                <a
-                  href={schoolConfig.developer.tipping.paypalUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-sky-600 text-white hover:bg-sky-500 transition-all shadow-xs hover:shadow"
-                  title="PayPal Global"
-                >
-                  <span>🌐 PayPal</span>
-                </a>
-              )}
+                  ? "Jika templat ini memberi manfaat atau membantu projek anda, sokongan tip anda amat dihargai demi pembangunan berterusan."
+                  : "If this template benefits your school or project, your support helps maintain and expand open educational tools."}
+              </p>
+              <div class="flex flex-col sm:flex-row gap-2 pt-1">
+                {schoolConfig.developer.tipping.bayarcashUrl && (
+                  <a
+                    href={schoolConfig.developer.tipping.bayarcashUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="flex-1 text-center px-4 py-2.5 rounded-xl text-xs font-bold bg-amber-400 text-slate-950 hover:bg-amber-300 transition-colors shadow-xs"
+                  >
+                    🇲🇾 BayarCash (FPX / DuitNow)
+                  </a>
+                )}
+                {schoolConfig.developer.tipping.paypalUrl && (
+                  <a
+                    href={schoolConfig.developer.tipping.paypalUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="flex-1 text-center px-4 py-2.5 rounded-xl text-xs font-bold bg-sky-600 text-white hover:bg-sky-500 transition-colors shadow-xs"
+                  >
+                    🌐 PayPal (Global)
+                  </a>
+                )}
+              </div>
             </div>
           )}
         </div>
-      )
-    }
-  </div>
+      </div>
+    )
+  }
 </footer>
+
+<script>
+  function setupDevModal() {
+    const openBtn = document.getElementById("open-dev-modal");
+    const closeBtn = document.getElementById("close-dev-modal");
+    const modal = document.getElementById("dev-modal");
+
+    if (!openBtn || !closeBtn || !modal) return;
+
+    const open = () => {
+      modal.classList.remove("hidden");
+      modal.classList.add("flex");
+      document.body.style.overflow = "hidden";
+    };
+
+    const close = () => {
+      modal.classList.add("hidden");
+      modal.classList.remove("flex");
+      document.body.style.overflow = "";
+    };
+
+    openBtn.addEventListener("click", open);
+    closeBtn.addEventListener("click", close);
+
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) close();
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && !modal.classList.contains("hidden")) {
+        close();
+      }
+    });
+  }
+
+  setupDevModal();
+  document.addEventListener("astro:after-swap", setupDevModal);
+</script>
