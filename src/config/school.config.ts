@@ -94,7 +94,7 @@ export const schoolConfig: SchoolConfig = {
     affiliation:
       "Kementerian Pendidikan Malaysia (KPM) & Jabatan Pendidikan Agama Islam Negeri Johor (SRAS/BP/001)",
     // Set custom logo image path (e.g. "/images/logo.png"). If left empty, fallback is used according to logoMode.
-    logo: "",
+    logo: "/images/logo-srirs-primary-fc.png",
     // Options: 'auto' (image if present, else fallback), 'monogram' (initial letter), 'crest' (minimalist shield icon), 'none' (no logo)
     logoMode: "auto",
     headteacher: {

@@ -2,7 +2,7 @@
 import { schoolConfig, type LogoMode } from '../../config/school.config';
 
 interface Props {
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'sm' | 'md' | 'lg' | 'responsive';
   class?: string;
 }
 
@@ -24,12 +24,14 @@ const sizeMap = {
   sm: 'w-10 h-10',
   md: 'w-12 h-12',
   lg: 'w-16 h-16',
+  responsive: 'w-10 h-10 sm:w-12 sm:h-12',
 };
 
 const fontMap = {
   sm: 'text-lg',
   md: 'text-2xl',
   lg: 'text-3xl',
+  responsive: 'text-lg sm:text-2xl',
 };
 
 const dimensions = sizeMap[size];

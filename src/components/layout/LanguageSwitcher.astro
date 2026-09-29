@@ -13,27 +13,28 @@ const currentLang = getLangFromUrl(Astro.url);
 
 {
   variant === "topbar" ? (
-    <div class={`inline-flex items-center gap-1.5 text-xs ${className}`}>
-      <span class="text-slate-400">🌐</span>
-      {(Object.keys(languages) as SupportedLanguage[]).map((lang, index) => {
+    <div
+      class={`inline-flex items-center gap-1 rounded-full bg-slate-800/90 border border-slate-700/70 p-0.5 text-xs shadow-xs ${className}`}
+      role="navigation"
+      aria-label="Language selection"
+    >
+      <span class="pl-1.5 pr-0.5 text-slate-400 text-[11px]" aria-hidden="true">🌐</span>
+      {(Object.keys(languages) as SupportedLanguage[]).map((lang) => {
         const isCurrent = currentLang === lang;
         const targetUrl = getAlternateLanguageUrl(Astro.url, lang);
         return (
-          <>
-            {index > 0 && <span class="text-slate-600">|</span>}
-            <a
-              href={targetUrl}
-              class={`px-1.5 py-0.5 rounded transition-colors text-[11px] font-semibold ${
-                isCurrent
-                  ? "text-amber-400 bg-slate-800"
-                  : "text-slate-400 hover:text-white"
-              }`}
-              aria-current={isCurrent ? "page" : undefined}
-              title={languages[lang].label}
-            >
-              {languages[lang].shortLabel}
-            </a>
-          </>
+          <a
+            href={targetUrl}
+            class={`px-2 py-0.5 rounded-full transition-all text-[11px] font-bold ${
+              isCurrent
+                ? "bg-amber-400 text-slate-950 shadow-xs"
+                : "text-slate-300 hover:text-white hover:bg-slate-700/60"
+            }`}
+            aria-current={isCurrent ? "page" : undefined}
+            title={languages[lang].label}
+          >
+            {languages[lang].shortLabel}
+          </a>
         );
       })}
     </div>
