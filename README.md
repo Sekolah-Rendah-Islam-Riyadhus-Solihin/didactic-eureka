@@ -138,3 +138,29 @@ When your school is ready for dynamic services (student records, parent portals,
      ```
 3. **Automated Deploy Webhook**:
    - When school staff post a new circular inside Laravel Filament Admin, trigger a Cloudflare Pages Deploy Hook to automatically re-publish the Astro static site in seconds!
+
+---
+
+## 👨‍💻 Architecture & Lead Developer
+
+This open primary school web platform was architected and developed by:
+
+**Sahaini bin Ahmad Safian**  
+**Eco Idea Niaga** *(Suruhanjaya Syarikat Malaysia Registration No: `JR0031446-U`)*  
+- 🐙 **GitHub Profile**: [@unclesaha](https://github.com/unclesaha)
+- 💼 **Custom Deployments & Integrations**: Available for institutional customizations, bespoke school management system integrations (Laravel/Astro), and portal implementations.
+
+### ☕ Support the Project / Buy Me a Coffee
+
+If this open-source template helps your school, community, or client, you are welcome to support the ongoing development:
+
+- 🇲🇾 **BayarCash (Malaysia FPX & DuitNow QR)**: [https://ecoideaniaga.bcl.my/form/buymeacupofcoffee](https://ecoideaniaga.bcl.my/form/buymeacupofcoffee)
+- 🌐 **PayPal (International & Cards)**: [https://paypal.me/inisahaini](https://paypal.me/inisahaini)
+
+---
+
+## 📄 License & Trademark Notice
+
+Copyright (c) 2026 **Sahaini bin Ahmad Safian / Eco Idea Niaga (JR0031446-U)**.  
+Released under the [MIT License](./LICENSE). When deploying, adapting, or creating derivative works from this repository, original authorship and developer attribution notices must be preserved for future reference and portfolio verification.
+

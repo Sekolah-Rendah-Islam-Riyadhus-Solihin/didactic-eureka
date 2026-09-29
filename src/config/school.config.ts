@@ -107,6 +107,17 @@ export interface SchoolConfig {
       bodies: Array<{ name: string; role: string; regNumber?: string }>;
     };
   };
+  developer?: {
+    author: string;
+    company: string;
+    registrationNumber: string;
+    github?: string;
+    tipping?: {
+      bayarcashUrl?: string;
+      paypalUrl?: string;
+    };
+    showFooterCredit: boolean;
+  };
 }
 
 /**
@@ -337,5 +348,16 @@ export const schoolConfig: SchoolConfig = {
         },
       ],
     },
+  },
+  developer: {
+    author: "Sahaini bin Ahmad Safian",
+    company: "Eco Idea Niaga",
+    registrationNumber: "JR0031446-U",
+    github: "https://github.com/unclesaha",
+    tipping: {
+      bayarcashUrl: "https://ecoideaniaga.bcl.my/form/buymeacupofcoffee",
+      paypalUrl: "https://paypal.me/inisahaini",
+    },
+    showFooterCredit: true,
   },
 };

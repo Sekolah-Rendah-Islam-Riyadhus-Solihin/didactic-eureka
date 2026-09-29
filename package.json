@@ -3,6 +3,18 @@
   "type": "module",
   "version": "1.0.0",
   "description": "An open, reusable, white-label website template for primary schools (government & private) built with Astro, Tailwind CSS, and Cloudflare Pages readiness.",
+  "author": "Sahaini bin Ahmad Safian <Eco Idea Niaga (JR0031446-U)> (https://github.com/unclesaha)",
+  "license": "MIT",
+  "funding": [
+    {
+      "type": "bayarcash",
+      "url": "https://ecoideaniaga.bcl.my/form/buymeacupofcoffee"
+    },
+    {
+      "type": "paypal",
+      "url": "https://paypal.me/inisahaini"
+    }
+  ],
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
