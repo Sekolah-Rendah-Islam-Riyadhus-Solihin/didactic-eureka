@@ -5,6 +5,7 @@ import {
   getLangFromUrl,
   getLocalizedPath,
 } from "../../i18n/utils";
+import SchoolLogo from "./SchoolLogo.astro";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -22,11 +23,7 @@ const isPrivate = schoolConfig.identity.schoolType === "private";
       <!-- Column 1: School Identity & Motto -->
       <div class="space-y-4">
         <div class="flex items-center gap-3">
-          <div
-            class="w-10 h-10 rounded-lg bg-school-primary text-white flex items-center justify-center font-serif text-xl font-bold shadow"
-          >
-            {schoolConfig.identity.shortName.charAt(0)}
-          </div>
+          <SchoolLogo size="sm" />
           <div>
             <h3 class="font-heading font-bold text-white text-base">
               {schoolConfig.identity.name}

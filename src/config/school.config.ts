@@ -1,4 +1,5 @@
 export type SchoolType = "government" | "private";
+export type LogoMode = "auto" | "image" | "monogram" | "crest" | "none";
 
 export interface SchoolConfig {
   identity: {
@@ -10,6 +11,19 @@ export interface SchoolConfig {
     establishedYear: number;
     registrationNumber?: string;
     affiliation: string;
+    /**
+     * Optional path or URL to the school logo image (e.g. "/images/logo.png" or "/logo.svg")
+     */
+    logo?: string;
+    /**
+     * Logo display and fallback behavior:
+     * - 'auto': Displays `logo` image if provided, otherwise uses the minimalist fallback
+     * - 'image': Enforces displaying the image (if present)
+     * - 'monogram': Displays clean initial letter monogram badge (e.g. "S")
+     * - 'crest': Displays minimalist academic crest/shield icon placeholder
+     * - 'none': Hides the logo and placeholder completely (text-only branding)
+     */
+    logoMode?: LogoMode;
     headteacher: {
       name: string;
       title: string;
@@ -79,6 +93,10 @@ export const schoolConfig: SchoolConfig = {
     registrationNumber: "JJAA001",
     affiliation:
       "Kementerian Pendidikan Malaysia (KPM) & Jabatan Pendidikan Agama Islam Negeri Johor (SRAS/BP/001)",
+    // Set custom logo image path (e.g. "/images/logo.png"). If left empty, fallback is used according to logoMode.
+    logo: "",
+    // Options: 'auto' (image if present, else fallback), 'monogram' (initial letter), 'crest' (minimalist shield icon), 'none' (no logo)
+    logoMode: "auto",
     headteacher: {
       name: "Hajah Zainon binti Abd Samad",
       title: "Guru Besar (Mudirah)",

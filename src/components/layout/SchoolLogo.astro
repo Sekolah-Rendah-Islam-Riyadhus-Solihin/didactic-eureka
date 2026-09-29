@@ -1,0 +1,78 @@
+---
+import { schoolConfig, type LogoMode } from '../../config/school.config';
+
+interface Props {
+  size?: 'sm' | 'md' | 'lg';
+  class?: string;
+}
+
+const { size = 'md', class: className = '' } = Astro.props;
+
+const mode: LogoMode = schoolConfig.identity.logoMode ?? 'auto';
+const logoSrc = schoolConfig.identity.logo?.trim();
+
+// Determine actual display state:
+// 1. If mode is 'none', do not render anything
+// 2. If mode is 'image' or ('auto' and logoSrc is provided), render the image
+// 3. Otherwise render fallback placeholder ('crest' or 'monogram')
+const shouldHide = mode === 'none';
+const hasValidLogo = Boolean(logoSrc && logoSrc.length > 0);
+const shouldRenderImage = !shouldHide && (mode === 'image' || (mode === 'auto' && hasValidLogo));
+const fallbackType = mode === 'crest' ? 'crest' : 'monogram';
+
+const sizeMap = {
+  sm: 'w-10 h-10',
+  md: 'w-12 h-12',
+  lg: 'w-16 h-16',
+};
+
+const fontMap = {
+  sm: 'text-lg',
+  md: 'text-2xl',
+  lg: 'text-3xl',
+};
+
+const dimensions = sizeMap[size];
+---
+
+{!shouldHide && (
+  shouldRenderImage ? (
+    <img
+      src={logoSrc}
+      alt={`${schoolConfig.identity.name} Logo`}
+      class={`${dimensions} object-contain rounded-xl transition-transform group-hover:scale-105 ${className}`}
+      loading="eager"
+    />
+  ) : fallbackType === 'crest' ? (
+    <!-- Minimalist Academic Crest Shield Placeholder -->
+    <div
+      class={`${dimensions} rounded-xl bg-school-primary text-amber-300 flex items-center justify-center shadow-md transition-transform group-hover:scale-105 border border-white/20 p-2.5 ${className}`}
+      title={`${schoolConfig.identity.shortName} Crest`}
+      aria-label={`${schoolConfig.identity.shortName} Crest`}
+    >
+      <svg
+        class="w-full h-full"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.8"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+        <path d="M12 8v5" />
+        <path d="M9.5 10.5l2.5-2.5 2.5 2.5" />
+        <circle cx="12" cy="16" r="1" fill="currentColor" />
+      </svg>
+    </div>
+  ) : (
+    <!-- Minimalist Monogram Initial Placeholder -->
+    <div
+      class={`${dimensions} rounded-xl bg-school-primary text-white flex items-center justify-center shadow-md font-serif ${fontMap[size]} font-bold transition-transform group-hover:scale-105 border border-white/10 select-none ${className}`}
+      title={`${schoolConfig.identity.shortName} Monogram`}
+      aria-label={`${schoolConfig.identity.shortName} Monogram`}
+    >
+      {schoolConfig.identity.shortName.charAt(0)}
+    </div>
+  )
+)}
