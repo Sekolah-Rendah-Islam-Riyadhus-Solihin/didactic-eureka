@@ -11,9 +11,28 @@ import SchoolLogo from "./SchoolLogo.astro";
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-const navItems = [
+interface NavItem {
+  label: string;
+  href: string;
+  children?: { label: string; href: string }[];
+}
+
+const navItems: NavItem[] = [
   { label: t("nav.home"), href: getLocalizedPath("/", lang) },
-  { label: t("nav.about"), href: getLocalizedPath("/about", lang) },
+  {
+    label: t("nav.about"),
+    href: getLocalizedPath("/about", lang),
+    children: [
+      {
+        label: t("subnav.aboutOverview"),
+        href: getLocalizedPath("/about", lang),
+      },
+      {
+        label: t("subnav.stakeholders"),
+        href: getLocalizedPath("/about/stakeholders", lang),
+      },
+    ],
+  },
   { label: t("nav.academics"), href: getLocalizedPath("/academics", lang) },
   { label: t("nav.admissions"), href: getLocalizedPath("/admissions", lang) },
   { label: t("nav.news"), href: getLocalizedPath("/news", lang) },
@@ -177,7 +196,60 @@ const isPrivate = schoolConfig.identity.schoolType === "private";
             const isActive = isHome
               ? currentPath === item.href
               : currentPath === item.href ||
-                currentPath.startsWith(item.href + "/");
+                (currentPath.startsWith(item.href + "/") &&
+                  item.href !== "/" &&
+                  item.href !== "/en");
+
+            if (item.children && item.children.length > 0) {
+              return (
+                <div class="relative group">
+                  <a
+                    href={item.href}
+                    class={`inline-flex items-center gap-1 px-3.5 py-2 rounded-lg text-sm font-medium transition-all ${
+                      isActive
+                        ? "text-school-primary bg-school-primary-light font-semibold"
+                        : "text-slate-600 hover:text-school-primary hover:bg-slate-50"
+                    }`}
+                  >
+                    <span>{item.label}</span>
+                    <svg
+                      class="w-3.5 h-3.5 opacity-60 transition-transform group-hover:rotate-180"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M19 9l-7 7-7-7"
+                      />
+                    </svg>
+                  </a>
+                  <!-- Dropdown Menu -->
+                  <div class="absolute left-0 top-full pt-1 hidden group-hover:block z-50 min-w-[210px]">
+                    <div class="bg-white rounded-xl shadow-xl border border-slate-100 p-1.5 space-y-0.5">
+                      {item.children.map((child) => {
+                        const isChildActive = currentPath === child.href;
+                        return (
+                          <a
+                            href={child.href}
+                            class={`block px-3 py-2 rounded-lg text-xs font-medium transition-colors ${
+                              isChildActive
+                                ? "bg-school-primary-light text-school-primary font-semibold"
+                                : "text-slate-700 hover:bg-slate-50 hover:text-school-primary"
+                            }`}
+                          >
+                            {child.label}
+                          </a>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </div>
+              );
+            }
+
             return (
               <a
                 href={item.href}
@@ -249,14 +321,46 @@ const isPrivate = schoolConfig.identity.schoolType === "private";
   >
     <div class="space-y-1">
       {
-        navItems.map((item) => (
-          <a
-            href={item.href}
-            class="block px-3 py-2.5 rounded-md text-base font-medium text-slate-700 hover:text-school-primary hover:bg-slate-50"
-          >
-            {item.label}
-          </a>
-        ))
+        navItems.map((item) => {
+          if (item.children && item.children.length > 0) {
+            return (
+              <div class="space-y-1 pb-1">
+                <a
+                  href={item.href}
+                  class="block px-3 py-2 rounded-md text-base font-semibold text-slate-800 hover:text-school-primary hover:bg-slate-50"
+                >
+                  {item.label}
+                </a>
+                <div class="pl-4 ml-3 border-l-2 border-slate-100 space-y-1">
+                  {item.children.map((child) => {
+                    const isChildActive = currentPath === child.href;
+                    return (
+                      <a
+                        href={child.href}
+                        class={`block px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
+                          isChildActive
+                            ? "text-school-primary font-bold bg-school-primary-light/60"
+                            : "text-slate-600 hover:text-school-primary hover:bg-slate-50"
+                        }`}
+                      >
+                        {child.label}
+                      </a>
+                    );
+                  })}
+                </div>
+              </div>
+            );
+          }
+
+          return (
+            <a
+              href={item.href}
+              class="block px-3 py-2.5 rounded-md text-base font-medium text-slate-700 hover:text-school-primary hover:bg-slate-50"
+            >
+              {item.label}
+            </a>
+          );
+        })
       }
       <div class="pt-4 border-t border-slate-100 flex flex-col gap-2">
         <a

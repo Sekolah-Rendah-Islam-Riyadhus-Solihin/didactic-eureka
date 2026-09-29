@@ -19,6 +19,7 @@ export const ui = {
     // Navigation
     "nav.home": "Laman Utama",
     "nav.about": "Tentang Kami",
+    "nav.stakeholders": "Pemegang Taruh",
     "nav.academics": "Kurikulum & Akademik",
     "nav.admissions": "Pendaftaran",
     "nav.news": "Berita & Takwim",
@@ -26,6 +27,10 @@ export const ui = {
     "nav.apply": "Daftar Kemasukan",
     "nav.enrollmentInfo": "Maklumat Pendaftaran",
     "nav.parentPortal": "Portal Ibu Bapa",
+
+    // Sub Navigation (About Us Section)
+    "subnav.aboutOverview": "Tentang Sekolah",
+    "subnav.stakeholders": "Maklumat Pemegang Taruh",
 
     // Top Utility Bar
     "topbar.emergency": "Kecemasan",
@@ -73,6 +78,7 @@ export const ui = {
     // Navigation
     "nav.home": "Home",
     "nav.about": "About Us",
+    "nav.stakeholders": "Stakeholders",
     "nav.academics": "Academics",
     "nav.admissions": "Admissions",
     "nav.news": "News & Calendar",
@@ -80,6 +86,10 @@ export const ui = {
     "nav.apply": "Apply for Place",
     "nav.enrollmentInfo": "Enrollment Info",
     "nav.parentPortal": "Parent Portal",
+
+    // Sub Navigation (About Us Section)
+    "subnav.aboutOverview": "School Overview",
+    "subnav.stakeholders": "Stakeholder Information",
 
     // Top Utility Bar
     "topbar.emergency": "Emergency",

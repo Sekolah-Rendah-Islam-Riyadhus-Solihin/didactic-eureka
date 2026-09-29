@@ -1,0 +1,532 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import { schoolConfig } from "../../../config/school.config";
+import { getLocalizedPath } from "../../../i18n/utils";
+
+const lang = "en";
+const stakeholders = schoolConfig.stakeholders;
+---
+
+<BaseLayout
+  lang={lang}
+  title={`Stakeholder Information | ${schoolConfig.identity.name}`}
+>
+  <!-- Page Header Banner -->
+  <section class="bg-slate-900 text-white py-14 sm:py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
+      <!-- Breadcrumb -->
+      <nav
+        aria-label="Breadcrumb"
+        class="flex items-center justify-center gap-2 text-xs text-slate-400"
+      >
+        <a
+          href={getLocalizedPath("/", lang)}
+          class="hover:text-amber-400 transition-colors">Home</a
+        >
+        <span>/</span>
+        <a
+          href={getLocalizedPath("/about", lang)}
+          class="hover:text-amber-400 transition-colors">About Us</a
+        >
+        <span>/</span>
+        <span class="text-amber-400 font-medium">Stakeholders</span>
+      </nav>
+
+      <span
+        class="inline-block text-xs font-bold uppercase tracking-widest text-amber-400"
+      >
+        Governance, PTA & Leadership
+      </span>
+      <h1 class="text-3xl sm:text-5xl font-heading font-bold text-white">
+        Stakeholder Information
+      </h1>
+      <p class="max-w-2xl mx-auto text-sm sm:text-base text-slate-300 font-light">
+        A unified synergy between our Board of Governors, Parents & Teachers
+        Association (PTA), School Leadership, and Regulatory Authorities.
+      </p>
+
+      <!-- Sub Navigation Tabs between About & Stakeholders -->
+      <div class="pt-6 flex justify-center">
+        <div
+          class="inline-flex p-1 rounded-xl bg-slate-800/90 border border-slate-700/80 max-w-full overflow-x-auto"
+        >
+          <a
+            href={getLocalizedPath("/about", lang)}
+            class="px-4 py-2 rounded-lg text-xs font-medium text-slate-300 hover:text-white transition-all whitespace-nowrap"
+          >
+            🏛️ School Overview
+          </a>
+          <a
+            href={getLocalizedPath("/about/stakeholders", lang)}
+            class="px-4 py-2 rounded-lg text-xs font-bold bg-amber-400 text-slate-950 shadow-xs transition-all whitespace-nowrap"
+          >
+            🤝 Stakeholder Information
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Islamic Syura Principles Quote -->
+  <section class="py-6 bg-emerald-900/10 border-b border-emerald-900/20">
+    <div class="max-w-4xl mx-auto px-4 text-center space-y-1.5">
+      <p class="text-xs sm:text-sm italic font-serif text-emerald-950 font-medium">
+        "...and whose affairs are conducted by mutual consultation (shura) among
+        themselves..."
+      </p>
+      <p class="text-[11px] text-emerald-800 font-semibold tracking-wide">
+        — Surah Ash-Shura, Verse 38
+      </p>
+    </div>
+  </section>
+
+  <!-- 1. Board of Governors & Trustees (LPS) -->
+  {
+    stakeholders?.governance && (
+      <section id="governance" class="py-14 sm:py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+          <div class="max-w-3xl space-y-3">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800">
+              <span>{stakeholders.governance.icon}</span>
+              <span>Governance & Board of Trustees</span>
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-heading font-bold text-slate-900">
+              Board of Governors (Lembaga Pengelola Sekolah)
+            </h2>
+            <p class="text-sm sm:text-base text-slate-600 leading-relaxed">
+              The highest governing and trustee body responsible for setting the
+              strategic institutional vision, Shariah governance, endowment
+              management, and fiscal stewardship.
+            </p>
+          </div>
+
+          <!-- Members Grid -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 hover:border-emerald-600/40 hover:shadow-md transition space-y-3">
+              <div class="w-12 h-12 rounded-xl bg-emerald-800 text-amber-300 flex items-center justify-center text-xl font-bold shadow-xs">
+                🏛️
+              </div>
+              <div>
+                <h3 class="font-heading font-bold text-slate-900 text-sm">
+                  Dato' Hj. Ismail bin Mohd Nor
+                </h3>
+                <p class="text-xs text-emerald-700 font-semibold mt-0.5">
+                  Chairman, Board of Governors
+                </p>
+                <p class="text-[11px] text-slate-500 mt-1">Trustees Representative</p>
+              </div>
+            </div>
+
+            <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 hover:border-emerald-600/40 hover:shadow-md transition space-y-3">
+              <div class="w-12 h-12 rounded-xl bg-emerald-800 text-amber-300 flex items-center justify-center text-xl font-bold shadow-xs">
+                🏛️
+              </div>
+              <div>
+                <h3 class="font-heading font-bold text-slate-900 text-sm">
+                  Ustaz Dr. Khairul Anwar bin Basri
+                </h3>
+                <p class="text-xs text-emerald-700 font-semibold mt-0.5">
+                  Vice Chairman & Shariah Advisor
+                </p>
+                <p class="text-[11px] text-slate-500 mt-1">Islamic Education Specialist</p>
+              </div>
+            </div>
+
+            <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 hover:border-emerald-600/40 hover:shadow-md transition space-y-3">
+              <div class="w-12 h-12 rounded-xl bg-emerald-800 text-amber-300 flex items-center justify-center text-xl font-bold shadow-xs">
+                🏛️
+              </div>
+              <div>
+                <h3 class="font-heading font-bold text-slate-900 text-sm">
+                  Haji Razak bin Sulaiman
+                </h3>
+                <p class="text-xs text-emerald-700 font-semibold mt-0.5">
+                  Honorary Secretary
+                </p>
+                <p class="text-[11px] text-slate-500 mt-1">Corporate Governance</p>
+              </div>
+            </div>
+
+            <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 hover:border-emerald-600/40 hover:shadow-md transition space-y-3">
+              <div class="w-12 h-12 rounded-xl bg-emerald-800 text-amber-300 flex items-center justify-center text-xl font-bold shadow-xs">
+                🏛️
+              </div>
+              <div>
+                <h3 class="font-heading font-bold text-slate-900 text-sm">
+                  Puan Noraini binti Yusof
+                </h3>
+                <p class="text-xs text-emerald-700 font-semibold mt-0.5">
+                  Honorary Treasurer
+                </p>
+                <p class="text-[11px] text-slate-500 mt-1">Chartered Auditor</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Key Responsibilities -->
+          <div class="bg-emerald-50/60 rounded-2xl p-6 sm:p-8 border border-emerald-100 space-y-4">
+            <h3 class="font-heading font-bold text-emerald-950 text-sm sm:text-base flex items-center gap-2">
+              <span class="text-emerald-700">✓</span> Core Strategic
+              Responsibilities:
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs text-emerald-900">
+              <div class="flex items-start gap-2">
+                <span class="text-emerald-600 font-bold shrink-0">✦</span>
+                <span>Establishing long-term educational policies and campus development blueprints</span>
+              </div>
+              <div class="flex items-start gap-2">
+                <span class="text-emerald-600 font-bold shrink-0">✦</span>
+                <span>Overseeing education waqf endowments, donations, and capital investment funds</span>
+              </div>
+              <div class="flex items-start gap-2">
+                <span class="text-emerald-600 font-bold shrink-0">✦</span>
+                <span>Ensuring strict regulatory compliance, Islamic integrity, and annual audited standards</span>
+              </div>
+              <div class="flex items-start gap-2">
+                <span class="text-emerald-600 font-bold shrink-0">✦</span>
+                <span>Appointing and evaluating executive school administrative leadership</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  <!-- 2. Parents & Teachers Association (PIBG / PTA) -->
+  {
+    stakeholders?.pta && (
+      <section
+        id="pta"
+        class="py-14 sm:py-16 bg-slate-50 border-t border-slate-200"
+      >
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+          <div class="max-w-3xl space-y-3">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-900">
+              <span>{stakeholders.pta.icon}</span>
+              <span>Parent-School Partnership</span>
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-heading font-bold text-slate-900">
+              Parents & Teachers Association (PIBG)
+            </h2>
+            <p class="text-sm sm:text-base text-slate-600 leading-relaxed">
+              A vital cooperative body strengthening collaboration between
+              parents, guardians, and educators to advance student welfare,
+              Tahfiz enrichment, and community initiatives.
+            </p>
+          </div>
+
+          <!-- Members Grid -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="p-5 rounded-2xl bg-white border border-slate-200 hover:border-amber-500/50 hover:shadow-md transition space-y-3">
+              <div class="w-12 h-12 rounded-xl bg-amber-500 text-slate-950 flex items-center justify-center text-xl font-bold shadow-xs">
+                🤝
+              </div>
+              <div>
+                <h3 class="font-heading font-bold text-slate-900 text-sm">
+                  En. Muhammad Ridzuan bin Azman
+                </h3>
+                <p class="text-xs text-amber-800 font-semibold mt-0.5">
+                  PTA President (YDP)
+                </p>
+                <p class="text-[11px] text-slate-500 mt-1">Parents Representative</p>
+              </div>
+            </div>
+
+            <div class="p-5 rounded-2xl bg-white border border-slate-200 hover:border-amber-500/50 hover:shadow-md transition space-y-3">
+              <div class="w-12 h-12 rounded-xl bg-amber-500 text-slate-950 flex items-center justify-center text-xl font-bold shadow-xs">
+                🤝
+              </div>
+              <div>
+                <h3 class="font-heading font-bold text-slate-900 text-sm">
+                  Ustazah Mardhiah binti Ramli
+                </h3>
+                <p class="text-xs text-amber-800 font-semibold mt-0.5">
+                  PTA Vice President (NYDP)
+                </p>
+                <p class="text-[11px] text-slate-500 mt-1">Teachers Representative</p>
+              </div>
+            </div>
+
+            <div class="p-5 rounded-2xl bg-white border border-slate-200 hover:border-amber-500/50 hover:shadow-md transition space-y-3">
+              <div class="w-12 h-12 rounded-xl bg-amber-500 text-slate-950 flex items-center justify-center text-xl font-bold shadow-xs">
+                🤝
+              </div>
+              <div>
+                <h3 class="font-heading font-bold text-slate-900 text-sm">
+                  Cikgu Mohd Fikri bin Samsudin
+                </h3>
+                <p class="text-xs text-amber-800 font-semibold mt-0.5">
+                  PTA Secretary
+                </p>
+                <p class="text-[11px] text-slate-500 mt-1">Academic Faculty</p>
+              </div>
+            </div>
+
+            <div class="p-5 rounded-2xl bg-white border border-slate-200 hover:border-amber-500/50 hover:shadow-md transition space-y-3">
+              <div class="w-12 h-12 rounded-xl bg-amber-500 text-slate-950 flex items-center justify-center text-xl font-bold shadow-xs">
+                🤝
+              </div>
+              <div>
+                <h3 class="font-heading font-bold text-slate-900 text-sm">
+                  Puan Salmah binti Kassim
+                </h3>
+                <p class="text-xs text-amber-800 font-semibold mt-0.5">
+                  PTA Treasurer
+                </p>
+                <p class="text-[11px] text-slate-500 mt-1">Parents Representative</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- PTA Initiatives -->
+          <div class="bg-amber-50/70 rounded-2xl p-6 sm:p-8 border border-amber-200/60 space-y-4">
+            <h3 class="font-heading font-bold text-amber-950 text-sm sm:text-base flex items-center gap-2">
+              <span class="text-amber-700">★</span> PTA Initiatives & Support
+              Programs:
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs text-amber-950">
+              <div class="flex items-start gap-2">
+                <span class="text-amber-600 font-bold shrink-0">✦</span>
+                <span>Channeling welfare funds and financial aid for orphan and needy students</span>
+              </div>
+              <div class="flex items-start gap-2">
+                <span class="text-amber-600 font-bold shrink-0">✦</span>
+                <span>Organizing parent engagement days, school open houses, and campus cleanups</span>
+              </div>
+              <div class="flex items-start gap-2">
+                <span class="text-amber-600 font-bold shrink-0">✦</span>
+                <span>Upgrading digital classroom amenities and co-curricular sports equipment</span>
+              </div>
+              <div class="flex items-start gap-2">
+                <span class="text-amber-600 font-bold shrink-0">✦</span>
+                <span>Serving as a collaborative communication bridge between families and school leaders</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  <!-- 3. Executive School Leadership Team -->
+  {
+    stakeholders?.leadership && (
+      <section
+        id="leadership"
+        class="py-14 sm:py-16 bg-white border-t border-slate-200"
+      >
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+          <div class="max-w-3xl space-y-3">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-sky-100 text-sky-900">
+              <span>{stakeholders.leadership.icon}</span>
+              <span>Executive Instructional Leadership</span>
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-heading font-bold text-slate-900">
+              School Leadership & Administration
+            </h2>
+            <p class="text-sm sm:text-base text-slate-600 leading-relaxed">
+              The executive faculty driving daily school operations, national
+              curriculum standards, early Huffaz Al-Quran memorisation programs,
+              and pastoral care.
+            </p>
+          </div>
+
+          <!-- Members Grid -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 hover:border-sky-500/50 hover:shadow-md transition space-y-3">
+              <div class="w-12 h-12 rounded-xl bg-slate-900 text-sky-400 flex items-center justify-center text-xl font-bold shadow-xs">
+                🎓
+              </div>
+              <div>
+                <h3 class="font-heading font-bold text-slate-900 text-sm">
+                  Hajah Zainon binti Abd Samad
+                </h3>
+                <p class="text-xs text-sky-700 font-semibold mt-0.5">
+                  Headteacher (Mudirah)
+                </p>
+                <p class="text-[11px] text-slate-500 mt-1">Chief Executive Administrator</p>
+              </div>
+            </div>
+
+            <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 hover:border-sky-500/50 hover:shadow-md transition space-y-3">
+              <div class="w-12 h-12 rounded-xl bg-slate-900 text-sky-400 flex items-center justify-center text-xl font-bold shadow-xs">
+                🎓
+              </div>
+              <div>
+                <h3 class="font-heading font-bold text-slate-900 text-sm">
+                  Ustaz Ahmad bin Zainudin
+                </h3>
+                <p class="text-xs text-sky-700 font-semibold mt-0.5">
+                  Deputy Head (Academics & Curriculum)
+                </p>
+                <p class="text-[11px] text-slate-500 mt-1">Academic Administration</p>
+              </div>
+            </div>
+
+            <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 hover:border-sky-500/50 hover:shadow-md transition space-y-3">
+              <div class="w-12 h-12 rounded-xl bg-slate-900 text-sky-400 flex items-center justify-center text-xl font-bold shadow-xs">
+                🎓
+              </div>
+              <div>
+                <h3 class="font-heading font-bold text-slate-900 text-sm">
+                  Ustaz Mohd Nazri bin Hashim
+                </h3>
+                <p class="text-xs text-sky-700 font-semibold mt-0.5">
+                  Deputy Head (Student Affairs & Welfare)
+                </p>
+                <p class="text-[11px] text-slate-500 mt-1">Pastoral Care & Discipline</p>
+              </div>
+            </div>
+
+            <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 hover:border-sky-500/50 hover:shadow-md transition space-y-3">
+              <div class="w-12 h-12 rounded-xl bg-slate-900 text-sky-400 flex items-center justify-center text-xl font-bold shadow-xs">
+                🎓
+              </div>
+              <div>
+                <h3 class="font-heading font-bold text-slate-900 text-sm">
+                  Puan Norhidayah binti Mansor
+                </h3>
+                <p class="text-xs text-sky-700 font-semibold mt-0.5">
+                  Deputy Head (Co-curricular & Sports)
+                </p>
+                <p class="text-[11px] text-slate-500 mt-1">Uniform Bodies, Clubs & Athletics</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Key Responsibilities -->
+          <div class="bg-sky-50/70 rounded-2xl p-6 sm:p-8 border border-sky-100 space-y-4">
+            <h3 class="font-heading font-bold text-sky-950 text-sm sm:text-base flex items-center gap-2">
+              <span class="text-sky-700">✓</span> Operational & Instructional Focus:
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs text-sky-900">
+              <div class="flex items-start gap-2">
+                <span class="text-sky-600 font-bold shrink-0">✦</span>
+                <span>Delivering dual excellence in national KSSR and integrated religious curricula</span>
+              </div>
+              <div class="flex items-start gap-2">
+                <span class="text-sky-600 font-bold shrink-0">✦</span>
+                <span>Safeguarding student welfare, child protection, and holistic character formation</span>
+              </div>
+              <div class="flex items-start gap-2">
+                <span class="text-sky-600 font-bold shrink-0">✦</span>
+                <span>Continuous teacher professional development and smart classroom implementation</span>
+              </div>
+              <div class="flex items-start gap-2">
+                <span class="text-sky-600 font-bold shrink-0">✦</span>
+                <span>Regular assessment reporting and collaborative parental feedback sessions</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  <!-- 4. Regulatory & Accrediting Authorities -->
+  {
+    stakeholders?.regulatory && (
+      <section class="py-14 sm:py-16 bg-slate-900 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+          <div class="max-w-2xl space-y-2">
+            <span class="text-xs font-bold uppercase tracking-widest text-amber-400">
+              Accreditations & Official Compliance
+            </span>
+            <h2 class="text-2xl sm:text-3xl font-heading font-bold">
+              Regulatory Authorities & Affiliations
+            </h2>
+            <p class="text-xs sm:text-sm text-slate-300 font-light">
+              Operating with full accreditation under Malaysian national education
+              regulations and Johor state religious education guidelines.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="p-6 rounded-2xl bg-slate-800/80 border border-slate-700 space-y-3 hover:border-amber-400/50 transition">
+              <div class="w-10 h-10 rounded-lg bg-amber-400/20 text-amber-300 flex items-center justify-center font-bold text-lg">
+                📜
+              </div>
+              <h3 class="font-heading font-bold text-base text-white">
+                Ministry of Education Malaysia (MOE / KPM)
+              </h3>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                National Primary School Standard Curriculum (KSSR) compliance and registration.
+              </p>
+              <div class="inline-block px-2.5 py-1 rounded bg-slate-900/90 text-amber-300 text-[11px] font-mono font-semibold">
+                MOE Reg. No: JJAA001
+              </div>
+            </div>
+
+            <div class="p-6 rounded-2xl bg-slate-800/80 border border-slate-700 space-y-3 hover:border-amber-400/50 transition">
+              <div class="w-10 h-10 rounded-lg bg-amber-400/20 text-amber-300 flex items-center justify-center font-bold text-lg">
+                📜
+              </div>
+              <h3 class="font-heading font-bold text-base text-white">
+                Johor State Islamic Religious Department (JAINJ)
+              </h3>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Supervising Islamic curriculum, Tahfiz certification, and private Islamic school governance.
+              </p>
+              <div class="inline-block px-2.5 py-1 rounded bg-slate-900/90 text-amber-300 text-[11px] font-mono font-semibold">
+                JAINJ Reg. No: SRAS/BP/001
+              </div>
+            </div>
+
+            <div class="p-6 rounded-2xl bg-slate-800/80 border border-slate-700 space-y-3 hover:border-amber-400/50 transition">
+              <div class="w-10 h-10 rounded-lg bg-amber-400/20 text-amber-300 flex items-center justify-center font-bold text-lg">
+                📜
+              </div>
+              <h3 class="font-heading font-bold text-base text-white">
+                Batu Pahat District Education Office (PPD)
+              </h3>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                District-level academic coordination, national examination administration, and calendars.
+              </p>
+              <div class="inline-block px-2.5 py-1 rounded bg-slate-900/90 text-amber-300 text-[11px] font-mono font-semibold">
+                District Admin Zone
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  <!-- 5. Stakeholder Inquiries & Contact Card -->
+  <section class="py-12 bg-slate-50 border-t border-slate-200">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div
+        class="bg-white rounded-3xl p-8 sm:p-10 border border-slate-200 shadow-sm flex flex-col md:flex-row items-center justify-between gap-8"
+      >
+        <div class="space-y-2 text-center md:text-left">
+          <span class="text-xs font-bold uppercase tracking-wider text-school-primary">
+            Secretariat & Inquiries Desk
+          </span>
+          <h3 class="text-xl sm:text-2xl font-heading font-bold text-slate-900">
+            Contact the Stakeholder Secretariat
+          </h3>
+          <p class="text-xs sm:text-sm text-slate-600 max-w-lg">
+            For official inquiries regarding Board of Governors resolutions,
+            PTA motions, or administrative appointments, please reach out to our
+            secretariat.
+          </p>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
+          <a
+            href={`mailto:${schoolConfig.contact.email}`}
+            class="px-5 py-3 rounded-xl bg-school-primary text-white text-xs font-bold hover:bg-school-primary-hover transition text-center shadow-xs"
+          >
+            Email Secretariat →
+          </a>
+          <a
+            href={getLocalizedPath("/contact", lang)}
+            class="px-5 py-3 rounded-xl bg-slate-100 text-slate-800 text-xs font-bold hover:bg-slate-200 transition text-center"
+          >
+            Office Hours & Map
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

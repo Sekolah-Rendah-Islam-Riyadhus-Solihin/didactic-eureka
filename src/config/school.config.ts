@@ -76,6 +76,37 @@ export interface SchoolConfig {
     currentTerm: string;
     termDates: { term: string; dates: string }[];
   };
+  stakeholders?: {
+    governance: {
+      title: string;
+      badge: string;
+      description: string;
+      icon: string;
+      members: Array<{ name: string; role: string; organization?: string }>;
+      responsibilities: string[];
+    };
+    pta: {
+      title: string;
+      badge: string;
+      description: string;
+      icon: string;
+      members: Array<{ name: string; role: string; organization?: string }>;
+      responsibilities: string[];
+    };
+    leadership: {
+      title: string;
+      badge: string;
+      description: string;
+      icon: string;
+      members: Array<{ name: string; role: string; organization?: string }>;
+      responsibilities: string[];
+    };
+    regulatory: {
+      title: string;
+      description: string;
+      bodies: Array<{ name: string; role: string; regNumber?: string }>;
+    };
+  };
 }
 
 /**
@@ -177,5 +208,134 @@ export const schoolConfig: SchoolConfig = {
       { term: "Penggal 1", dates: "12 Jan 2026 – 07 Jun 2026" },
       { term: "Penggal 2", dates: "08 Jun 2026 – 31 Dis 2026" },
     ],
+  },
+  stakeholders: {
+    governance: {
+      title: "Lembaga Pengelola Sekolah (LPS)",
+      badge: "Tadbir Urus & Pemegang Amanah",
+      description:
+        "Badan tertinggi pengurusan strategik dan pemegang amanah yang bertanggungjawab menetapkan hala tuju institusi, pematuhan syariah, dan pengurusan aset wakaf.",
+      icon: "🏛️",
+      members: [
+        {
+          name: "Dato' Hj. Ismail bin Mohd Nor",
+          role: "Pengerusi Lembaga Pengelola",
+          organization: "Wakil Pemegang Amanah",
+        },
+        {
+          name: "Ustaz Dr. Khairul Anwar bin Basri",
+          role: "Timbalan Pengerusi & Penasihat Syariah",
+          organization: "Pakar Pendidikan Islam",
+        },
+        {
+          name: "Haji Razak bin Sulaiman",
+          role: "Setiausaha Kehormat",
+          organization: "Pengurusan Korporat",
+        },
+        {
+          name: "Puan Noraini binti Yusof",
+          role: "Bendahari Kehormat",
+          organization: "Juruaudit Bertauliah",
+        },
+      ],
+      responsibilities: [
+        "Menetapkan dasar strategik pendidikan dan pembangunan sekolah",
+        "Menguruskan dana wakaf, infaq, dan pelaburan prasarana fizikal",
+        "Memastikan pematuhan undang-undang pendidikan dan piawaian audit",
+        "Melantik dan menyelia pengurusan pentadbiran sekolah",
+      ],
+    },
+    pta: {
+      title: "Persatuan Ibu Bapa & Guru (PIBG)",
+      badge: "Sinergi Komuniti & Waris",
+      description:
+        "Platform rasmi memperkukuh kerjasama erat antara ibu bapa, penjaga, dan guru demi kebajikan murid, sokongan program tahfiz, serta aktiviti ko-kurikulum.",
+      icon: "🤝",
+      members: [
+        {
+          name: "En. Muhammad Ridzuan bin Azman",
+          role: "Yang Dipertua (YDP) PIBG",
+          organization: "Wakil Ibu Bapa",
+        },
+        {
+          name: "Ustazah Mardhiah binti Ramli",
+          role: "Naib Yang Dipertua (NYDP)",
+          organization: "Wakil Guru",
+        },
+        {
+          name: "Cikgu Mohd Fikri bin Samsudin",
+          role: "Setiausaha PIBG",
+          organization: "Kakitangan Akademik",
+        },
+        {
+          name: "Puan Salmah binti Kassim",
+          role: "Bendahari PIBG",
+          organization: "Wakil Ibu Bapa",
+        },
+      ],
+      responsibilities: [
+        "Menyalurkan sumbangan dana kebajikan bagi murid asnaf & yatim",
+        "Menganjurkan program Sarana Ibu Bapa, Hari Terbuka, dan Gotong-Royong",
+        "Menyokong kelengkapan prasarana bilik darjah dan sukan",
+        "Menjadi jambatan komunikasi antara waris dan pihak sekolah",
+      ],
+    },
+    leadership: {
+      title: "Barisan Pentadbir & Pengurusan Sekolah",
+      badge: "Kepimpinan Operasi & Instruksional",
+      description:
+        "Pasukan eksekutif yang memacu pengurusan harian, kecemerlangan kurikulum KSSR, pelaksanaan program tahfiz huffaz cilik, dan sahsiah murid.",
+      icon: "🎓",
+      members: [
+        {
+          name: "Hajah Zainon binti Abd Samad",
+          role: "Guru Besar (Mudirah)",
+          organization: "Ketua Eksekutif Pentadbiran",
+        },
+        {
+          name: "Ustaz Ahmad bin Zainudin",
+          role: "Guru Penolong Kanan (GPK) Pentadbiran & Kurikulum",
+          organization: "Pengurusan Akademik",
+        },
+        {
+          name: "Ustaz Mohd Nazri bin Hashim",
+          role: "Guru Penolong Kanan Hal Ehwal Murid (HEM)",
+          organization: "Disiplin & Kebajikan Murid",
+        },
+        {
+          name: "Puan Norhidayah binti Mansor",
+          role: "Guru Penolong Kanan Kokurikulum",
+          organization: "Sukan, Unit Beruniform & Kelab",
+        },
+      ],
+      responsibilities: [
+        "Memacu kecemerlangan akademik kurikulum KSSR dan silibus agama",
+        "Menjaga kebajikan, keselamatan, dan pembentukan adab islami murid",
+        "Memantau kualiti pengajaran guru dan pemerkasaan bilik darjah digital",
+        "Menyelaras pelaporan perkembangan murid secara berkala kepada waris",
+      ],
+    },
+    regulatory: {
+      title: "Badan Kawal Selia & Agensi Bersekutu",
+      description:
+        "SRIRS beroperasi dengan pematuhan penuh terhadap piawaian pendidikan kebangsaan dan kurikulum agama negeri Johor.",
+      bodies: [
+        {
+          name: "Kementerian Pendidikan Malaysia (KPM)",
+          role: "Pematuhan Kurikulum Standard Sekolah Rendah (KSSR)",
+          regNumber: "No. Perakuan KPM: JJAA001",
+        },
+        {
+          name: "Jabatan Agama Islam Negeri Johor (JAINJ)",
+          role: "Kawal Selia Sekolah Rendah Agama Islam Swasta",
+          regNumber: "No. Siri Pendaftaran: SRAS/BP/001",
+        },
+        {
+          name: "Pejabat Pendidikan Daerah (PPD) Batu Pahat",
+          role: "Penyelarasan Peperiksaan Awam & Takwim Persekolahan",
+          regNumber: "Zon Pentadbiran Daerah",
+        },
+      ],
+    },
   },
 };

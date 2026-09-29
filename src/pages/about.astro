@@ -89,6 +89,26 @@ const facilities = [
           schoolConfig.identity.establishedYear
         }.
       </p>
+
+      <!-- Sub Navigation Tabs between About & Stakeholders -->
+      <div class="pt-4 flex justify-center">
+        <div
+          class="inline-flex p-1 rounded-xl bg-slate-800/90 border border-slate-700/80 max-w-full overflow-x-auto"
+        >
+          <a
+            href={getLocalizedPath("/about", lang)}
+            class="px-4 py-2 rounded-lg text-xs font-bold bg-amber-400 text-slate-950 shadow-xs transition-all whitespace-nowrap"
+          >
+            🏛️ Tentang Sekolah
+          </a>
+          <a
+            href={getLocalizedPath("/about/stakeholders", lang)}
+            class="px-4 py-2 rounded-lg text-xs font-medium text-slate-300 hover:text-white transition-all whitespace-nowrap"
+          >
+            🤝 Maklumat Pemegang Taruh
+          </a>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -241,6 +261,37 @@ const facilities = [
             </div>
           ))
         }
+      </div>
+    </div>
+  </section>
+
+  <!-- Stakeholders Quick Link Banner -->
+  <section class="py-12 bg-white border-t border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div
+        class="p-8 sm:p-10 rounded-3xl bg-gradient-to-r from-slate-900 via-slate-800 to-emerald-950 text-white flex flex-col md:flex-row items-center justify-between gap-6 shadow-md border border-slate-800"
+      >
+        <div class="space-y-2 text-center md:text-left">
+          <div
+            class="inline-flex items-center gap-2 text-xs font-bold text-amber-400 uppercase tracking-widest"
+          >
+            <span>🏛️</span> Tadbir Urus & Komuniti
+          </div>
+          <h3 class="text-xl sm:text-2xl font-heading font-bold text-white">
+            Maklumat Pemegang Taruh (LPS, PIBG & Pentadbir)
+          </h3>
+          <p class="text-xs sm:text-sm text-slate-300 max-w-xl">
+            Ketahui struktur tadbir urus Lembaga Pengelola Sekolah (LPS),
+            kepimpinan PIBG, barisan pentadbir kanan, dan pengiktirafan agensi
+            kawal selia (KPM & JAINJ).
+          </p>
+        </div>
+        <a
+          href={getLocalizedPath("/about/stakeholders", lang)}
+          class="whitespace-nowrap px-6 py-3.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 text-xs font-bold transition shadow-md"
+        >
+          Lihat Maklumat Pemegang Taruh →
+        </a>
       </div>
     </div>
   </section>
