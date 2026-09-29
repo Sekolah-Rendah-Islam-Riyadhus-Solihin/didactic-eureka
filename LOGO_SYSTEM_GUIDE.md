@@ -7,8 +7,9 @@ This guide explains how to use and customize the school logo and minimalist fall
 ## 📌 Overview
 
 The logo system is powered by:
-- **Configuration file**: [`src/config/school.config.ts`](file:///c:/Users/sahaini/.gemini/antigravity/scratch/open-primary-school-web/src/config/school.config.ts)
-- **Reusable component**: [`src/components/layout/SchoolLogo.astro`](file:///c:/Users/sahaini/.gemini/antigravity/scratch/open-primary-school-web/src/components/layout/SchoolLogo.astro)
+
+- **Configuration file**: [`src/config/school.config.ts`](./src/config/school.config.ts)
+- **Reusable component**: [`src/components/layout/SchoolLogo.astro`](./src/components/layout/SchoolLogo.astro)
 - **Integrated locations**: Header navigation bar & Footer across all pages and languages (Bahasa Melayu & English).
 
 ---
@@ -36,13 +37,13 @@ export const schoolConfig: SchoolConfig = {
 
 ## 🛠️ The 5 Display Modes (`logoMode`)
 
-| Mode | Behavior | Best Used When... |
-| :--- | :--- | :--- |
-| **`"auto"`** | Uses `logo` if path is provided; automatically falls back to minimalist initial badge if `logo` is empty. | **Default recommended mode.** Works out of the box. |
-| **`"image"`** | Enforces displaying the custom image file. | You have an official school logo image ready. |
-| **`"crest"`** | Displays a sleek, minimalist academic shield/crest SVG with school accent colors. | School does not yet have a digitized logo, but wants a professional crest symbol. |
-| **`"monogram"`** | Displays the school's initial letter (e.g. `S` for SRIRS) on a stylized brand-colored badge. | You prefer a modern, clean typography-first monogram. |
-| **`"none"`** | Hides the logo and fallback completely. | You want clean text-only branding (School Name + Motto only). |
+| Mode             | Behavior                                                                                                  | Best Used When...                                                                 |
+| :--------------- | :-------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------- |
+| **`"auto"`**     | Uses `logo` if path is provided; automatically falls back to minimalist initial badge if `logo` is empty. | **Default recommended mode.** Works out of the box.                               |
+| **`"image"`**    | Enforces displaying the custom image file.                                                                | You have an official school logo image ready.                                     |
+| **`"crest"`**    | Displays a sleek, minimalist academic shield/crest SVG with school accent colors.                         | School does not yet have a digitized logo, but wants a professional crest symbol. |
+| **`"monogram"`** | Displays the school's initial letter (e.g. `S` for SRIRS) on a stylized brand-colored badge.              | You prefer a modern, clean typography-first monogram.                             |
+| **`"none"`**     | Hides the logo and fallback completely.                                                                   | You want clean text-only branding (School Name + Motto only).                     |
 
 ---
 
@@ -65,6 +66,7 @@ export const schoolConfig: SchoolConfig = {
 
 > [!TIP]
 > **Recommended Image Specifications**:
+>
 > - **Format**: Transparent SVG (preferred) or PNG with transparent background.
 > - **Dimensions**: At least `256 x 256` pixels (square or near-square aspect ratio).
 > - **File size**: Under `200 KB` for fast loading.
@@ -140,9 +142,11 @@ import SchoolLogo from "../components/layout/SchoolLogo.astro";
 ## ❓ Troubleshooting & FAQs
 
 ### Why is my logo image not showing?
+
 - Ensure the image file is placed inside the `public/` folder, not `src/`. Files in `public/` are served from the root URL (e.g. `public/logo.png` is accessible at `/logo.png`).
 - Check that `logoMode` is not set to `"none"`.
 
 ### My logo looks distorted or stretched
+
 - The `SchoolLogo` component uses `object-contain`, ensuring the image aspect ratio is preserved without stretching.
 - For best visual alignment in the header, square (`1:1`) or slightly horizontal (`4:3`) logos look cleanest.
