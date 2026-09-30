@@ -65,8 +65,22 @@ export interface SchoolConfig {
     socials: {
       facebook?: string;
       instagram?: string;
+      tiktok?: string;
       youtube?: string;
+      x?: string;
+      twitter?: string;
+      telegram?: string;
+      whatsapp?: string;
+      linkedin?: string;
+      [key: string]: string | undefined;
     };
+    customSocials?: Array<{
+      name: string;
+      url: string;
+      handle?: string;
+      icon?: string;
+      color?: string;
+    }>;
   };
   keyStats: {
     label: string;

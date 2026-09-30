@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { schoolConfig } from "../config/school.config";
+import SocialLinks from "../components/common/SocialLinks.astro";
 
 const lang = "ms";
 ---
@@ -146,18 +147,9 @@ const lang = "ms";
             }<br />
             Maklum balas akan diberikan dalam tempoh 24 jam hari bekerja.
           </p>
-          {
-            schoolConfig.contact.socials?.facebook && (
-              <a
-                href={schoolConfig.contact.socials.facebook}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="inline-flex items-center gap-1 text-xs font-semibold text-blue-600 hover:underline"
-              >
-                Halaman Facebook →
-              </a>
-            )
-          }
+          <div class="pt-2">
+            <SocialLinks variant="pills" />
+          </div>
         </div>
       </div>
 
@@ -237,39 +229,8 @@ const lang = "ms";
             Ketahui aktiviti harian, foto program dan pencapaian anak-anak murid
             SRIRS.
           </p>
-          <div class="flex flex-col gap-2">
-            {
-              schoolConfig.contact.socials?.facebook && (
-                <a
-                  href={schoolConfig.contact.socials.facebook}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="flex items-center gap-2 text-xs font-semibold text-blue-400 hover:text-blue-300 transition"
-                >
-                  📘 Facebook —{" "}
-                  {schoolConfig.contact.socials.facebook.replace(
-                    "https://facebook.com/",
-                    "@",
-                  )}
-                </a>
-              )
-            }
-            {
-              schoolConfig.contact.socials?.instagram && (
-                <a
-                  href={schoolConfig.contact.socials.instagram}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="flex items-center gap-2 text-xs font-semibold text-pink-400 hover:text-pink-300 transition"
-                >
-                  📸 Instagram —{" "}
-                  {schoolConfig.contact.socials.instagram.replace(
-                    "https://instagram.com/",
-                    "@",
-                  )}
-                </a>
-              )
-            }
+          <div class="pt-2">
+            <SocialLinks variant="cards" />
           </div>
         </div>
 

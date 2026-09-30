@@ -6,6 +6,7 @@ import {
   getLocalizedPath,
 } from "../../i18n/utils";
 import SchoolLogo from "./SchoolLogo.astro";
+import SocialLinks from "../common/SocialLinks.astro";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -61,6 +62,14 @@ const isPrivate = schoolConfig.identity.schoolType === "private";
             >
             {schoolConfig.identity.establishedYear}
           </p>
+        </div>
+
+        <!-- Social Media Links -->
+        <div class="pt-3 border-t border-slate-800/80">
+          <p class="text-[11px] font-semibold text-slate-300 uppercase tracking-wider mb-2.5">
+            {lang === "ms" ? "Ikuti Media Sosial:" : "Connect With Us:"}
+          </p>
+          <SocialLinks variant="icons" />
         </div>
       </div>
 

@@ -1,19 +1,27 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import { schoolConfig } from '../../config/school.config';
-import { getLocalizedPath } from '../../i18n/utils';
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { schoolConfig } from "../../config/school.config";
+import { getLocalizedPath } from "../../i18n/utils";
+import SocialLinks from "../../components/common/SocialLinks.astro";
 
-const lang = 'en';
+const lang = "en";
 ---
 
 <BaseLayout lang={lang} title="Contact & Campus Location">
   <!-- Page Header -->
   <section class="bg-slate-900 text-white py-16">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
-      <span class="text-xs font-bold uppercase tracking-widest text-emerald-400">We Are Here To Help</span>
-      <h1 class="text-3xl sm:text-5xl font-heading font-bold">Contact {schoolConfig.identity.shortName}</h1>
-      <p class="max-w-2xl mx-auto text-sm sm:text-base text-slate-300 font-light">
-        Have questions about enrollment, daily schedules, or visiting our campus? Reach out to our school office — we're happy to help.
+      <span class="text-xs font-bold uppercase tracking-widest text-emerald-400"
+        >We Are Here To Help</span
+      >
+      <h1 class="text-3xl sm:text-5xl font-heading font-bold">
+        Contact {schoolConfig.identity.shortName}
+      </h1>
+      <p
+        class="max-w-2xl mx-auto text-sm sm:text-base text-slate-300 font-light"
+      >
+        Have questions about enrollment, daily schedules, or visiting our
+        campus? Reach out to our school office — we're happy to help.
       </p>
     </div>
   </section>
@@ -21,19 +29,23 @@ const lang = 'en';
   <!-- Contact Cards -->
   <section class="py-16 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-      
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        
-        <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
+        <div
+          class="p-6 rounded-2xl bg-slate-50 border border-slate-200 space-y-3"
+        >
           <div class="text-3xl">📍</div>
-          <h3 class="font-heading font-bold text-base text-slate-900">Campus Address</h3>
+          <h3 class="font-heading font-bold text-base text-slate-900">
+            Campus Address
+          </h3>
           <p class="text-xs text-slate-600 leading-relaxed">
             {schoolConfig.contact.address.street}<br />
-            {schoolConfig.contact.address.city}, {schoolConfig.contact.address.stateZip}<br />
+            {schoolConfig.contact.address.city}, {
+              schoolConfig.contact.address.stateZip
+            }<br />
             {schoolConfig.contact.address.country}
           </p>
           <a
-            href={`https://maps.google.com/?q=${encodeURIComponent(schoolConfig.contact.address.street + ', ' + schoolConfig.contact.address.city)}`}
+            href={`https://maps.google.com/?q=${encodeURIComponent(schoolConfig.contact.address.street + ", " + schoolConfig.contact.address.city)}`}
             target="_blank"
             rel="noopener noreferrer"
             class="inline-flex items-center gap-1 text-xs font-semibold text-school-primary hover:underline mt-1"
@@ -42,103 +54,166 @@ const lang = 'en';
           </a>
         </div>
 
-        <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
+        <div
+          class="p-6 rounded-2xl bg-slate-50 border border-slate-200 space-y-3"
+        >
           <div class="text-3xl">📞</div>
-          <h3 class="font-heading font-bold text-base text-slate-900">Phone & Emergency</h3>
+          <h3 class="font-heading font-bold text-base text-slate-900">
+            Phone & Emergency
+          </h3>
           <p class="text-xs text-slate-600 leading-relaxed">
-            <strong>Main Line:</strong> {schoolConfig.contact.phone}<br />
-            <strong class="text-rose-600">Emergency Hotline:</strong> {schoolConfig.contact.emergencyPhone}
+            <strong>Main Line:</strong>
+            {schoolConfig.contact.phone}<br />
+            <strong class="text-rose-600">Emergency Hotline:</strong>
+            {schoolConfig.contact.emergencyPhone}
           </p>
-          <p class="text-[11px] text-slate-500 pt-1 border-t border-slate-200/60">
-            Emergency hotline operates 24/7 for student safety & wellbeing matters.
+          <p
+            class="text-[11px] text-slate-500 pt-1 border-t border-slate-200/60"
+          >
+            Emergency hotline operates 24/7 for student safety & wellbeing
+            matters.
           </p>
         </div>
 
-        <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
+        <div
+          class="p-6 rounded-2xl bg-slate-50 border border-slate-200 space-y-3"
+        >
           <div class="text-3xl">⏰</div>
-          <h3 class="font-heading font-bold text-base text-slate-900">Office Hours</h3>
-          {typeof schoolConfig.contact.officeHours === "string" ? (
-            <p class="text-xs text-slate-600 leading-relaxed">
-              {schoolConfig.contact.officeHours}
-            </p>
-          ) : (
-            <div class="space-y-2.5 text-xs text-slate-600">
-              {schoolConfig.contact.officeHours.map((schedule) => {
-                const breakInfo = schedule.breakTime || schedule.breakHours;
-                return (
-                  <div class="border-b border-slate-200/70 pb-2 last:border-b-0 last:pb-0">
-                    <div class="flex justify-between items-baseline gap-2">
-                      <span class="font-semibold text-slate-800">{schedule.days}</span>
-                      <span class={schedule.isClosed ? "font-semibold text-rose-600" : "font-semibold text-emerald-700"}>
-                        {schedule.isClosed ? "Closed" : (schedule.hours || `${schedule.openTime} – ${schedule.closeTime}`)}
-                      </span>
-                    </div>
-                    {breakInfo && (
-                      <div class="text-[11px] text-amber-800 bg-amber-50 border border-amber-200/60 rounded px-1.5 py-0.5 mt-1 flex items-center gap-1">
-                        <span>☕</span>
-                        <span>
-                          {typeof breakInfo === "string"
-                            ? `Break: ${breakInfo}`
-                            : `${breakInfo.label ? `${breakInfo.label}: ` : "Break: "}${breakInfo.time}`}
+          <h3 class="font-heading font-bold text-base text-slate-900">
+            Office Hours
+          </h3>
+          {
+            typeof schoolConfig.contact.officeHours === "string" ? (
+              <p class="text-xs text-slate-600 leading-relaxed">
+                {schoolConfig.contact.officeHours}
+              </p>
+            ) : (
+              <div class="space-y-2.5 text-xs text-slate-600">
+                {schoolConfig.contact.officeHours.map((schedule) => {
+                  const breakInfo = schedule.breakTime || schedule.breakHours;
+                  return (
+                    <div class="border-b border-slate-200/70 pb-2 last:border-b-0 last:pb-0">
+                      <div class="flex justify-between items-baseline gap-2">
+                        <span class="font-semibold text-slate-800">
+                          {schedule.days}
+                        </span>
+                        <span
+                          class={
+                            schedule.isClosed
+                              ? "font-semibold text-rose-600"
+                              : "font-semibold text-emerald-700"
+                          }
+                        >
+                          {schedule.isClosed
+                            ? "Closed"
+                            : schedule.hours ||
+                              `${schedule.openTime} – ${schedule.closeTime}`}
                         </span>
                       </div>
-                    )}
-                    {schedule.notes && (
-                      <div class="text-[10px] text-slate-500 italic mt-0.5">
-                        {schedule.notes.replace("Tutup", "Closed")}
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-          )}
+                      {breakInfo && (
+                        <div class="text-[11px] text-amber-800 bg-amber-50 border border-amber-200/60 rounded px-1.5 py-0.5 mt-1 flex items-center gap-1">
+                          <span>☕</span>
+                          <span>
+                            {typeof breakInfo === "string"
+                              ? `Break: ${breakInfo}`
+                              : `${breakInfo.label ? `${breakInfo.label}: ` : "Break: "}${breakInfo.time}`}
+                          </span>
+                        </div>
+                      )}
+                      {schedule.notes && (
+                        <div class="text-[10px] text-slate-500 italic mt-0.5">
+                          {schedule.notes.replace("Tutup", "Closed")}
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            )
+          }
         </div>
 
-        <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
+        <div
+          class="p-6 rounded-2xl bg-slate-50 border border-slate-200 space-y-3"
+        >
           <div class="text-3xl">✉️</div>
-          <h3 class="font-heading font-bold text-base text-slate-900">Email & Inquiries</h3>
+          <h3 class="font-heading font-bold text-base text-slate-900">
+            Email & Inquiries
+          </h3>
           <p class="text-xs text-slate-600 leading-relaxed">
-            <strong>School Office:</strong> {schoolConfig.contact.email}<br />
-            <strong>Admissions:</strong> admissions@{schoolConfig.contact.email.split('@')[1]}<br />
+            <strong>School Office:</strong>
+            {schoolConfig.contact.email}<br />
+            <strong>Admissions:</strong> admissions@{
+              schoolConfig.contact.email.split("@")[1]
+            }<br />
             Responses provided within 24 hours on school days.
           </p>
-          {schoolConfig.contact.socials?.facebook && (
-            <a href={schoolConfig.contact.socials.facebook} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-xs font-semibold text-blue-600 hover:underline">
-              Facebook Page →
-            </a>
-          )}
+          <div class="pt-2">
+            <SocialLinks variant="pills" />
+          </div>
         </div>
-
       </div>
 
       <!-- Drop-off & Pick-up Gate Guidelines -->
-      <div id="transport" class="bg-slate-50 border border-slate-200 rounded-3xl p-8 space-y-6">
+      <div
+        id="transport"
+        class="bg-slate-50 border border-slate-200 rounded-3xl p-8 space-y-6"
+      >
         <div class="space-y-2">
-          <span class="text-xs font-bold uppercase tracking-wider text-school-primary">Safety & Traffic Flow</span>
-          <h2 class="text-2xl font-heading font-bold text-slate-900">🚌 School Van & Drop-Off Zones</h2>
+          <span
+            class="text-xs font-bold uppercase tracking-wider text-school-primary"
+            >Safety & Traffic Flow</span
+          >
+          <h2 class="text-2xl font-heading font-bold text-slate-900">
+            🚌 School Van & Drop-Off Zones
+          </h2>
           <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
-            To ensure student safety during morning drop-off (7:15 – 7:45 AM) and afternoon pickup (1:00 – 1:30 PM, and 4:00 PM for co-curricular days), please use the designated gate for your child's year group:
+            To ensure student safety during morning drop-off (7:15 – 7:45 AM)
+            and afternoon pickup (1:00 – 1:30 PM, and 4:00 PM for co-curricular
+            days), please use the designated gate for your child's year group:
           </p>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-2">
-          <div class="p-4 bg-white rounded-xl border border-slate-200 space-y-2">
-            <div class="text-xs font-bold text-emerald-700 uppercase">Gate A (Main Entrance)</div>
+          <div
+            class="p-4 bg-white rounded-xl border border-slate-200 space-y-2"
+          >
+            <div class="text-xs font-bold text-emerald-700 uppercase">
+              Gate A (Main Entrance)
+            </div>
             <h4 class="font-bold text-sm text-slate-900">Preschool & Year 1</h4>
-            <p class="text-xs text-slate-500">Parent escort required. Hand-in-hand delivery to classroom teacher only.</p>
+            <p class="text-xs text-slate-500">
+              Parent escort required. Hand-in-hand delivery to classroom teacher
+              only.
+            </p>
           </div>
 
-          <div class="p-4 bg-white rounded-xl border border-slate-200 space-y-2">
-            <div class="text-xs font-bold text-sky-700 uppercase">Gate B (Side Entrance)</div>
+          <div
+            class="p-4 bg-white rounded-xl border border-slate-200 space-y-2"
+          >
+            <div class="text-xs font-bold text-sky-700 uppercase">
+              Gate B (Side Entrance)
+            </div>
             <h4 class="font-bold text-sm text-slate-900">Year 2 – Year 4</h4>
-            <p class="text-xs text-slate-500">Supervised by duty teachers. Quick drop-off lane — please do not park.</p>
+            <p class="text-xs text-slate-500">
+              Supervised by duty teachers. Quick drop-off lane — please do not
+              park.
+            </p>
           </div>
 
-          <div class="p-4 bg-white rounded-xl border border-slate-200 space-y-2">
-            <div class="text-xs font-bold text-amber-700 uppercase">Gate C (Van & Bus Bay)</div>
-            <h4 class="font-bold text-sm text-slate-900">Year 5 – Year 6 & School Van</h4>
-            <p class="text-xs text-slate-500">Dedicated yellow-line van bay. Private cars are not permitted in this zone.</p>
+          <div
+            class="p-4 bg-white rounded-xl border border-slate-200 space-y-2"
+          >
+            <div class="text-xs font-bold text-amber-700 uppercase">
+              Gate C (Van & Bus Bay)
+            </div>
+            <h4 class="font-bold text-sm text-slate-900">
+              Year 5 – Year 6 & School Van
+            </h4>
+            <p class="text-xs text-slate-500">
+              Dedicated yellow-line van bay. Private cars are not permitted in
+              this zone.
+            </p>
           </div>
         </div>
       </div>
@@ -146,32 +221,40 @@ const lang = 'en';
       <!-- Social Media & Location -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div class="bg-slate-900 text-white rounded-2xl p-6 space-y-4">
-          <h3 class="font-heading font-bold text-base">Follow Us on Social Media</h3>
-          <p class="text-xs text-slate-400">Stay updated with daily activities, announcements, and school achievements.</p>
-          <div class="flex flex-col gap-2">
-            {schoolConfig.contact.socials?.facebook && (
-              <a href={schoolConfig.contact.socials.facebook} target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-xs font-semibold text-blue-400 hover:text-blue-300 transition">
-                📘 Facebook — {schoolConfig.contact.socials.facebook.replace('https://facebook.com/', '@')}
-              </a>
-            )}
-            {schoolConfig.contact.socials?.instagram && (
-              <a href={schoolConfig.contact.socials.instagram} target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-xs font-semibold text-pink-400 hover:text-pink-300 transition">
-                📸 Instagram — {schoolConfig.contact.socials.instagram.replace('https://instagram.com/', '@')}
-              </a>
-            )}
+          <h3 class="font-heading font-bold text-base">
+            Follow Us on Social Media
+          </h3>
+          <p class="text-xs text-slate-400">
+            Stay updated with daily activities, announcements, and school
+            achievements.
+          </p>
+          <div class="pt-2">
+            <SocialLinks variant="cards" />
           </div>
         </div>
 
-        <div class="bg-emerald-50 border border-emerald-200 rounded-2xl p-6 space-y-4">
-          <h3 class="font-heading font-bold text-base text-emerald-900">📍 Getting Here</h3>
+        <div
+          class="bg-emerald-50 border border-emerald-200 rounded-2xl p-6 space-y-4"
+        >
+          <h3 class="font-heading font-bold text-base text-emerald-900">
+            📍 Getting Here
+          </h3>
           <div class="text-xs text-emerald-800 space-y-1.5">
-            <p>🚗 <strong>By Car:</strong> Enter via Jalan Kg Sg Kajang. Free parking available at the school compound.</p>
-            <p>🚌 <strong>By Public Transport:</strong> Take bus from Batu Pahat town centre — alight at Kg Sg Kajang stop.</p>
-            <p>🚐 <strong>School Van:</strong> Registered van service available. Contact the office for route details and fees.</p>
+            <p>
+              🚗 <strong>By Car:</strong> Enter via Jalan Kg Sg Kajang. Free parking
+              available at the school compound.
+            </p>
+            <p>
+              🚌 <strong>By Public Transport:</strong> Take bus from Batu Pahat town
+              centre — alight at Kg Sg Kajang stop.
+            </p>
+            <p>
+              🚐 <strong>School Van:</strong> Registered van service available. Contact
+              the office for route details and fees.
+            </p>
           </div>
         </div>
       </div>
-
     </div>
   </section>
 </BaseLayout>
