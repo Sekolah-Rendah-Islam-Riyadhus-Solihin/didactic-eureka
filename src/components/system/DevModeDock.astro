@@ -1,0 +1,209 @@
+---
+import { schoolConfig } from "../../config/school.config";
+import type { SupportedLanguage } from "../../i18n/ui";
+
+interface Props {
+  lang?: SupportedLanguage;
+}
+
+const { lang = "ms" } = Astro.props;
+const devConfig = schoolConfig.system?.devMode;
+if (!devConfig?.enabled) {
+  // Do not render anything if devMode is disabled
+}
+---
+
+{
+  devConfig?.enabled && (
+    <>
+      <!-- Grid Overlay (toggled via DevModeDock) -->
+      <div
+        id="dev-grid-overlay"
+        class="fixed inset-0 pointer-events-none z-50 hidden opacity-15"
+      >
+        <div class="max-w-7xl mx-auto h-full px-4 sm:px-6 lg:px-8 grid grid-cols-4 sm:grid-cols-6 lg:grid-cols-12 gap-4">
+          {Array.from({ length: 12 }).map((_, i) => (
+            <div class="h-full bg-rose-500 border-x border-rose-600/30 text-[9px] text-white p-1">
+              {i + 1}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Floating Dev Dock Pill -->
+      <div
+        id="dev-mode-dock"
+        class="fixed bottom-4 right-4 z-50 font-sans text-xs select-none"
+      >
+        <!-- Collapsed Pill -->
+        <div
+          id="dev-dock-pill"
+          class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-900/90 text-slate-200 border border-slate-700/80 shadow-2xl backdrop-blur-md cursor-pointer hover:border-amber-400 hover:text-white transition-all group"
+          title="Klik untuk buka Panel Pembangun / Dev Tools"
+        >
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+          <span class="font-mono font-bold text-[10px] tracking-wider text-amber-400 uppercase">
+            DEV
+          </span>
+
+          <!-- Viewport Breakpoint Indicator -->
+          {devConfig.showViewportBadge && (
+            <div class="font-mono text-[10px] px-1.5 py-0.5 rounded bg-slate-800 border border-slate-700 font-semibold text-slate-300">
+              <span class="block sm:hidden">XS</span>
+              <span class="hidden sm:block md:hidden">SM</span>
+              <span class="hidden md:block lg:hidden">MD</span>
+              <span class="hidden lg:block xl:hidden">LG</span>
+              <span class="hidden xl:block 2xl:hidden">XL</span>
+              <span class="hidden 2xl:block">2XL</span>
+            </div>
+          )}
+
+          <!-- Current Locale -->
+          <span class="text-[10px] font-mono uppercase text-slate-400">
+            {lang}
+          </span>
+          <span class="text-slate-500 text-[10px]">⚙️</span>
+        </div>
+
+        <!-- Expanded Dev Panel Popup -->
+        <div
+          id="dev-dock-panel"
+          class="hidden absolute bottom-10 right-0 w-72 rounded-2xl bg-slate-900/95 border border-slate-700 p-4 text-slate-200 shadow-2xl backdrop-blur-lg space-y-3.5 mb-2"
+        >
+          <div class="flex items-center justify-between pb-2 border-b border-slate-800">
+            <div class="flex items-center gap-1.5 font-bold text-xs text-white">
+              <span>🛠️</span>
+              <span>Alatan Pembangun (SRIRS)</span>
+            </div>
+            <button
+              type="button"
+              id="dev-dock-close"
+              class="text-slate-400 hover:text-white text-xs cursor-pointer"
+            >
+              ✕
+            </button>
+          </div>
+
+          <!-- Quick Info Details -->
+          <div class="space-y-1.5 text-[11px] font-mono text-slate-400 bg-slate-950/70 p-2.5 rounded-xl border border-slate-800">
+            <div class="flex justify-between">
+              <span class="text-slate-500">Viewport:</span>
+              <span id="dev-res-w" class="text-amber-300 font-bold">
+                1024px
+              </span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-slate-500">Bahasa:</span>
+              <span class="text-emerald-400 font-bold uppercase">{lang}</span>
+            </div>
+            <div class="flex justify-between truncate">
+              <span class="text-slate-500">Laluan:</span>
+              <span class="text-slate-300 truncate max-w-[140px]" title={Astro.url.pathname}>
+                {Astro.url.pathname}
+              </span>
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="space-y-2 pt-1">
+            <button
+              type="button"
+              id="toggle-grid-btn"
+              class="w-full flex items-center justify-between px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-[11px] font-medium text-slate-200 transition cursor-pointer border border-slate-700/60"
+            >
+              <span>📐 Hamparan Grid Layout (12-Col)</span>
+              <span id="grid-status-badge" class="text-[10px] text-slate-400">
+                OFF
+              </span>
+            </button>
+
+            <button
+              type="button"
+              id="log-config-btn"
+              class="w-full flex items-center justify-between px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-[11px] font-medium text-slate-200 transition cursor-pointer border border-slate-700/60"
+            >
+              <span>📋 Cetak Config ke Konsol</span>
+              <span class="text-[10px] text-amber-400">console.log</span>
+            </button>
+          </div>
+
+          <div class="pt-2 border-t border-slate-800 text-[10px] text-slate-500 flex justify-between items-center">
+            <span>Ubah di school.config.ts</span>
+            <span class="text-[9px] font-mono bg-slate-800 px-1 py-0.5 rounded text-slate-400">
+              devMode: true
+            </span>
+          </div>
+        </div>
+      </div>
+    </>
+  )
+}
+
+<script>
+  function setupDevModeDock() {
+    const pill = document.getElementById("dev-dock-pill");
+    const panel = document.getElementById("dev-dock-panel");
+    const closeBtn = document.getElementById("dev-dock-close");
+    const gridBtn = document.getElementById("toggle-grid-btn");
+    const gridOverlay = document.getElementById("dev-grid-overlay");
+    const gridBadge = document.getElementById("grid-status-badge");
+    const logBtn = document.getElementById("log-config-btn");
+    const resText = document.getElementById("dev-res-w");
+
+    if (!pill || !panel) return;
+
+    pill.addEventListener("click", () => {
+      panel.classList.toggle("hidden");
+    });
+
+    closeBtn?.addEventListener("click", (e) => {
+      e.stopPropagation();
+      panel.classList.add("hidden");
+    });
+
+    const updateRes = () => {
+      if (resText) {
+        resText.textContent = `${window.innerWidth}px × ${window.innerHeight}px`;
+      }
+    };
+    updateRes();
+    window.addEventListener("resize", updateRes);
+
+    gridBtn?.addEventListener("click", () => {
+      if (!gridOverlay) return;
+      const isHidden = gridOverlay.classList.contains("hidden");
+      if (isHidden) {
+        gridOverlay.classList.remove("hidden");
+        if (gridBadge) {
+          gridBadge.textContent = "ON";
+          gridBadge.className = "text-[10px] text-emerald-400 font-bold";
+        }
+      } else {
+        gridOverlay.classList.add("hidden");
+        if (gridBadge) {
+          gridBadge.textContent = "OFF";
+          gridBadge.className = "text-[10px] text-slate-400";
+        }
+      }
+    });
+
+    logBtn?.addEventListener("click", () => {
+      console.info(
+        "%c[SRIRS Dev Mode] Diagnostic Snapshot:",
+        "background: #047857; color: white; padding: 2px 6px; border-radius: 4px; font-weight: bold;",
+        {
+          timestamp: new Date().toISOString(),
+          viewport: `${window.innerWidth}x${window.innerHeight}`,
+          url: window.location.href,
+          storage: {
+            maintenanceBypass: sessionStorage.getItem("maintenance_bypass"),
+          },
+        }
+      );
+      alert("Diagnostic maklumat sistem telah dicetak ke Console (F12)!");
+    });
+  }
+
+  setupDevModeDock();
+  document.addEventListener("astro:after-swap", setupDevModeDock);
+</script>

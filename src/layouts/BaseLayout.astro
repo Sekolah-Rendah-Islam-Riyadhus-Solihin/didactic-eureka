@@ -4,6 +4,9 @@ import { schoolConfig } from '../config/school.config';
 import Header from '../components/layout/Header.astro';
 import Footer from '../components/layout/Footer.astro';
 import EmergencyBanner from '../components/layout/EmergencyBanner.astro';
+import MaintenanceScreen from '../components/system/MaintenanceScreen.astro';
+import MaintenanceBypassBanner from '../components/system/MaintenanceBypassBanner.astro';
+import DevModeDock from '../components/system/DevModeDock.astro';
 import { getLangFromUrl, getLocalizedPath } from '../i18n/utils';
 import type { SupportedLanguage } from '../i18n/ui';
 
@@ -48,6 +51,11 @@ const schemaOrgData = {
 
 const alternateMs = getLocalizedPath(Astro.url.pathname, 'ms');
 const alternateEn = getLocalizedPath(Astro.url.pathname, 'en');
+
+const isMaintenanceActive = schoolConfig.system?.maintenance?.enabled || false;
+const bypassKey = schoolConfig.system?.maintenance?.bypassKey || "srirs-dev-2026";
+const isLoggingEnabled = schoolConfig.system?.logging?.enabled || false;
+const logLevel = schoolConfig.system?.logging?.level || "info";
 ---
 
 <!doctype html>
@@ -93,11 +101,80 @@ const alternateEn = getLocalizedPath(Astro.url.pathname, 'en');
     </style>
   </head>
   <body class="min-h-screen flex flex-col font-sans bg-slate-50 antialiased selection:bg-school-primary-light selection:text-school-primary">
-    {showEmergencyNotice && <EmergencyBanner notice={noticeText} lang={currentLang} />}
-    <Header lang={currentLang} />
-    <main class="flex-grow">
-      <slot />
-    </main>
-    <Footer lang={currentLang} />
+    {isMaintenanceActive ? (
+      <>
+        <!-- Maintenance Mode Screen (Default for public visitors) -->
+        <div id="maintenance-view" class="w-full">
+          <MaintenanceScreen lang={currentLang} />
+        </div>
+
+        <!-- Bypass Protected Site (Shown only when bypass key is authenticated) -->
+        <div id="bypass-site-view" class="hidden min-h-screen flex-col w-full">
+          <MaintenanceBypassBanner lang={currentLang} />
+          {showEmergencyNotice && <EmergencyBanner notice={noticeText} lang={currentLang} />}
+          <Header lang={currentLang} />
+          <main class="flex-grow">
+            <slot />
+          </main>
+          <Footer lang={currentLang} />
+        </div>
+
+        <!-- Client-side Maintenance Bypass Logic -->
+        <script define:vars={{ bypassKey }}>
+          function evaluateMaintenanceBypass() {
+            const params = new URLSearchParams(window.location.search);
+            const urlBypass = params.get('bypass');
+            const sessionBypass = sessionStorage.getItem('maintenance_bypass');
+
+            // Handle explicit bypass logout
+            if (urlBypass === 'off' || urlBypass === 'false') {
+              sessionStorage.removeItem('maintenance_bypass');
+              return;
+            }
+
+            const isAuthorized = (urlBypass && urlBypass === bypassKey) || sessionBypass === 'true';
+
+            if (isAuthorized) {
+              sessionStorage.setItem('maintenance_bypass', 'true');
+              const maintView = document.getElementById('maintenance-view');
+              const bypassView = document.getElementById('bypass-site-view');
+              if (maintView && bypassView) {
+                maintView.classList.add('hidden');
+                bypassView.classList.remove('hidden');
+                bypassView.classList.add('flex');
+              }
+            }
+          }
+
+          evaluateMaintenanceBypass();
+          document.addEventListener('astro:after-swap', evaluateMaintenanceBypass);
+        </script>
+      </>
+    ) : (
+      <>
+        {showEmergencyNotice && <EmergencyBanner notice={noticeText} lang={currentLang} />}
+        <Header lang={currentLang} />
+        <main class="flex-grow">
+          <slot />
+        </main>
+        <Footer lang={currentLang} />
+      </>
+    )}
+
+    <!-- Floating Dev Mode Dock (Controlled by school.config.ts) -->
+    <DevModeDock lang={currentLang} />
+
+    <!-- Diagnostics Logging Script -->
+    {isLoggingEnabled && (
+      <script define:vars={{ path: Astro.url.pathname, lang: currentLang, logLevel }}>
+        console.info(
+          `%c[SRIRS System]%c Route loaded: %c${path}%c [${lang.toUpperCase()}]`,
+          "background: #0f172a; color: #10b981; font-weight: bold; padding: 2px 6px; border-radius: 4px;",
+          "color: #94a3b8; font-size: 11px;",
+          "color: #38bdf8; font-weight: bold; font-family: monospace;",
+          "color: #a855f7; font-weight: bold;"
+        );
+      </script>
+    )}
   </body>
 </html>

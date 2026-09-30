@@ -1,0 +1,272 @@
+---
+import { schoolConfig } from "../../config/school.config";
+import SchoolLogo from "../layout/SchoolLogo.astro";
+import type { SupportedLanguage } from "../../i18n/ui";
+
+interface Props {
+  lang?: SupportedLanguage;
+}
+
+const { lang = "ms" } = Astro.props;
+
+const maintenance = schoolConfig.system?.maintenance || {
+  enabled: true,
+  bypassKey: "srirs-dev-2026",
+  estimatedCompletion: "Akan dimaklumkan kelak",
+  title: {
+    ms: "Laman Web Sedang Diselenggara",
+    en: "Website Under Scheduled Maintenance",
+  },
+  message: {
+    ms: "Kami sedang melakukan penambahbaikan dan pengemaskinian sistem portal sekolah. Segala kesulitan amat dikesali.",
+    en: "We are currently conducting scheduled improvements and maintenance on the school portal. We apologize for any inconvenience caused.",
+  },
+  allowContact: true,
+};
+
+const title = lang === "ms" ? maintenance.title?.ms : maintenance.title?.en;
+const message = lang === "ms" ? maintenance.message?.ms : maintenance.message?.en;
+---
+
+<div class="min-h-screen bg-slate-950 text-slate-100 flex flex-col justify-between selection:bg-amber-500 selection:text-slate-950">
+  <!-- Top brand bar -->
+  <header class="py-6 px-4 sm:px-8 border-b border-slate-800/80 bg-slate-900/60 backdrop-blur-md">
+    <div class="max-w-6xl mx-auto flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <SchoolLogo size="sm" />
+        <div>
+          <span class="font-heading font-bold text-sm sm:text-base text-white tracking-tight block">
+            {schoolConfig.identity.name}
+          </span>
+          <span class="text-[11px] text-emerald-400 font-medium">
+            {schoolConfig.identity.shortName} • {schoolConfig.identity.tagline}
+          </span>
+        </div>
+      </div>
+
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-amber-400/10 text-amber-300 border border-amber-400/30">
+        <span class="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>
+        <span>{lang === "ms" ? "Mod Penyelenggaraan" : "Maintenance Mode"}</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Central Maintenance Hero -->
+  <main class="flex-grow flex items-center justify-center px-4 py-12">
+    <div class="max-w-2xl w-full mx-auto text-center space-y-8">
+      <!-- Animated Status Icon -->
+      <div class="relative inline-flex items-center justify-center">
+        <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-3xl bg-gradient-to-tr from-amber-500/20 via-emerald-500/10 to-transparent border border-amber-500/30 flex items-center justify-center text-4xl sm:text-5xl shadow-2xl">
+          ⚙️
+        </div>
+        <div class="absolute -bottom-2 -right-2 px-2.5 py-1 rounded-lg bg-amber-500 text-slate-950 font-mono text-[10px] font-bold uppercase tracking-wider shadow-md">
+          Offline
+        </div>
+      </div>
+
+      <!-- Heading & Explanatory Notice -->
+      <div class="space-y-3">
+        <h1 class="text-2xl sm:text-4xl font-heading font-bold text-white tracking-tight">
+          {title}
+        </h1>
+        <p class="text-sm sm:text-base text-slate-300 leading-relaxed max-w-xl mx-auto">
+          {message}
+        </p>
+      </div>
+
+      <!-- ETA Card -->
+      {maintenance.estimatedCompletion && (
+        <div class="inline-block p-4 sm:p-5 rounded-2xl bg-slate-900 border border-slate-800 text-left max-w-md w-full shadow-lg">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-amber-400/10 text-amber-400 flex items-center justify-center text-lg shrink-0">
+              ⏳
+            </div>
+            <div>
+              <p class="text-[11px] uppercase tracking-wider font-semibold text-slate-400">
+                {lang === "ms" ? "Anggaran Siap Operasi" : "Estimated Completion Time"}
+              </p>
+              <p class="text-sm font-bold text-white font-mono">
+                {maintenance.estimatedCompletion}
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <!-- Contact options during maintenance -->
+      {maintenance.allowContact && (
+        <div class="pt-4 border-t border-slate-800/80 space-y-4">
+          <p class="text-xs uppercase tracking-wider text-slate-400 font-semibold">
+            {lang === "ms"
+              ? "Perlukan Bantuan Segera Pejabat Sekolah?"
+              : "Need Urgent Assistance From School Office?"}
+          </p>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <a
+              href={`tel:${schoolConfig.contact.phone.replace(/[^0-9+]/g, "")}`}
+              class="p-3 rounded-xl bg-slate-900/80 border border-slate-800 hover:border-slate-700 hover:bg-slate-800 transition flex flex-col items-center gap-1 group"
+            >
+              <span class="text-lg">📞</span>
+              <span class="text-xs font-semibold text-white group-hover:text-amber-400 transition">
+                {lang === "ms" ? "Talian Pejabat" : "Office Phone"}
+              </span>
+              <span class="text-[11px] text-slate-400 font-mono">
+                {schoolConfig.contact.phone}
+              </span>
+            </a>
+
+            <a
+              href={`tel:${schoolConfig.contact.emergencyPhone.replace(/[^0-9+]/g, "")}`}
+              class="p-3 rounded-xl bg-slate-900/80 border border-slate-800 hover:border-rose-900/40 hover:bg-slate-800 transition flex flex-col items-center gap-1 group"
+            >
+              <span class="text-lg">🚨</span>
+              <span class="text-xs font-semibold text-rose-400 group-hover:text-rose-300 transition">
+                {lang === "ms" ? "Talian Kecemasan" : "Emergency Line"}
+              </span>
+              <span class="text-[11px] text-slate-400 font-mono">
+                {schoolConfig.contact.emergencyPhone}
+              </span>
+            </a>
+
+            <a
+              href={`mailto:${schoolConfig.contact.email}`}
+              class="p-3 rounded-xl bg-slate-900/80 border border-slate-800 hover:border-slate-700 hover:bg-slate-800 transition flex flex-col items-center gap-1 group"
+            >
+              <span class="text-lg">✉️</span>
+              <span class="text-xs font-semibold text-white group-hover:text-amber-400 transition">
+                {lang === "ms" ? "Emel Rasmi" : "Official Email"}
+              </span>
+              <span class="text-[11px] text-slate-400 truncate max-w-full">
+                {schoolConfig.contact.email}
+              </span>
+            </a>
+          </div>
+        </div>
+      )}
+    </div>
+  </main>
+
+  <!-- Footer with subtle Admin Bypass option -->
+  <footer class="py-6 px-4 border-t border-slate-900 bg-slate-950/80 text-center">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
+      <p>
+        © {new Date().getFullYear()} {schoolConfig.identity.name}. Hak cipta terpelihara.
+      </p>
+
+      <!-- Admin Bypass Trigger -->
+      <div class="flex items-center gap-2">
+        <button
+          type="button"
+          id="open-bypass-dialog"
+          class="text-[11px] text-slate-500 hover:text-amber-400 underline underline-offset-2 transition-colors cursor-pointer"
+        >
+          🔑 {lang === "ms" ? "Akses Pintasan Pentadbir" : "Admin Bypass Access"}
+        </button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Admin Bypass Modal Dialog -->
+  <div
+    id="bypass-modal"
+    class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-sm items-center justify-center p-4"
+    role="dialog"
+    aria-modal="true"
+  >
+    <div class="relative w-full max-w-sm rounded-3xl bg-slate-900 border border-slate-700 p-6 text-slate-200 space-y-4 shadow-2xl">
+      <div class="flex items-center justify-between">
+        <h3 class="font-heading font-bold text-base text-white flex items-center gap-2">
+          <span>🔑</span>
+          <span>{lang === "ms" ? "Pintasan Penyelenggaraan" : "Maintenance Bypass"}</span>
+        </h3>
+        <button
+          type="button"
+          id="close-bypass-dialog"
+          class="text-slate-400 hover:text-white text-lg cursor-pointer"
+        >
+          ✕
+        </button>
+      </div>
+
+      <p class="text-xs text-slate-400">
+        {lang === "ms"
+          ? "Masukkan kunci pintasan rahsia pentadbir untuk melihat laman web penuh semasa mod penyelenggaraan aktif."
+          : "Enter the secret bypass key to access the live site during maintenance mode."}
+      </p>
+
+      <form id="bypass-form" class="space-y-3">
+        <div>
+          <label for="bypass-key-input" class="block text-[11px] font-semibold text-slate-300 uppercase mb-1">
+            {lang === "ms" ? "Kunci Pintasan" : "Bypass Key"}
+          </label>
+          <input
+            type="password"
+            id="bypass-key-input"
+            required
+            placeholder="Masukkan kunci rahsia..."
+            class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-white text-xs focus:outline-none focus:border-amber-400 font-mono"
+          />
+          <p id="bypass-error" class="text-[11px] text-rose-400 hidden mt-1">
+            ⚠️ {lang === "ms" ? "Kunci pintasan tidak sah." : "Invalid bypass key."}
+          </p>
+        </div>
+
+        <button
+          type="submit"
+          class="w-full py-2.5 rounded-xl bg-amber-400 text-slate-950 font-bold text-xs hover:bg-amber-300 transition-colors shadow-sm cursor-pointer"
+        >
+          {lang === "ms" ? "Buka Laman Penuh" : "Unlock Full Site"}
+        </button>
+      </form>
+
+      <div class="pt-2 border-t border-slate-800 text-[10px] text-slate-500 space-y-1">
+        <p>💡 <strong>Tip Pentadbir:</strong> Anda juga boleh meletakkan parameter di hujung URL:</p>
+        <code class="block bg-slate-950 px-2 py-1 rounded text-amber-300 font-mono">
+          ?bypass={maintenance.bypassKey || "srirs-dev-2026"}
+        </code>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script define:vars={{ expectedKey: maintenance.bypassKey }}>
+  function initMaintenanceBypass() {
+    const openBtn = document.getElementById("open-bypass-dialog");
+    const closeBtn = document.getElementById("close-bypass-dialog");
+    const modal = document.getElementById("bypass-modal");
+    const form = document.getElementById("bypass-form");
+    const input = document.getElementById("bypass-key-input");
+    const errorMsg = document.getElementById("bypass-error");
+
+    if (!openBtn || !closeBtn || !modal || !form || !input) return;
+
+    openBtn.addEventListener("click", () => {
+      modal.classList.remove("hidden");
+      modal.classList.add("flex");
+      input.focus();
+    });
+
+    closeBtn.addEventListener("click", () => {
+      modal.classList.add("hidden");
+      modal.classList.remove("flex");
+      if (errorMsg) errorMsg.classList.add("hidden");
+    });
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const entered = input.value.trim();
+      if (entered === expectedKey) {
+        sessionStorage.setItem("maintenance_bypass", "true");
+        // Reload page to render full site
+        window.location.reload();
+      } else {
+        if (errorMsg) errorMsg.classList.remove("hidden");
+        input.select();
+      }
+    });
+  }
+
+  initMaintenanceBypass();
+  document.addEventListener("astro:after-swap", initMaintenanceBypass);
+</script>

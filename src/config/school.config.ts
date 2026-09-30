@@ -132,6 +132,33 @@ export interface SchoolConfig {
     };
     showFooterCredit: boolean;
   };
+  system?: {
+    maintenance: {
+      enabled: boolean;
+      bypassKey: string;
+      estimatedCompletion?: string;
+      title?: {
+        ms: string;
+        en: string;
+      };
+      message?: {
+        ms: string;
+        en: string;
+      };
+      allowContact: boolean;
+    };
+    devMode: {
+      enabled: boolean;
+      showViewportBadge: boolean;
+      showRouteInfo: boolean;
+      showGridOverlay: boolean;
+    };
+    logging: {
+      enabled: boolean;
+      level: "debug" | "info" | "warn" | "error";
+      logRouteTransitions?: boolean;
+    };
+  };
 }
 
 /**
@@ -369,5 +396,32 @@ export const schoolConfig: SchoolConfig = {
       paypalUrl: "https://paypal.me/inisahaini",
     },
     showFooterCredit: true,
+  },
+  system: {
+    maintenance: {
+      enabled: false,
+      bypassKey: "srirs-dev-2026",
+      estimatedCompletion: "Akan dimaklumkan kelak",
+      title: {
+        ms: "Laman Web Sedang Diselenggara",
+        en: "Website Under Scheduled Maintenance",
+      },
+      message: {
+        ms: "Kami sedang melakukan penambahbaikan dan pengemaskinian sistem portal sekolah. Segala kesulitan amat dikesali.",
+        en: "We are currently conducting scheduled improvements and maintenance on the school portal. We apologize for any inconvenience caused.",
+      },
+      allowContact: true,
+    },
+    devMode: {
+      enabled: true,
+      showViewportBadge: true,
+      showRouteInfo: true,
+      showGridOverlay: false,
+    },
+    logging: {
+      enabled: true,
+      level: "info",
+      logRouteTransitions: true,
+    },
   },
 };

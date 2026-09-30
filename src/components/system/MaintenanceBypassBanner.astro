@@ -1,0 +1,49 @@
+---
+import type { SupportedLanguage } from "../../i18n/ui";
+
+interface Props {
+  lang?: SupportedLanguage;
+}
+
+const { lang = "ms" } = Astro.props;
+---
+
+<div
+  id="maintenance-bypass-banner"
+  class="bg-amber-500 text-slate-950 px-4 py-2 text-xs font-semibold flex items-center justify-between sticky top-0 z-50 shadow-md border-b border-amber-600"
+>
+  <div class="flex items-center gap-2">
+    <span class="text-sm">⚠️</span>
+    <span>
+      {lang === "ms"
+        ? "Mod Penyelenggaraan Aktif (Akses Pintasan Sedang Berjalan). Pelawat awam sedang melihat skrin penyelenggaraan."
+        : "Maintenance Mode Active (Bypass Enabled). Public visitors currently see the maintenance screen."}
+    </span>
+  </div>
+
+  <button
+    type="button"
+    id="exit-bypass-btn"
+    class="px-2.5 py-1 rounded-lg bg-slate-950 text-amber-300 hover:text-white hover:bg-slate-900 transition-colors text-[11px] font-bold cursor-pointer shrink-0"
+  >
+    {lang === "ms" ? "Tamatkan Pintasan ✕" : "Exit Bypass ✕"}
+  </button>
+</div>
+
+<script>
+  function setupExitBypass() {
+    const btn = document.getElementById("exit-bypass-btn");
+    if (!btn) return;
+
+    btn.addEventListener("click", () => {
+      sessionStorage.removeItem("maintenance_bypass");
+      // Remove ?bypass query param from URL if present
+      const url = new URL(window.location.href);
+      url.searchParams.delete("bypass");
+      window.location.href = url.pathname + url.search;
+    });
+  }
+
+  setupExitBypass();
+  document.addEventListener("astro:after-swap", setupExitBypass);
+</script>
