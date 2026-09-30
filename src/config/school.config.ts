@@ -399,8 +399,8 @@ export const schoolConfig: SchoolConfig = {
   },
   system: {
     maintenance: {
-      enabled: false,
-      bypassKey: "srirs-dev-2026",
+      enabled: true,
+      bypassKey: "sahaini",
       estimatedCompletion: "Akan dimaklumkan kelak",
       title: {
         ms: "Laman Web Sedang Diselenggara",
