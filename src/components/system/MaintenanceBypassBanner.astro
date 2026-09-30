@@ -15,9 +15,11 @@ const { lang = "ms" } = Astro.props;
   <div class="flex items-center gap-2">
     <span class="text-sm">⚠️</span>
     <span>
-      {lang === "ms"
-        ? "Mod Penyelenggaraan Aktif (Akses Pintasan Sedang Berjalan). Pelawat awam sedang melihat skrin penyelenggaraan."
-        : "Maintenance Mode Active (Bypass Enabled). Public visitors currently see the maintenance screen."}
+      {
+        lang === "ms"
+          ? "Mod Penyelenggaraan Aktif (Akses Pintasan Sedang Berjalan). Pelawat awam sedang melihat skrin penyelenggaraan."
+          : "Maintenance Mode Active (Bypass Enabled). Public visitors currently see the maintenance screen."
+      }
     </span>
   </div>
 
