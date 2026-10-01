@@ -131,7 +131,7 @@ const logLevel = schoolConfig.system?.logging?.level || "info";
           <MaintenanceBypassBanner lang={currentLang} />
           {showEmergencyNotice && <EmergencyBanner notice={noticeText} lang={currentLang} />}
           <Header lang={currentLang} />
-          <main id="main-content" class="flex-grow pb-16 sm:pb-0">
+          <main id="main-content" class="flex-grow">
             <slot />
           </main>
           <Footer lang={currentLang} />
@@ -172,7 +172,7 @@ const logLevel = schoolConfig.system?.logging?.level || "info";
       <>
         {showEmergencyNotice && <EmergencyBanner notice={noticeText} lang={currentLang} />}
         <Header lang={currentLang} />
-        <main id="main-content" class="flex-grow pb-16 sm:pb-0">
+        <main id="main-content" class="flex-grow">
           <slot />
         </main>
         <Footer lang={currentLang} />

@@ -64,10 +64,10 @@ const labels = {
 };
 ---
 
-<!-- Floating A11y Trigger Button (Drawer style, minimized to icon, transparent at rest) -->
+<!-- Floating A11y Trigger Button (Desktop / Tablet only; mobile uses MobileQuickBar button) -->
 <div
   id="a11y-floating-dock"
-  class="fixed bottom-20 sm:bottom-24 left-3 sm:left-4 z-40 transition-all duration-500 opacity-30 hover:opacity-100 select-none group"
+  class="hidden sm:flex fixed sm:bottom-24 left-3 sm:left-4 z-40 transition-all duration-500 opacity-30 hover:opacity-100 select-none group"
 >
   <button
     type="button"
