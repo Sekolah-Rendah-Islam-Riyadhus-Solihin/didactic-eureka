@@ -16,17 +16,148 @@
   --font-heading: Georgia, Cambria, 'Times New Roman', Times, serif;
 }
 
-/* Accessible focus outlines for keyboard navigation */
-*:focus-visible {
-  outline: 2px solid var(--color-school-primary);
-  outline-offset: 3px;
-}
-
 /* Ensure smooth scrolling across page sections */
 html {
   scroll-behavior: smooth;
   color: var(--color-school-dark);
   background-color: #ffffff;
+  transition: font-size 0.15s ease-out;
+}
+
+/* ----------------------------------------------------
+ * ACCESSIBILITY ENGINE: FONT SCALING
+ * ---------------------------------------------------- */
+html[data-font-size="large"] {
+  font-size: 115%;
+}
+
+html[data-font-size="xlarge"] {
+  font-size: 130%;
+}
+
+/* ----------------------------------------------------
+ * ACCESSIBILITY ENGINE: DYSLEXIA / READABILITY MODE
+ * ---------------------------------------------------- */
+html[data-readable-font="true"] body,
+html[data-readable-font="true"] p,
+html[data-readable-font="true"] span,
+html[data-readable-font="true"] a,
+html[data-readable-font="true"] li,
+html[data-readable-font="true"] input,
+html[data-readable-font="true"] button {
+  font-family: system-ui, -apple-system, 'Trebuchet MS', Verdana, sans-serif !important;
+  letter-spacing: 0.04em !important;
+  word-spacing: 0.08em !important;
+  line-height: 1.75 !important;
+}
+
+/* ----------------------------------------------------
+ * ACCESSIBILITY ENGINE: HIGH CONTRAST MODE (WCAG AAA)
+ * ---------------------------------------------------- */
+html[data-contrast="high"] {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+
+html[data-contrast="high"] body {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+
+html[data-contrast="high"] header,
+html[data-contrast="high"] nav,
+html[data-contrast="high"] footer,
+html[data-contrast="high"] section,
+html[data-contrast="high"] main,
+html[data-contrast="high"] div[class*="bg-white"],
+html[data-contrast="high"] div[class*="bg-slate-50"],
+html[data-contrast="high"] div[class*="bg-slate-100"],
+html[data-contrast="high"] div[class*="bg-slate-900"],
+html[data-contrast="high"] div[class*="bg-slate-950"] {
+  background-color: #000000 !important;
+  border-color: #facc15 !important;
+}
+
+html[data-contrast="high"] p,
+html[data-contrast="high"] span:not([class*="bg-"]),
+html[data-contrast="high"] li,
+html[data-contrast="high"] h1,
+html[data-contrast="high"] h2,
+html[data-contrast="high"] h3,
+html[data-contrast="high"] h4 {
+  color: #ffffff !important;
+}
+
+html[data-contrast="high"] a {
+  color: #fde047 !important;
+  text-decoration: underline !important;
+  text-underline-offset: 3px !important;
+}
+
+html[data-contrast="high"] button:not([class*="bg-amber"]) {
+  border: 2px solid #facc15 !important;
+  color: #ffffff !important;
+  background-color: #111827 !important;
+}
+
+html[data-contrast="high"] input,
+html[data-contrast="high"] select,
+html[data-contrast="high"] textarea {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #facc15 !important;
+}
+
+/* ----------------------------------------------------
+ * ACCESSIBILITY ENGINE: REDUCED MOTION
+ * ---------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+html[data-reduced-motion="true"] *,
+html[data-reduced-motion="true"] *::before,
+html[data-reduced-motion="true"] *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}
+
+/* Accessible focus outlines for keyboard navigation */
+*:focus-visible {
+  outline: 3px solid #f59e0b !important;
+  outline-offset: 3px !important;
+}
+
+/* ----------------------------------------------------
+ * FLUID RESPONSIVE UTILITIES (Mobile & Large Screen)
+ * ---------------------------------------------------- */
+.fluid-hero-title {
+  font-size: clamp(2rem, 5vw + 1rem, 4rem);
+  line-height: 1.15;
+}
+
+.fluid-section-title {
+  font-size: clamp(1.5rem, 3vw + 0.75rem, 2.75rem);
+  line-height: 1.25;
+}
+
+.max-w-reading {
+  max-width: 68ch;
+}
+
+.touch-target {
+  min-height: 44px;
+  min-width: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Custom scrollbar for modern browsers */

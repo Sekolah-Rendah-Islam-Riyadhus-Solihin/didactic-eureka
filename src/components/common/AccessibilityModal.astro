@@ -1,0 +1,410 @@
+---
+import type { SupportedLanguage } from "../../i18n/ui";
+
+interface Props {
+  lang?: SupportedLanguage;
+}
+
+const { lang = "ms" } = Astro.props;
+
+const labels = {
+  ms: {
+    btnTitle: "Kawalan Aksesibiliti (Saiz Teks, Kontras, Fon)",
+    btnLabel: "Aksesibiliti",
+    modalTitle: "Pusat Kawalan Aksesibiliti",
+    modalSubtitle: "Sesuaikan pengalaman paparan mengikut keselesaan penglihatan anda.",
+    fontSizeTitle: "Saiz Teks Paparan",
+    fontNormal: "Biasa",
+    fontLarge: "Besar",
+    fontXLarge: "Sangat Besar",
+    contrastTitle: "Mod Kontras Tinggi (WCAG AAA)",
+    contrastDesc: "Latar hitam pekat dengan teks putih & kuning berkejelasan tinggi.",
+    readableFontTitle: "Fon Mudah Baca (Disleksia)",
+    readableFontDesc: "Penjarakan huruf dan baris lebih luas untuk kemudahan membaca.",
+    reducedMotionTitle: "Kurangkan Pergerakan Animasi",
+    reducedMotionDesc: "Hentikan animasi dan kesan visual bergerak.",
+    resetBtn: "Tetapkan Semula ke Asal",
+    closeBtn: "Tutup",
+  },
+  en: {
+    btnTitle: "Accessibility Controls (Font Size, Contrast, Readability)",
+    btnLabel: "Accessibility",
+    modalTitle: "Accessibility Control Center",
+    modalSubtitle: "Customize your viewing experience for maximum visual comfort.",
+    fontSizeTitle: "Display Font Size",
+    fontNormal: "Default",
+    fontLarge: "Large",
+    fontXLarge: "Extra Large",
+    contrastTitle: "High Contrast Mode (WCAG AAA)",
+    contrastDesc: "Stark black background with high-visibility white & yellow text.",
+    readableFontTitle: "Readable / Dyslexia Font",
+    readableFontDesc: "Increased letter and line spacing for effortless reading.",
+    reducedMotionTitle: "Reduce Motion & Animations",
+    reducedMotionDesc: "Disables transitions, pulse effects, and animated elements.",
+    resetBtn: "Reset to Defaults",
+    closeBtn: "Close",
+  },
+}[lang] || {
+  btnTitle: "Kawalan Aksesibiliti",
+  btnLabel: "Aksesibiliti",
+  modalTitle: "Pusat Kawalan Aksesibiliti",
+  modalSubtitle: "Sesuaikan pengalaman paparan mengikut keselesaan penglihatan anda.",
+  fontSizeTitle: "Saiz Teks Paparan",
+  fontNormal: "Biasa",
+  fontLarge: "Besar",
+  fontXLarge: "Sangat Besar",
+  contrastTitle: "Mod Kontras Tinggi (WCAG AAA)",
+  contrastDesc: "Latar hitam pekat dengan teks putih & kuning berkejelasan tinggi.",
+  readableFontTitle: "Fon Mudah Baca (Disleksia)",
+  readableFontDesc: "Penjarakan huruf dan baris lebih luas untuk kemudahan membaca.",
+  reducedMotionTitle: "Kurangkan Pergerakan Animasi",
+  reducedMotionDesc: "Hentikan animasi dan kesan visual bergerak.",
+  resetBtn: "Tetapkan Semula ke Asal",
+  closeBtn: "Tutup",
+};
+---
+
+<!-- Floating A11y Trigger Button (Desktop / Tablet) -->
+<div class="fixed bottom-4 left-4 z-40 hidden sm:block">
+  <button
+    type="button"
+    id="open-a11y-modal-btn"
+    class="flex items-center gap-2 px-3.5 py-2.5 rounded-full bg-slate-900/90 hover:bg-slate-900 text-white border border-slate-700/80 shadow-xl backdrop-blur-md transition-all hover:scale-105 hover:border-amber-400 focus:outline-none focus:ring-4 focus:ring-amber-400 cursor-pointer"
+    aria-haspopup="dialog"
+    aria-expanded="false"
+    aria-controls="a11y-dialog"
+    title={labels.btnTitle}
+  >
+    <span class="text-base" aria-hidden="true">♿</span>
+    <span class="text-xs font-semibold tracking-wide">{labels.btnLabel}</span>
+  </button>
+</div>
+
+<!-- Accessibility Modal Backdrop & Dialog -->
+<div
+  id="a11y-dialog"
+  class="fixed inset-0 z-50 hidden bg-slate-950/75 backdrop-blur-xs items-center justify-center p-3 sm:p-4"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="a11y-title"
+>
+  <div
+    class="relative w-full max-w-lg rounded-3xl bg-slate-900 border border-slate-700 p-5 sm:p-7 shadow-2xl text-slate-200 space-y-6 max-h-[92vh] overflow-y-auto"
+  >
+    <!-- Modal Header -->
+    <div class="flex items-start justify-between pb-3 border-b border-slate-800">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-2xl bg-amber-400 text-slate-950 flex items-center justify-center text-xl font-bold shrink-0 shadow">
+          ♿
+        </div>
+        <div>
+          <h2 id="a11y-title" class="font-heading font-bold text-base sm:text-lg text-white">
+            {labels.modalTitle}
+          </h2>
+          <p class="text-xs text-slate-400">
+            {labels.modalSubtitle}
+          </p>
+        </div>
+      </div>
+      <button
+        type="button"
+        id="close-a11y-modal-btn"
+        class="w-8 h-8 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center text-sm transition cursor-pointer"
+        aria-label={labels.closeBtn}
+      >
+        ✕
+      </button>
+    </div>
+
+    <!-- Setting 1: Font Size Adjustment -->
+    <div class="space-y-2.5">
+      <div class="flex justify-between items-center">
+        <label class="text-xs font-bold text-slate-200 uppercase tracking-wider">
+          {labels.fontSizeTitle}
+        </label>
+        <span id="current-font-size-label" class="text-xs font-mono text-amber-400 font-bold">
+          100%
+        </span>
+      </div>
+
+      <div class="grid grid-cols-3 gap-2 bg-slate-950/80 p-1.5 rounded-2xl border border-slate-800">
+        <button
+          type="button"
+          data-font-size="normal"
+          class="font-btn py-2 px-3 rounded-xl text-xs font-semibold transition-all cursor-pointer flex flex-col items-center gap-0.5 border border-transparent text-slate-300 hover:text-white hover:bg-slate-800"
+        >
+          <span class="text-sm font-bold">A</span>
+          <span class="text-[10px] opacity-80">{labels.fontNormal} (100%)</span>
+        </button>
+
+        <button
+          type="button"
+          data-font-size="large"
+          class="font-btn py-2 px-3 rounded-xl text-xs font-semibold transition-all cursor-pointer flex flex-col items-center gap-0.5 border border-transparent text-slate-300 hover:text-white hover:bg-slate-800"
+        >
+          <span class="text-base font-bold">A+</span>
+          <span class="text-[10px] opacity-80">{labels.fontLarge} (115%)</span>
+        </button>
+
+        <button
+          type="button"
+          data-font-size="xlarge"
+          class="font-btn py-2 px-3 rounded-xl text-xs font-semibold transition-all cursor-pointer flex flex-col items-center gap-0.5 border border-transparent text-slate-300 hover:text-white hover:bg-slate-800"
+        >
+          <span class="text-lg font-bold">A++</span>
+          <span class="text-[10px] opacity-80">{labels.fontXLarge} (130%)</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Setting 2: High Contrast Mode -->
+    <div class="flex items-center justify-between p-3.5 rounded-2xl bg-slate-950/60 border border-slate-800">
+      <div class="space-y-0.5 pr-4">
+        <div class="text-xs font-bold text-white flex items-center gap-1.5">
+          <span>🌓</span>
+          <span>{labels.contrastTitle}</span>
+        </div>
+        <p class="text-[11px] text-slate-400 leading-snug">
+          {labels.contrastDesc}
+        </p>
+      </div>
+      <label class="relative inline-flex items-center cursor-pointer shrink-0">
+        <input type="checkbox" id="toggle-high-contrast" class="sr-only peer" />
+        <div class="w-11 h-6 bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-amber-400 peer-checked:after:bg-slate-950"></div>
+      </label>
+    </div>
+
+    <!-- Setting 3: Dyslexia / Readable Font -->
+    <div class="flex items-center justify-between p-3.5 rounded-2xl bg-slate-950/60 border border-slate-800">
+      <div class="space-y-0.5 pr-4">
+        <div class="text-xs font-bold text-white flex items-center gap-1.5">
+          <span>📖</span>
+          <span>{labels.readableFontTitle}</span>
+        </div>
+        <p class="text-[11px] text-slate-400 leading-snug">
+          {labels.readableFontDesc}
+        </p>
+      </div>
+      <label class="relative inline-flex items-center cursor-pointer shrink-0">
+        <input type="checkbox" id="toggle-readable-font" class="sr-only peer" />
+        <div class="w-11 h-6 bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-400 peer-checked:after:bg-slate-950"></div>
+      </label>
+    </div>
+
+    <!-- Setting 4: Reduced Motion -->
+    <div class="flex items-center justify-between p-3.5 rounded-2xl bg-slate-950/60 border border-slate-800">
+      <div class="space-y-0.5 pr-4">
+        <div class="text-xs font-bold text-white flex items-center gap-1.5">
+          <span>⏸️</span>
+          <span>{labels.reducedMotionTitle}</span>
+        </div>
+        <p class="text-[11px] text-slate-400 leading-snug">
+          {labels.reducedMotionDesc}
+        </p>
+      </div>
+      <label class="relative inline-flex items-center cursor-pointer shrink-0">
+        <input type="checkbox" id="toggle-reduced-motion" class="sr-only peer" />
+        <div class="w-11 h-6 bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-sky-400 peer-checked:after:bg-slate-950"></div>
+      </label>
+    </div>
+
+    <!-- Reset and Close Footer -->
+    <div class="pt-2 flex flex-col sm:flex-row gap-2 justify-between items-center border-t border-slate-800">
+      <button
+        type="button"
+        id="reset-a11y-btn"
+        class="text-xs text-slate-400 hover:text-amber-400 underline underline-offset-2 transition cursor-pointer py-1"
+      >
+        ↺ {labels.resetBtn}
+      </button>
+
+      <button
+        type="button"
+        id="apply-close-a11y-btn"
+        class="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-xs transition cursor-pointer shadow"
+      >
+        ✓ {labels.closeBtn}
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  interface A11yPreferences {
+    fontSize: "normal" | "large" | "xlarge";
+    highContrast: boolean;
+    readableFont: boolean;
+    reducedMotion: boolean;
+  }
+
+  const STORAGE_KEY = "srirs_a11y_prefs";
+
+  const defaultPrefs: A11yPreferences = {
+    fontSize: "normal",
+    highContrast: false,
+    readableFont: false,
+    reducedMotion: false,
+  };
+
+  function getSavedPrefs(): A11yPreferences {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) return { ...defaultPrefs, ...JSON.parse(saved) };
+    } catch (e) {
+      // fallback
+    }
+    return defaultPrefs;
+  }
+
+  function applyPrefs(prefs: A11yPreferences) {
+    const root = document.documentElement;
+
+    // 1. Font Size
+    if (prefs.fontSize === "normal") {
+      root.removeAttribute("data-font-size");
+    } else {
+      root.setAttribute("data-font-size", prefs.fontSize);
+    }
+
+    // 2. High Contrast
+    if (prefs.highContrast) {
+      root.setAttribute("data-contrast", "high");
+    } else {
+      root.removeAttribute("data-contrast");
+    }
+
+    // 3. Readable Font
+    if (prefs.readableFont) {
+      root.setAttribute("data-readable-font", "true");
+    } else {
+      root.removeAttribute("data-readable-font");
+    }
+
+    // 4. Reduced Motion
+    if (prefs.reducedMotion) {
+      root.setAttribute("data-reduced-motion", "true");
+    } else {
+      root.removeAttribute("data-reduced-motion");
+    }
+
+    // Save to localStorage
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(prefs));
+    } catch (e) {}
+
+    // Update UI elements in dialog
+    updateDialogUI(prefs);
+  }
+
+  function updateDialogUI(prefs: A11yPreferences) {
+    // Font size buttons
+    const fontBtns = document.querySelectorAll(".font-btn");
+    const label = document.getElementById("current-font-size-label");
+
+    fontBtns.forEach((btn) => {
+      const val = btn.getAttribute("data-font-size");
+      if (val === prefs.fontSize) {
+        btn.classList.add("bg-amber-400", "text-slate-950", "font-bold", "shadow-sm");
+        btn.classList.remove("text-slate-300", "hover:bg-slate-800");
+      } else {
+        btn.classList.remove("bg-amber-400", "text-slate-950", "font-bold", "shadow-sm");
+        btn.classList.add("text-slate-300", "hover:bg-slate-800");
+      }
+    });
+
+    if (label) {
+      label.textContent = prefs.fontSize === "normal" ? "100%" : prefs.fontSize === "large" ? "115%" : "130%";
+    }
+
+    // Toggles
+    const contrastInput = document.getElementById("toggle-high-contrast") as HTMLInputElement | null;
+    const readableInput = document.getElementById("toggle-readable-font") as HTMLInputElement | null;
+    const motionInput = document.getElementById("toggle-reduced-motion") as HTMLInputElement | null;
+
+    if (contrastInput) contrastInput.checked = prefs.highContrast;
+    if (readableInput) readableInput.checked = prefs.readableFont;
+    if (motionInput) motionInput.checked = prefs.reducedMotion;
+  }
+
+  function setupA11yModal() {
+    const dialog = document.getElementById("a11y-dialog");
+    const openBtn = document.getElementById("open-a11y-modal-btn");
+    const closeBtn = document.getElementById("close-a11y-modal-btn");
+    const applyCloseBtn = document.getElementById("apply-close-a11y-btn");
+    const resetBtn = document.getElementById("reset-a11y-btn");
+
+    // Also support external triggers (e.g., from MobileQuickBar)
+    const mobileTrigger = document.getElementById("mobile-a11y-trigger");
+
+    let currentPrefs = getSavedPrefs();
+    applyPrefs(currentPrefs);
+
+    const open = () => {
+      if (!dialog) return;
+      dialog.classList.remove("hidden");
+      dialog.classList.add("flex");
+      document.body.style.overflow = "hidden";
+      updateDialogUI(getSavedPrefs());
+    };
+
+    const close = () => {
+      if (!dialog) return;
+      dialog.classList.add("hidden");
+      dialog.classList.remove("flex");
+      document.body.style.overflow = "";
+    };
+
+    openBtn?.addEventListener("click", open);
+    mobileTrigger?.addEventListener("click", open);
+    closeBtn?.addEventListener("click", close);
+    applyCloseBtn?.addEventListener("click", close);
+
+    dialog?.addEventListener("click", (e) => {
+      if (e.target === dialog) close();
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && dialog && !dialog.classList.contains("hidden")) {
+        close();
+      }
+    });
+
+    // Font buttons
+    const fontBtns = document.querySelectorAll(".font-btn");
+    fontBtns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const val = btn.getAttribute("data-font-size") as "normal" | "large" | "xlarge";
+        if (val) {
+          currentPrefs.fontSize = val;
+          applyPrefs(currentPrefs);
+        }
+      });
+    });
+
+    // Checkboxes
+    document.getElementById("toggle-high-contrast")?.addEventListener("change", (e) => {
+      currentPrefs.highContrast = (e.target as HTMLInputElement).checked;
+      applyPrefs(currentPrefs);
+    });
+
+    document.getElementById("toggle-readable-font")?.addEventListener("change", (e) => {
+      currentPrefs.readableFont = (e.target as HTMLInputElement).checked;
+      applyPrefs(currentPrefs);
+    });
+
+    document.getElementById("toggle-reduced-motion")?.addEventListener("change", (e) => {
+      currentPrefs.reducedMotion = (e.target as HTMLInputElement).checked;
+      applyPrefs(currentPrefs);
+    });
+
+    // Reset button
+    resetBtn?.addEventListener("click", () => {
+      currentPrefs = { ...defaultPrefs };
+      applyPrefs(currentPrefs);
+    });
+  }
+
+  // Run on first load and on client-side router navigation
+  setupA11yModal();
+  document.addEventListener("astro:after-swap", setupA11yModal);
+</script>

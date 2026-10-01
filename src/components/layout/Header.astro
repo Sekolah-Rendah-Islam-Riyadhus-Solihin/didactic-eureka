@@ -43,6 +43,14 @@ const currentPath = Astro.url.pathname;
 const isPrivate = schoolConfig.identity.schoolType === "private";
 ---
 
+<!-- Skip to Main Content (Accessibility standard for keyboard and screen reader users) -->
+<a
+  href="#main-content"
+  class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2.5 focus:bg-amber-400 focus:text-slate-950 focus:font-bold focus:rounded-xl focus:shadow-2xl focus:outline-none focus:ring-4 focus:ring-slate-900"
+>
+  {lang === "ms" ? "Langkau ke kandungan utama →" : "Skip to main content →"}
+</a>
+
 <!-- Top utility bar for quick contacts & term info -->
 <div
   class="bg-slate-900 text-slate-300 text-xs py-2 px-3 sm:px-6 lg:px-8 border-b border-slate-800"
@@ -276,14 +284,14 @@ const isPrivate = schoolConfig.identity.schoolType === "private";
         </a>
       </div>
 
-      <!-- Mobile Hamburger Button -->
+      <!-- Mobile Hamburger Button (Min 44x44px touch target) -->
       <div class="flex items-center lg:hidden">
         <button
           id="mobile-menu-button"
           type="button"
-          aria-label="Toggle navigation menu"
+          aria-label="Buka Menu Navigasi"
           aria-expanded="false"
-          class="p-2 rounded-lg text-slate-700 hover:text-slate-900 hover:bg-slate-100 focus:outline-none"
+          class="min-w-[44px] min-h-[44px] flex items-center justify-center rounded-xl text-slate-700 hover:text-slate-900 hover:bg-slate-100 active:bg-slate-200 focus:outline-none focus:ring-2 focus:ring-school-primary transition-colors cursor-pointer"
         >
           <svg
             id="hamburger-icon"
@@ -314,10 +322,10 @@ const isPrivate = schoolConfig.identity.schoolType === "private";
     </div>
   </div>
 
-  <!-- Mobile Drawer Menu -->
+  <!-- Mobile Drawer Menu (Touch-Friendly Links) -->
   <div
     id="mobile-menu"
-    class="hidden lg:hidden border-t border-slate-200 bg-white px-4 pt-3 pb-6 shadow-lg"
+    class="hidden lg:hidden border-t border-slate-200 bg-white px-4 pt-3 pb-6 shadow-xl space-y-2 animate-in fade-in duration-150"
   >
     <div class="space-y-1">
       {
@@ -327,19 +335,19 @@ const isPrivate = schoolConfig.identity.schoolType === "private";
               <div class="space-y-1 pb-1">
                 <a
                   href={item.href}
-                  class="block px-3 py-2 rounded-md text-base font-semibold text-slate-800 hover:text-school-primary hover:bg-slate-50"
+                  class="min-h-[44px] flex items-center px-3.5 py-2 rounded-xl text-base font-semibold text-slate-800 hover:text-school-primary hover:bg-slate-50 transition-colors"
                 >
                   {item.label}
                 </a>
-                <div class="pl-4 ml-3 border-l-2 border-slate-100 space-y-1">
+                <div class="pl-4 ml-3 border-l-2 border-slate-200 space-y-1">
                   {item.children.map((child) => {
                     const isChildActive = currentPath === child.href;
                     return (
                       <a
                         href={child.href}
-                        class={`block px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
+                        class={`min-h-[42px] flex items-center px-3.5 py-2 rounded-xl text-sm font-medium transition-colors ${
                           isChildActive
-                            ? "text-school-primary font-bold bg-school-primary-light/60"
+                            ? "text-school-primary font-bold bg-school-primary-light"
                             : "text-slate-600 hover:text-school-primary hover:bg-slate-50"
                         }`}
                       >

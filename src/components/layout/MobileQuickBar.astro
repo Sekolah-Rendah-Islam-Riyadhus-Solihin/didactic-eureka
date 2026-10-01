@@ -1,0 +1,128 @@
+---
+import { schoolConfig } from "../../config/school.config";
+import type { SupportedLanguage } from "../../i18n/ui";
+
+interface Props {
+  lang?: SupportedLanguage;
+}
+
+const { lang = "ms" } = Astro.props;
+
+const phoneClean = schoolConfig.contact.phone.replace(/[^0-9+]/g, "");
+// Format WhatsApp number (e.g., from +607-455 6000 or 074556000 to standard 60...)
+const waNumber = phoneClean.startsWith("+")
+  ? phoneClean.replace("+", "")
+  : phoneClean.startsWith("0")
+    ? "6" + phoneClean
+    : phoneClean;
+
+const waMessage = encodeURIComponent(
+  lang === "ms"
+    ? `Assalamualaikum / Salam Sejahtera Pentadbiran ${schoolConfig.identity.shortName}, saya ingin bertanya mengenai maklumat persekolahan.`
+    : `Hello / Greetings Administration of ${schoolConfig.identity.shortName}, I would like to inquire about school information.`
+);
+
+const labels = {
+  ms: {
+    call: "Telefon",
+    whatsapp: "WhatsApp",
+    a11y: "Aksesibiliti",
+    top: "Ke Atas",
+  },
+  en: {
+    call: "Call",
+    whatsapp: "WhatsApp",
+    a11y: "A11y",
+    top: "Top",
+  },
+}[lang] || {
+  call: "Telefon",
+  whatsapp: "WhatsApp",
+  a11y: "Aksesibiliti",
+  top: "Ke Atas",
+};
+---
+
+<!-- Mobile Portrait Sticky Action Bar (Hidden on Tablets & Desktop) -->
+<nav
+  aria-label="Tindakan Pantas Mudah Alih"
+  class="sm:hidden fixed bottom-0 inset-x-0 z-40 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-t border-slate-200 dark:border-slate-800 shadow-[0_-4px_16px_rgba(0,0,0,0.06)] px-2 py-1 flex items-center justify-around select-none"
+>
+  <!-- 1. Direct Dial Office -->
+  <a
+    href={`tel:${phoneClean}`}
+    class="flex flex-col items-center justify-center min-w-[58px] min-h-[44px] rounded-xl text-slate-700 hover:text-emerald-700 active:bg-slate-100 transition-colors p-1"
+    title={labels.call}
+  >
+    <div class="w-6 h-6 rounded-full bg-emerald-50 text-emerald-700 flex items-center justify-center text-xs font-bold mb-0.5">
+      📞
+    </div>
+    <span class="text-[10px] font-medium leading-none">{labels.call}</span>
+  </a>
+
+  <!-- 2. Direct WhatsApp Chat -->
+  <a
+    href={`https://wa.me/${waNumber}?text=${waMessage}`}
+    target="_blank"
+    rel="noopener noreferrer"
+    class="flex flex-col items-center justify-center min-w-[58px] min-h-[44px] rounded-xl text-slate-700 hover:text-emerald-600 active:bg-slate-100 transition-colors p-1"
+    title={labels.whatsapp}
+  >
+    <div class="w-6 h-6 rounded-full bg-emerald-500 text-white flex items-center justify-center text-xs font-bold mb-0.5 shadow-xs">
+      💬
+    </div>
+    <span class="text-[10px] font-medium leading-none">{labels.whatsapp}</span>
+  </a>
+
+  <!-- 3. Accessibility Suite Modal Trigger -->
+  <button
+    type="button"
+    id="mobile-a11y-trigger"
+    class="flex flex-col items-center justify-center min-w-[58px] min-h-[44px] rounded-xl text-slate-700 hover:text-amber-600 active:bg-slate-100 transition-colors p-1 cursor-pointer"
+    title={labels.a11y}
+  >
+    <div class="w-6 h-6 rounded-full bg-amber-100 text-amber-900 flex items-center justify-center text-xs font-bold mb-0.5">
+      ♿
+    </div>
+    <span class="text-[10px] font-medium leading-none">{labels.a11y}</span>
+  </button>
+
+  <!-- 4. Smooth Back-to-Top Button -->
+  <button
+    type="button"
+    id="mobile-back-to-top"
+    class="flex flex-col items-center justify-center min-w-[58px] min-h-[44px] rounded-xl text-slate-500 hover:text-slate-900 active:bg-slate-100 transition-colors p-1 cursor-pointer opacity-50 hover:opacity-100"
+    title={labels.top}
+  >
+    <div class="w-6 h-6 rounded-full bg-slate-100 text-slate-700 flex items-center justify-center text-xs font-bold mb-0.5">
+      ▲
+    </div>
+    <span class="text-[10px] font-medium leading-none">{labels.top}</span>
+  </button>
+</nav>
+
+<script>
+  function setupMobileQuickBar() {
+    const topBtn = document.getElementById("mobile-back-to-top");
+    if (!topBtn) return;
+
+    topBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    const handleScroll = () => {
+      if (window.scrollY > 250) {
+        topBtn.classList.remove("opacity-50");
+        topBtn.classList.add("opacity-100", "text-slate-900");
+      } else {
+        topBtn.classList.add("opacity-50");
+        topBtn.classList.remove("opacity-100", "text-slate-900");
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+  }
+
+  setupMobileQuickBar();
+  document.addEventListener("astro:after-swap", setupMobileQuickBar);
+</script>

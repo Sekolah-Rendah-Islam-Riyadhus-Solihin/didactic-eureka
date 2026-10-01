@@ -37,13 +37,13 @@ const isPrivate = schoolConfig.identity.schoolType === "private";
           </div>
 
           <h1
-            class="text-3xl sm:text-5xl lg:text-6xl font-heading font-extrabold tracking-tight leading-tight"
+            class="fluid-hero-title font-heading font-extrabold tracking-tight"
           >
             {schoolConfig.identity.tagline}
           </h1>
 
           <p
-            class="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto lg:mx-0 font-light leading-relaxed"
+            class="text-base sm:text-lg text-slate-300 max-w-reading mx-auto lg:mx-0 font-light leading-relaxed"
           >
             Selamat datang ke <strong class="text-white font-semibold"
               >{schoolConfig.identity.name}</strong
@@ -52,13 +52,13 @@ const isPrivate = schoolConfig.identity.schoolType === "private";
             kecemerlangan akademik anak-anak anda.
           </p>
 
-          <!-- Call to action buttons -->
+          <!-- Call to action buttons (Full width on mobile portrait, auto on tablet/desktop) -->
           <div
-            class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2"
+            class="flex flex-col sm:flex-row items-stretch sm:items-center justify-center lg:justify-start gap-3 sm:gap-4 pt-2"
           >
             <a
               href={getLocalizedPath("/admissions", lang)}
-              class="px-6 py-3.5 rounded-xl text-sm font-bold bg-school-primary text-white hover:bg-school-primary-hover shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5"
+              class="w-full sm:w-auto text-center px-6 py-3.5 rounded-xl text-sm font-bold bg-school-primary text-white hover:bg-school-primary-hover shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5"
             >
               {
                 isPrivate
@@ -68,7 +68,7 @@ const isPrivate = schoolConfig.identity.schoolType === "private";
             </a>
             <a
               href={getLocalizedPath("/about", lang)}
-              class="px-6 py-3.5 rounded-xl text-sm font-semibold bg-white/10 text-white hover:bg-white/20 border border-white/20 transition-all backdrop-blur-sm"
+              class="w-full sm:w-auto text-center px-6 py-3.5 rounded-xl text-sm font-semibold bg-white/10 text-white hover:bg-white/20 border border-white/20 transition-all backdrop-blur-sm"
             >
               Ketahui Falsafah Kami
             </a>

@@ -7,6 +7,8 @@ import EmergencyBanner from '../components/layout/EmergencyBanner.astro';
 import MaintenanceScreen from '../components/system/MaintenanceScreen.astro';
 import MaintenanceBypassBanner from '../components/system/MaintenanceBypassBanner.astro';
 import DevModeDock from '../components/system/DevModeDock.astro';
+import AccessibilityModal from '../components/common/AccessibilityModal.astro';
+import MobileQuickBar from '../components/layout/MobileQuickBar.astro';
 import { getLangFromUrl, getLocalizedPath } from '../i18n/utils';
 import type { SupportedLanguage } from '../i18n/ui';
 
@@ -99,6 +101,22 @@ const logLevel = schoolConfig.system?.logging?.level || "info";
         --color-school-muted: var(--muted);
       }
     </style>
+    <!-- Immediate A11y Theme Initializer (Prevents FOUC on page load) -->
+    <script is:inline>
+      (function () {
+        try {
+          const raw = localStorage.getItem("srirs_a11y_prefs");
+          if (raw) {
+            const prefs = JSON.parse(raw);
+            const root = document.documentElement;
+            if (prefs.fontSize && prefs.fontSize !== "normal") root.setAttribute("data-font-size", prefs.fontSize);
+            if (prefs.highContrast) root.setAttribute("data-contrast", "high");
+            if (prefs.readableFont) root.setAttribute("data-readable-font", "true");
+            if (prefs.reducedMotion) root.setAttribute("data-reduced-motion", "true");
+          }
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body class="min-h-screen flex flex-col font-sans bg-slate-50 antialiased selection:bg-school-primary-light selection:text-school-primary">
     {isMaintenanceActive ? (
@@ -113,7 +131,7 @@ const logLevel = schoolConfig.system?.logging?.level || "info";
           <MaintenanceBypassBanner lang={currentLang} />
           {showEmergencyNotice && <EmergencyBanner notice={noticeText} lang={currentLang} />}
           <Header lang={currentLang} />
-          <main class="flex-grow">
+          <main id="main-content" class="flex-grow pb-16 sm:pb-0">
             <slot />
           </main>
           <Footer lang={currentLang} />
@@ -154,12 +172,18 @@ const logLevel = schoolConfig.system?.logging?.level || "info";
       <>
         {showEmergencyNotice && <EmergencyBanner notice={noticeText} lang={currentLang} />}
         <Header lang={currentLang} />
-        <main class="flex-grow">
+        <main id="main-content" class="flex-grow pb-16 sm:pb-0">
           <slot />
         </main>
         <Footer lang={currentLang} />
       </>
     )}
+
+    <!-- Accessibility Control Modal -->
+    <AccessibilityModal lang={currentLang} />
+
+    <!-- Mobile Sticky Quick Bar (Phone screen actions) -->
+    <MobileQuickBar lang={currentLang} />
 
     <!-- Floating Dev Mode Dock (Controlled by school.config.ts) -->
     <DevModeDock lang={currentLang} />
