@@ -30,45 +30,53 @@ if (!devConfig?.enabled) {
         </div>
       </div>
 
-      <!-- Floating Dev Dock Pill -->
+      <!-- Floating Dev Dock Pill (Higher bottom offset, drawer minimize style, transparent at rest) -->
       <div
         id="dev-mode-dock"
-        class="fixed bottom-4 right-4 z-50 font-sans text-xs select-none"
+        class="fixed bottom-20 sm:bottom-24 right-3 sm:right-4 z-40 font-sans text-xs select-none transition-all duration-500 opacity-30 hover:opacity-100 group"
       >
-        <!-- Collapsed Pill -->
+        <!-- Collapsed Pill (Minimized to Dev Icon 🛠️, expands smoothly on hover) -->
         <div
           id="dev-dock-pill"
-          class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-900/90 text-slate-200 border border-slate-700/80 shadow-2xl backdrop-blur-md cursor-pointer hover:border-amber-400 hover:text-white transition-all group"
+          class="flex items-center gap-1.5 p-1.5 sm:p-2 rounded-full bg-slate-900/90 text-slate-200 border border-slate-700/80 shadow-2xl backdrop-blur-md cursor-pointer hover:border-amber-400 hover:text-white transition-all group"
           title="Klik untuk buka Panel Pembangun / Dev Tools"
         >
-          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-          <span class="font-mono font-bold text-[10px] tracking-wider text-amber-400 uppercase">
-            DEV
-          </span>
+          <!-- Suitable Dev Icon with Status Indicator -->
+          <div class="w-8 h-8 rounded-full bg-slate-800 text-amber-400 flex items-center justify-center text-sm font-bold shadow-xs shrink-0 relative">
+            <span>🛠️</span>
+            <span class="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-400 border border-slate-900 animate-pulse"></span>
+          </div>
 
-          <!-- Viewport Breakpoint Indicator -->
-          {devConfig.showViewportBadge && (
-            <div class="font-mono text-[10px] px-1.5 py-0.5 rounded bg-slate-800 border border-slate-700 font-semibold text-slate-300">
-              <span class="block sm:hidden">XS</span>
-              <span class="hidden sm:block md:hidden">SM</span>
-              <span class="hidden md:block lg:hidden">MD</span>
-              <span class="hidden lg:block xl:hidden">LG</span>
-              <span class="hidden xl:block 2xl:hidden">XL</span>
-              <span class="hidden 2xl:block">2XL</span>
-            </div>
-          )}
+          <!-- Drawer contents: expands smoothly on hover -->
+          <div class="flex items-center gap-1.5 max-w-0 overflow-hidden opacity-0 group-hover:max-w-[200px] group-hover:opacity-100 group-hover:pr-1.5 transition-all duration-300 whitespace-nowrap">
+            <span class="font-mono font-bold text-[10px] tracking-wider text-amber-400 uppercase">
+              DEV
+            </span>
 
-          <!-- Current Locale -->
-          <span class="text-[10px] font-mono uppercase text-slate-400">
-            {lang}
-          </span>
-          <span class="text-slate-500 text-[10px]">⚙️</span>
+            <!-- Viewport Breakpoint Indicator -->
+            {devConfig.showViewportBadge && (
+              <div class="font-mono text-[10px] px-1.5 py-0.5 rounded bg-slate-800 border border-slate-700 font-semibold text-slate-300">
+                <span class="block sm:hidden">XS</span>
+                <span class="hidden sm:block md:hidden">SM</span>
+                <span class="hidden md:block lg:hidden">MD</span>
+                <span class="hidden lg:block xl:hidden">LG</span>
+                <span class="hidden xl:block 2xl:hidden">XL</span>
+                <span class="hidden 2xl:block">2XL</span>
+              </div>
+            )}
+
+            <!-- Current Locale -->
+            <span class="text-[10px] font-mono uppercase text-slate-400">
+              {lang}
+            </span>
+            <span class="text-slate-500 text-[10px]">⚙️</span>
+          </div>
         </div>
 
         <!-- Expanded Dev Panel Popup -->
         <div
           id="dev-dock-panel"
-          class="hidden absolute bottom-10 right-0 w-72 rounded-2xl bg-slate-900/95 border border-slate-700 p-4 text-slate-200 shadow-2xl backdrop-blur-lg space-y-3.5 mb-2"
+          class="hidden absolute bottom-12 right-0 w-72 rounded-2xl bg-slate-900/95 border border-slate-700 p-4 text-slate-200 shadow-2xl backdrop-blur-lg space-y-3.5 mb-2"
         >
           <div class="flex items-center justify-between pb-2 border-b border-slate-800">
             <div class="flex items-center gap-1.5 font-bold text-xs text-white">
@@ -149,6 +157,7 @@ if (!devConfig?.enabled) {
     const gridBadge = document.getElementById("grid-status-badge");
     const logBtn = document.getElementById("log-config-btn");
     const resText = document.getElementById("dev-res-w");
+    const dockContainer = document.getElementById("dev-mode-dock");
 
     if (!pill || !panel) return;
 
@@ -202,6 +211,26 @@ if (!devConfig?.enabled) {
       );
       alert("Diagnostic maklumat sistem telah dicetak ke Console (F12)!");
     });
+
+    // Scroll activity listener: 100% visible on scroll, transparent at rest
+    let devScrollTimer: any;
+    const handleDevScroll = () => {
+      if (!dockContainer) return;
+      dockContainer.classList.remove("opacity-30");
+      dockContainer.classList.add("opacity-100");
+
+      clearTimeout(devScrollTimer);
+      devScrollTimer = setTimeout(() => {
+        // Keep visible if panel is currently open
+        const isPanelOpen = !panel?.classList.contains("hidden");
+        if (!isPanelOpen) {
+          dockContainer.classList.remove("opacity-100");
+          dockContainer.classList.add("opacity-30");
+        }
+      }, 1800);
+    };
+
+    window.addEventListener("scroll", handleDevScroll, { passive: true });
   }
 
   setupDevModeDock();

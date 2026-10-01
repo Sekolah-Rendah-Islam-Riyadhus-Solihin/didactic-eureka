@@ -64,19 +64,32 @@ const labels = {
 };
 ---
 
-<!-- Floating A11y Trigger Button (Desktop / Tablet) -->
-<div class="fixed bottom-4 left-4 z-40 hidden sm:block">
+<!-- Floating A11y Trigger Button (Drawer style, minimized to icon, transparent at rest) -->
+<div
+  id="a11y-floating-dock"
+  class="fixed bottom-20 sm:bottom-24 left-3 sm:left-4 z-40 transition-all duration-500 opacity-30 hover:opacity-100 select-none group"
+>
   <button
     type="button"
     id="open-a11y-modal-btn"
-    class="flex items-center gap-2 px-3.5 py-2.5 rounded-full bg-slate-900/90 hover:bg-slate-900 text-white border border-slate-700/80 shadow-xl backdrop-blur-md transition-all hover:scale-105 hover:border-amber-400 focus:outline-none focus:ring-4 focus:ring-amber-400 cursor-pointer"
+    class="flex items-center gap-2 p-1.5 sm:p-2 rounded-full bg-slate-900/90 hover:bg-slate-900 text-white border border-slate-700/80 shadow-2xl backdrop-blur-md transition-all hover:scale-105 hover:border-amber-400 focus:outline-none focus:ring-4 focus:ring-amber-400 cursor-pointer"
     aria-haspopup="dialog"
     aria-expanded="false"
     aria-controls="a11y-dialog"
     title={labels.btnTitle}
   >
-    <span class="text-base" aria-hidden="true">♿</span>
-    <span class="text-xs font-semibold tracking-wide">{labels.btnLabel}</span>
+    <span
+      class="w-8 h-8 rounded-full bg-amber-400 text-slate-950 flex items-center justify-center text-sm font-bold shadow-xs shrink-0"
+      aria-hidden="true"
+    >
+      ♿
+    </span>
+    <!-- Collapsible drawer label: expands smoothly on hover -->
+    <span
+      class="text-xs font-semibold tracking-wide max-w-0 overflow-hidden opacity-0 group-hover:max-w-[100px] group-hover:opacity-100 group-hover:pr-2 transition-all duration-300 whitespace-nowrap"
+    >
+      {labels.btnLabel}
+    </span>
   </button>
 </div>
 
@@ -402,6 +415,24 @@ const labels = {
       currentPrefs = { ...defaultPrefs };
       applyPrefs(currentPrefs);
     });
+
+    // Scroll activity: 100% visible during scroll, transparent at rest
+    const floatingDock = document.getElementById("a11y-floating-dock");
+    let a11yScrollTimer: any;
+
+    const handleA11yScroll = () => {
+      if (!floatingDock) return;
+      floatingDock.classList.remove("opacity-30");
+      floatingDock.classList.add("opacity-100");
+
+      clearTimeout(a11yScrollTimer);
+      a11yScrollTimer = setTimeout(() => {
+        floatingDock.classList.remove("opacity-100");
+        floatingDock.classList.add("opacity-30");
+      }, 1800);
+    };
+
+    window.addEventListener("scroll", handleA11yScroll, { passive: true });
   }
 
   // Run on first load and on client-side router navigation
