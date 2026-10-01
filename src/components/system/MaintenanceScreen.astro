@@ -272,7 +272,8 @@ const message =
         class="pt-2.5 border-t border-slate-800 text-[10px] text-slate-400 space-y-1.5"
       >
         <p>
-          💡 <strong>{lang === "ms" ? "Tip Pentadbir:" : "Admin Tip:"}</strong> {
+          💡 <strong>{lang === "ms" ? "Tip Pentadbir:" : "Admin Tip:"}</strong>
+          {
             lang === "ms"
               ? "Anda juga boleh meletakkan parameter di hujung URL:"
               : "You can also append the parameter directly to the URL:"
@@ -281,7 +282,13 @@ const message =
         <code
           class="block bg-slate-950 px-2.5 py-1.5 rounded-lg text-amber-300 font-mono text-[11px] border border-slate-800"
         >
-          ?bypas=x <span class="text-slate-400 font-sans text-[10px]">({lang === "ms" ? "di mana x ialah kekunci pintasan" : "where x is the bypass key"})</span>
+          ?bypas=x <span class="text-slate-400 font-sans text-[10px]"
+            >({
+              lang === "ms"
+                ? "di mana x ialah kekunci pintasan"
+                : "where x is the bypass key"
+            })</span
+          >
         </code>
       </div>
     </div>
