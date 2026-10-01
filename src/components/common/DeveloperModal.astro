@@ -1,0 +1,190 @@
+---
+import { schoolConfig } from "../../config/school.config";
+import type { SupportedLanguage } from "../../i18n/ui";
+
+interface Props {
+  lang?: SupportedLanguage;
+}
+
+const { lang = "ms" } = Astro.props;
+const developer = schoolConfig.developer;
+---
+
+{
+  developer && (
+    <div
+      id="dev-modal"
+      class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-sm items-center justify-center p-4 transition-opacity"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="dev-modal-title"
+    >
+      <div class="relative w-full max-w-md rounded-3xl bg-slate-900 border border-slate-700/80 p-6 sm:p-7 shadow-2xl text-slate-200 space-y-5 animate-in fade-in zoom-in-95 duration-150">
+        <!-- Close Button -->
+        <button
+          type="button"
+          id="close-dev-modal"
+          class="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700 flex items-center justify-center transition-colors cursor-pointer"
+          aria-label={lang === "ms" ? "Tutup" : "Close"}
+        >
+          ✕
+        </button>
+
+        <!-- Header & Identity with Eco Idea Niaga Logo -->
+        <div class="flex items-start gap-4 pr-6">
+          <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-emerald-800 via-emerald-700 to-teal-600 border border-emerald-500/30 text-amber-300 flex items-center justify-center p-2 shrink-0 shadow-lg shadow-emerald-950/50">
+            <svg
+              class="w-full h-full text-amber-300"
+              viewBox="0 0 91 90"
+              fill="currentColor"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-label="Eco Idea Niaga Logo"
+            >
+              <g transform="matrix(0.506161,0,0,0.506161,-388.696548,-8.446351)">
+                <path
+                  d="M856.835,16.687C807.779,16.687 767.931,56.536 767.931,105.592C767.931,154.648 807.779,194.496 856.835,194.496C905.891,194.496 945.74,154.648 945.74,105.592C945.74,56.536 905.891,16.687 856.835,16.687ZM856.835,22.746C902.634,22.746 939.681,59.792 939.681,105.592C939.681,151.391 902.634,188.437 856.835,188.437C811.036,188.437 773.989,151.391 773.989,105.592C773.989,59.792 811.036,22.746 856.835,22.746ZM856.835,28.569C814.383,28.569 779.811,63.141 779.811,105.593C779.811,148.045 814.383,182.617 856.835,182.617C899.287,182.617 933.859,148.045 933.859,105.593C933.859,63.141 899.287,28.569 856.835,28.569ZM853.728,43.729C854.783,43.675 855.861,43.729 856.929,43.729C891.123,43.729 918.793,71.494 918.793,105.687C918.793,139.881 891.123,167.551 856.929,167.551C846.318,167.551 836.28,164.91 827.551,160.207C826.239,159.332 825.318,157.881 824.444,156.817C817.667,144.728 820.841,124.911 837.344,113.879C848.421,107.084 860.688,102.3 873.784,100.791C879.477,100.16 875.475,91.139 876.421,86.384C863.423,87.868 852.868,90.292 844.783,93.823C842.684,94.744 840.615,95.236 838.568,95.236C836.214,95.236 833.809,94.675 831.506,93.447C829.049,92.167 827.833,89.563 827.834,85.725C827.834,80.403 830.231,76.428 834.99,73.767C841.244,70.587 848.084,68.99 855.234,68.776C861.875,68.599 858.25,54.348 858.907,48.458C854.856,53.718 851.475,54.164 846.054,55.67C840.633,57.177 833.172,59.744 829.999,61.714C819.56,68.213 814.368,76.776 814.368,87.42C814.368,94.073 816.645,98.867 821.148,101.733C823.553,103.268 826.071,104.07 828.681,104.275C824.741,105.555 819.868,109.53 814.086,116.234C808.765,122.622 806.852,133.965 807.777,143.164C799.808,132.743 794.971,119.82 794.971,105.688C794.971,72.562 821.012,45.39 853.728,43.729L853.728,43.729Z"
+                  style="fill-rule:nonzero;"
+                />
+              </g>
+            </svg>
+          </div>
+          <div>
+            <div class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-[10px] font-mono font-semibold bg-amber-400/10 text-amber-300 border border-amber-400/20 mb-1">
+              SSM: {developer.registrationNumber}
+            </div>
+            <h3
+              id="dev-modal-title"
+              class="text-lg font-heading font-bold text-white leading-tight"
+            >
+              {developer.company}
+            </h3>
+            <p class="text-xs text-emerald-400 font-medium">
+              {developer.author}
+            </p>
+          </div>
+        </div>
+
+        <!-- Description & Portfolio -->
+        <p class="text-xs text-slate-300 leading-relaxed">
+          {lang === "ms"
+            ? "Arkitek perisian dan pembangun templat web sekolah rendah sumber terbuka ini. Mengkhusus dalam ekosistem Astro, Tailwind CSS, Cloudflare Pages, serta integrasi sistem pengurusan sekolah Laravel."
+            : "Software architect and engineer of this open-source primary school web platform. Specialising in Astro, Tailwind CSS, Cloudflare Pages, and Laravel school management integrations."}
+        </p>
+
+        <!-- Social / Portfolio link -->
+        <div class="pt-1">
+          <a
+            href={developer.github || "https://github.com/unclesaha"}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 text-xs font-semibold text-slate-300 hover:text-amber-300 transition-colors"
+          >
+            <svg
+              class="w-4 h-4 text-slate-400"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+              />
+            </svg>
+            <span>GitHub: @unclesaha ↗</span>
+          </a>
+        </div>
+
+        <!-- Buy Me a Coffee Box -->
+        {developer.tipping && (
+          <div class="rounded-2xl bg-slate-800/90 border border-slate-700 p-4 space-y-3">
+            <div class="flex items-center gap-2">
+              <span class="text-base">☕</span>
+              <h4 class="text-xs font-bold uppercase tracking-wider text-amber-400">
+                {lang === "ms"
+                  ? "Belanja Secawan Kopi / Tip"
+                  : "Buy Me a Cup of Coffee"}
+              </h4>
+            </div>
+            <p class="text-[11px] text-slate-300 leading-relaxed">
+              {lang === "ms"
+                ? "Jika templat ini memberi manfaat atau membantu projek anda, sokongan tip anda amat dihargai demi pembangunan berterusan."
+                : "If this template benefits your school or project, your support helps maintain and expand open educational tools."}
+            </p>
+            <div class="flex flex-col sm:flex-row gap-2 pt-1">
+              {developer.tipping.bayarcashUrl && (
+                <a
+                  href={developer.tipping.bayarcashUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="flex-1 text-center px-4 py-2.5 rounded-xl text-xs font-bold bg-amber-400 text-slate-950 hover:bg-amber-300 transition-colors shadow-xs"
+                >
+                  🇲🇾 BayarCash (FPX / DuitNow)
+                </a>
+              )}
+              {developer.tipping.paypalUrl && (
+                <a
+                  href={developer.tipping.paypalUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="flex-1 text-center px-4 py-2.5 rounded-xl text-xs font-bold bg-sky-600 text-white hover:bg-sky-500 transition-colors shadow-xs"
+                >
+                  🌐 PayPal (Global)
+                </a>
+              )}
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}
+
+<script>
+  function setupDeveloperModal() {
+    const modal = document.getElementById("dev-modal");
+    const closeBtn = document.getElementById("close-dev-modal");
+    if (!modal) return;
+
+    const open = () => {
+      modal.classList.remove("hidden");
+      modal.classList.add("flex");
+      document.body.style.overflow = "hidden";
+    };
+
+    const close = () => {
+      modal.classList.add("hidden");
+      modal.classList.remove("flex");
+      document.body.style.overflow = "";
+    };
+
+    // Close button
+    closeBtn?.addEventListener("click", close);
+
+    // Click outside backdrop to close
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) close();
+    });
+
+    // Escape key
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && !modal.classList.contains("hidden")) {
+        close();
+      }
+    });
+
+    // Listen for open requests anywhere on the page
+    document.addEventListener("click", (e) => {
+      const target = e.target as HTMLElement | null;
+      if (!target) return;
+      if (target.closest("#open-dev-modal") || target.closest("#dev-dock-open-attrib")) {
+        e.preventDefault();
+        open();
+      }
+    });
+
+    window.addEventListener("open-dev-modal", open);
+  }
+
+  setupDeveloperModal();
+  document.addEventListener("astro:after-swap", setupDeveloperModal);
+</script>

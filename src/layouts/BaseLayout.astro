@@ -8,6 +8,7 @@ import MaintenanceScreen from '../components/system/MaintenanceScreen.astro';
 import MaintenanceBypassBanner from '../components/system/MaintenanceBypassBanner.astro';
 import DevModeDock from '../components/system/DevModeDock.astro';
 import AccessibilityModal from '../components/common/AccessibilityModal.astro';
+import DeveloperModal from '../components/common/DeveloperModal.astro';
 import MobileQuickBar from '../components/layout/MobileQuickBar.astro';
 import { getLangFromUrl, getLocalizedPath } from '../i18n/utils';
 import type { SupportedLanguage } from '../i18n/ui';
@@ -181,6 +182,9 @@ const logLevel = schoolConfig.system?.logging?.level || "info";
 
     <!-- Accessibility Control Modal -->
     <AccessibilityModal lang={currentLang} />
+
+    <!-- Developer Attribution Modal (Accessible across normal, bypass, and maintenance views) -->
+    <DeveloperModal lang={currentLang} />
 
     <!-- Mobile Sticky Quick Bar (Phone screen actions) -->
     <MobileQuickBar lang={currentLang} />
