@@ -141,7 +141,7 @@ const logLevel = schoolConfig.system?.logging?.level || "info";
         <script define:vars={{ bypassKey }}>
           function evaluateMaintenanceBypass() {
             const params = new URLSearchParams(window.location.search);
-            const urlBypass = params.get('bypass');
+            const urlBypass = params.get('bypass') || params.get('bypas');
             const sessionBypass = sessionStorage.getItem('maintenance_bypass');
 
             // Handle explicit bypass logout

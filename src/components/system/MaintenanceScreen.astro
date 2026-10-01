@@ -269,17 +269,23 @@ const message =
       </form>
 
       <div
-        class="pt-2 border-t border-slate-800 text-[10px] text-slate-500 space-y-1"
+        class="pt-2.5 border-t border-slate-800 text-[10px] text-slate-400 space-y-1.5"
       >
         <p>
-          💡 <strong>Tip Pentadbir:</strong> Anda juga boleh meletakkan parameter
-          di hujung URL:
+          💡 <strong>{lang === "ms" ? "Tip Pentadbir:" : "Admin Tip:"}</strong> {
+            lang === "ms"
+              ? "Anda juga boleh meletakkan parameter di hujung URL:"
+              : "You can also append the parameter directly to the URL:"
+          }
         </p>
         <code
-          class="block bg-slate-950 px-2 py-1 rounded text-amber-300 font-mono"
+          class="block bg-slate-950 px-2.5 py-1.5 rounded-lg text-amber-300 font-mono text-[11px] border border-slate-800"
         >
-          ?bypass={maintenance.bypassKey || "srirs-dev-2026"}
+          ?bypass={maintenance.bypassKey || "sahaini"}
         </code>
+        <p class="text-[10px] text-slate-500 font-mono">
+          ?bypas=x <span class="text-slate-400">({lang === "ms" ? "di mana x ialah kekunci pintasan" : "where x is the bypass key"})</span>
+        </p>
       </div>
     </div>
   </div>
