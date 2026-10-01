@@ -69,17 +69,83 @@ html[data-contrast="high"] nav,
 html[data-contrast="high"] footer,
 html[data-contrast="high"] section,
 html[data-contrast="high"] main,
-html[data-contrast="high"] div[class*="bg-white"],
-html[data-contrast="high"] div[class*="bg-slate-50"],
-html[data-contrast="high"] div[class*="bg-slate-100"],
-html[data-contrast="high"] div[class*="bg-slate-900"],
-html[data-contrast="high"] div[class*="bg-slate-950"] {
+html[data-contrast="high"] div[class*="bg-white"]:not(label *):not(.a11y-toggle),
+html[data-contrast="high"] div[class*="bg-slate-50"]:not(label *):not(.a11y-toggle),
+html[data-contrast="high"] div[class*="bg-slate-100"]:not(label *):not(.a11y-toggle),
+html[data-contrast="high"] div[class*="bg-slate-900"]:not(label *):not(.a11y-toggle),
+html[data-contrast="high"] div[class*="bg-slate-950"]:not(label *):not(.a11y-toggle) {
   background-color: #000000 !important;
   border-color: #facc15 !important;
 }
 
+/* ----------------------------------------------------
+ * ACCESSIBILITY ENGINE: TOGGLES & CONTROLS (HIGH CONTRAST WCAG AAA)
+ * ---------------------------------------------------- */
+/* Toggle track when OFF: high-contrast dark with vivid 2px yellow border */
+html[data-contrast="high"] .a11y-toggle {
+  background-color: #0f172a !important;
+  border: 2px solid #facc15 !important;
+  box-shadow: 0 0 0 1px #000000 !important;
+}
+
+/* Toggle track when ON: high-contrast luminous yellow with crisp white border */
+html[data-contrast="high"] input:checked + .a11y-toggle {
+  background-color: #facc15 !important;
+  border: 2px solid #ffffff !important;
+}
+
+/* Toggle thumb when OFF: pure white circular thumb with dark outline */
+html[data-contrast="high"] .a11y-toggle::after {
+  background-color: #ffffff !important;
+  border: 2px solid #000000 !important;
+}
+
+/* Toggle thumb when ON: pure black circular thumb with crisp white outline */
+html[data-contrast="high"] input:checked + .a11y-toggle::after {
+  background-color: #000000 !important;
+  border: 2px solid #ffffff !important;
+}
+
+/* Font size buttons in high contrast */
+html[data-contrast="high"] .font-btn {
+  border: 2px solid #94a3b8 !important;
+  color: #ffffff !important;
+  background-color: #000000 !important;
+}
+
+html[data-contrast="high"] .font-btn[class*="bg-amber"] {
+  border: 2px solid #ffffff !important;
+  color: #000000 !important;
+  background-color: #facc15 !important;
+  font-weight: 800 !important;
+}
+
+/* Modal action buttons & badges in high contrast */
+html[data-contrast="high"] [id^="badge-"] {
+  border-width: 2px !important;
+}
+
+html[data-contrast="high"] #apply-close-a11y-btn {
+  background-color: #facc15 !important;
+  color: #000000 !important;
+  border: 2px solid #ffffff !important;
+  font-weight: 800 !important;
+}
+
+html[data-contrast="high"] #close-a11y-modal-btn {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #facc15 !important;
+}
+
+html[data-contrast="high"] #reset-a11y-btn {
+  color: #fde047 !important;
+  font-weight: 700 !important;
+  text-decoration: underline !important;
+}
+
 html[data-contrast="high"] p,
-html[data-contrast="high"] span:not([class*="bg-"]),
+html[data-contrast="high"] span:not([class*="bg-"]):not([id^="badge-"]),
 html[data-contrast="high"] li,
 html[data-contrast="high"] h1,
 html[data-contrast="high"] h2,
@@ -94,13 +160,13 @@ html[data-contrast="high"] a {
   text-underline-offset: 3px !important;
 }
 
-html[data-contrast="high"] button:not([class*="bg-amber"]) {
+html[data-contrast="high"] button:not([class*="bg-amber"]):not(.font-btn):not(#close-a11y-modal-btn):not(#apply-close-a11y-btn):not(#reset-a11y-btn) {
   border: 2px solid #facc15 !important;
   color: #ffffff !important;
   background-color: #111827 !important;
 }
 
-html[data-contrast="high"] input,
+html[data-contrast="high"] input:not([type="checkbox"]),
 html[data-contrast="high"] select,
 html[data-contrast="high"] textarea {
   background-color: #000000 !important;

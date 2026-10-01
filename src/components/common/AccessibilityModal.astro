@@ -173,11 +173,17 @@ const labels = {
     </div>
 
     <!-- Setting 2: High Contrast Mode -->
-    <div class="flex items-center justify-between p-3.5 rounded-2xl bg-slate-950/60 border border-slate-800">
+    <div class="flex items-center justify-between p-3.5 rounded-2xl bg-slate-950/60 border border-slate-800 transition-colors">
       <div class="space-y-0.5 pr-4">
         <div class="text-xs font-bold text-white flex items-center gap-1.5">
           <span>🌓</span>
           <span>{labels.contrastTitle}</span>
+          <span
+            id="badge-high-contrast"
+            class="ml-1 px-1.5 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider bg-slate-800 text-slate-400 border border-slate-700"
+          >
+            {lang === "ms" ? "MATI" : "OFF"}
+          </span>
         </div>
         <p class="text-[11px] text-slate-400 leading-snug">
           {labels.contrastDesc}
@@ -185,16 +191,22 @@ const labels = {
       </div>
       <label class="relative inline-flex items-center cursor-pointer shrink-0">
         <input type="checkbox" id="toggle-high-contrast" class="sr-only peer" />
-        <div class="w-11 h-6 bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-amber-400 peer-checked:after:bg-slate-950"></div>
+        <div class="a11y-toggle w-12 h-7 bg-slate-800 border-2 border-slate-500 rounded-full peer peer-focus:outline-hidden peer-focus:ring-2 peer-focus:ring-amber-400 peer-checked:bg-amber-400 peer-checked:border-amber-300 peer-checked:after:translate-x-5 peer-checked:after:bg-slate-950 after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all after:shadow-sm"></div>
       </label>
     </div>
 
     <!-- Setting 3: Dyslexia / Readable Font -->
-    <div class="flex items-center justify-between p-3.5 rounded-2xl bg-slate-950/60 border border-slate-800">
+    <div class="flex items-center justify-between p-3.5 rounded-2xl bg-slate-950/60 border border-slate-800 transition-colors">
       <div class="space-y-0.5 pr-4">
         <div class="text-xs font-bold text-white flex items-center gap-1.5">
           <span>📖</span>
           <span>{labels.readableFontTitle}</span>
+          <span
+            id="badge-readable-font"
+            class="ml-1 px-1.5 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider bg-slate-800 text-slate-400 border border-slate-700"
+          >
+            {lang === "ms" ? "MATI" : "OFF"}
+          </span>
         </div>
         <p class="text-[11px] text-slate-400 leading-snug">
           {labels.readableFontDesc}
@@ -202,16 +214,22 @@ const labels = {
       </div>
       <label class="relative inline-flex items-center cursor-pointer shrink-0">
         <input type="checkbox" id="toggle-readable-font" class="sr-only peer" />
-        <div class="w-11 h-6 bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-400 peer-checked:after:bg-slate-950"></div>
+        <div class="a11y-toggle w-12 h-7 bg-slate-800 border-2 border-slate-500 rounded-full peer peer-focus:outline-hidden peer-focus:ring-2 peer-focus:ring-emerald-400 peer-checked:bg-emerald-400 peer-checked:border-emerald-300 peer-checked:after:translate-x-5 peer-checked:after:bg-slate-950 after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all after:shadow-sm"></div>
       </label>
     </div>
 
     <!-- Setting 4: Reduced Motion -->
-    <div class="flex items-center justify-between p-3.5 rounded-2xl bg-slate-950/60 border border-slate-800">
+    <div class="flex items-center justify-between p-3.5 rounded-2xl bg-slate-950/60 border border-slate-800 transition-colors">
       <div class="space-y-0.5 pr-4">
         <div class="text-xs font-bold text-white flex items-center gap-1.5">
           <span>⏸️</span>
           <span>{labels.reducedMotionTitle}</span>
+          <span
+            id="badge-reduced-motion"
+            class="ml-1 px-1.5 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider bg-slate-800 text-slate-400 border border-slate-700"
+          >
+            {lang === "ms" ? "MATI" : "OFF"}
+          </span>
         </div>
         <p class="text-[11px] text-slate-400 leading-snug">
           {labels.reducedMotionDesc}
@@ -219,7 +237,7 @@ const labels = {
       </div>
       <label class="relative inline-flex items-center cursor-pointer shrink-0">
         <input type="checkbox" id="toggle-reduced-motion" class="sr-only peer" />
-        <div class="w-11 h-6 bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-sky-400 peer-checked:after:bg-slate-950"></div>
+        <div class="a11y-toggle w-12 h-7 bg-slate-800 border-2 border-slate-500 rounded-full peer peer-focus:outline-hidden peer-focus:ring-2 peer-focus:ring-sky-400 peer-checked:bg-sky-400 peer-checked:border-sky-300 peer-checked:after:translate-x-5 peer-checked:after:bg-slate-950 after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all after:shadow-sm"></div>
       </label>
     </div>
 
@@ -331,14 +349,44 @@ const labels = {
       label.textContent = prefs.fontSize === "normal" ? "100%" : prefs.fontSize === "large" ? "115%" : "130%";
     }
 
-    // Toggles
+    // Toggles and State Badges
+    const isMs = document.documentElement.lang === "ms" || !document.documentElement.lang.startsWith("en");
     const contrastInput = document.getElementById("toggle-high-contrast") as HTMLInputElement | null;
     const readableInput = document.getElementById("toggle-readable-font") as HTMLInputElement | null;
     const motionInput = document.getElementById("toggle-reduced-motion") as HTMLInputElement | null;
 
-    if (contrastInput) contrastInput.checked = prefs.highContrast;
-    if (readableInput) readableInput.checked = prefs.readableFont;
-    if (motionInput) motionInput.checked = prefs.reducedMotion;
+    if (contrastInput) {
+      contrastInput.checked = prefs.highContrast;
+      const b = document.getElementById("badge-high-contrast");
+      if (b) {
+        b.textContent = prefs.highContrast ? (isMs ? "AKTIF" : "ON") : (isMs ? "MATI" : "OFF");
+        b.className = prefs.highContrast
+          ? "ml-1 px-1.5 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider bg-amber-400 text-slate-950 border border-amber-300"
+          : "ml-1 px-1.5 py-0.5 rounded text-[9px] font-medium uppercase tracking-wider bg-slate-800 text-slate-400 border border-slate-700";
+      }
+    }
+
+    if (readableInput) {
+      readableInput.checked = prefs.readableFont;
+      const b = document.getElementById("badge-readable-font");
+      if (b) {
+        b.textContent = prefs.readableFont ? (isMs ? "AKTIF" : "ON") : (isMs ? "MATI" : "OFF");
+        b.className = prefs.readableFont
+          ? "ml-1 px-1.5 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider bg-emerald-400 text-slate-950 border border-emerald-300"
+          : "ml-1 px-1.5 py-0.5 rounded text-[9px] font-medium uppercase tracking-wider bg-slate-800 text-slate-400 border border-slate-700";
+      }
+    }
+
+    if (motionInput) {
+      motionInput.checked = prefs.reducedMotion;
+      const b = document.getElementById("badge-reduced-motion");
+      if (b) {
+        b.textContent = prefs.reducedMotion ? (isMs ? "AKTIF" : "ON") : (isMs ? "MATI" : "OFF");
+        b.className = prefs.reducedMotion
+          ? "ml-1 px-1.5 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider bg-sky-400 text-slate-950 border border-sky-300"
+          : "ml-1 px-1.5 py-0.5 rounded text-[9px] font-medium uppercase tracking-wider bg-slate-800 text-slate-400 border border-slate-700";
+      }
+    }
   }
 
   function setupA11yModal() {
